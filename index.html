@@ -509,6 +509,47 @@
     .tabbtn{flex:1;text-align:center;}
   }
 
+  /* ---- mobile layout fixes ---- */
+  @media(max-width:700px){
+    .wrap{padding:0 18px;}
+    nav.wrap{flex-wrap:wrap;justify-content:center;min-height:auto;padding-top:12px;padding-bottom:12px;row-gap:10px;}
+    .logo{flex:1 1 100%;justify-content:center;text-align:center;white-space:normal;}
+    .logo small{white-space:normal;}
+    .navcta{flex:1 1 100%;justify-content:center;}
+    .navcta .btn{padding:8px 14px;font-size:13px;}
+    .lang-trigger{padding:8px 12px;font-size:13.5px;}
+
+    .hero{padding:56px 0 48px;}
+    section{padding:52px 0;}
+    .section-head{margin-bottom:32px;}
+    .section-head h2{font-size:25px;}
+
+    .eyebrow{margin-bottom:16px;}
+    .eyebrow span{padding:5px 12px;font-size:12.5px;}
+    .hero-actions{margin-bottom:36px;}
+    .hero-actions .btn,.hero-actions .btn-outline{flex:1 1 auto;text-align:center;}
+
+    .job-tags{gap:10px;padding-top:22px;}
+    .job-tag{font-size:14px;padding:6px 16px 6px 6px;}
+
+    .cta-strip{padding:26px;justify-content:center;text-align:center;}
+    .cta-strip h3{font-size:19px;}
+
+    .pill-box{min-width:100%;}
+    .flow{padding-left:24px;}
+    .flow-step .step-no{left:-38px;}
+
+    .news-modal{padding:24px;}
+
+    .info-table td:first-child{width:96px;font-size:14px;}
+    .info-table td{font-size:14px;padding:11px 12px;}
+  }
+
+  @media(max-width:400px){
+    .logo-text{font-size:15px;}
+    .navcta{gap:6px;}
+  }
+
   /* ---- touch device press feedback ---- */
   @media(hover:none){
     .adv-card,.job-card,.service-card,.pain-card,.respo-card,.voice-card,
