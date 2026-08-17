@@ -28,7 +28,9 @@
 
   header{position:sticky;top:0;z-index:50;background:rgba(252,252,251,0.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
   nav.wrap{display:flex;align-items:center;justify-content:space-between;min-height:74px;padding-top:10px;padding-bottom:10px;flex-wrap:nowrap;gap:16px;max-width:1320px;}
-  .logo{font-family:'Noto Sans TC',sans-serif;font-size:17px;font-weight:700;color:var(--navy);letter-spacing:.3px;white-space:nowrap;flex:none;}
+  .logo{font-family:'Noto Sans TC',sans-serif;font-size:17px;font-weight:700;color:var(--navy);letter-spacing:.3px;white-space:nowrap;flex:none;display:flex;align-items:center;gap:10px;}
+  .logo img{width:38px;height:38px;flex:none;object-fit:contain;}
+  .logo-text{display:flex;flex-direction:column;}
   .logo small{display:block;font-size:10px;font-weight:400;color:var(--ink-soft);letter-spacing:.5px;margin-top:2px;white-space:nowrap;}
   .navlinks{display:flex;gap:18px;font-size:13.5px;flex:none;}
   .navlinks a{position:relative;padding:4px 0;transition:color .2s var(--ease);white-space:nowrap;}
@@ -208,6 +210,27 @@
   }
   .back-to-top.show{opacity:1;visibility:visible;transform:translateY(0);}
   .back-to-top:hover{background:var(--peach);color:#3A2210;transform:translateY(-3px);}
+
+  /* ---- news list ---- */
+  .news-list{border-top:1px solid var(--line);}
+  .news-item{
+    display:flex;align-items:center;gap:18px;padding:20px 4px;border-bottom:1px solid var(--line);
+    text-decoration:none;color:var(--ink);transition:background .2s var(--ease);flex-wrap:wrap;
+  }
+  .news-item:hover{background:var(--bg-2);}
+  .news-item:hover .news-title{color:var(--navy);}
+  .news-date{flex:none;font-size:13px;color:var(--ink-soft);min-width:100px;font-weight:500;}
+  .news-tag{flex:none;font-size:12px;font-weight:700;color:var(--navy);background:var(--bg-2);padding:4px 12px;border-radius:12px;min-width:74px;text-align:center;}
+  .news-title{flex:1;font-size:14.5px;color:var(--ink);transition:color .2s var(--ease);}
+  .news-arrow{flex:none;color:var(--peach);font-weight:700;opacity:0;transition:all .2s var(--ease);}
+  .news-item:hover .news-arrow{opacity:1;transform:translateX(3px);}
+  @media(max-width:640px){
+    .news-item{gap:8px;}
+    .news-tag{order:1;}
+    .news-date{order:2;}
+    .news-title{order:4;width:100%;margin-top:4px;}
+    .news-arrow{display:none;}
+  }
 
   .pill-row{display:flex;gap:20px;flex-wrap:wrap;margin-bottom:40px;}
   .pill-box{flex:1;min-width:220px;border:1px solid var(--line);border-radius:var(--radius);background:var(--bg-2);padding:22px;transition:all .25s var(--ease);position:relative;overflow:hidden;}
@@ -500,6 +523,7 @@
 
 <nav class="side-nav" id="sideNav">
   <a href="#home" data-target="home"><span class="side-label" data-i18n="nav_home">首頁</span><span class="side-dot"></span></a>
+  <a href="#news" data-target="news"><span class="side-label" data-i18n="nav_news">最新消息</span><span class="side-dot"></span></a>
   <a href="#program" data-target="program"><span class="side-label" data-i18n="nav_program">制度說明</span><span class="side-dot"></span></a>
   <a href="#worker" data-target="worker"><span class="side-label" id="sideLabelWS" data-i18n="sidenav_ws">求職/企業</span><span class="side-dot"></span></a>
   <a href="#about" data-target="about"><span class="side-label" data-i18n="nav_about">關於我們</span><span class="side-dot"></span></a>
@@ -513,9 +537,10 @@
 
 <header>
   <nav class="wrap">
-    <div class="logo">Tokyo One Care協同組合<small data-i18n="logo_sub">外国人材紹介・監理支援</small></div>
+    <div class="logo"><img src="logo.png" alt="Tokyo One Care Logo"><span class="logo-text">Tokyo One Care協同組合<small data-i18n="logo_sub">外国人材紹介・監理支援</small></span></div>
     <div class="navlinks">
       <a href="#home" data-i18n="nav_home">首頁</a>
+      <a href="#news" data-i18n="nav_news">最新消息</a>
       <a href="#program" data-i18n="nav_program">制度說明</a>
       <a href="#worker" data-i18n="nav_worker">求職者專區</a>
       <a href="javascript:void(0)" onclick="goToTab('employer')" data-i18n="nav_employer">企業專區</a>
@@ -575,6 +600,38 @@
   </div>
 </section>
 <svg class="wave-divider" viewBox="0 0 1440 60" preserveAspectRatio="none" style="background:var(--navy);"><path d="M0,32 C240,60 480,4 720,20 C960,36 1200,58 1440,28 L1440,60 L0,60 Z"/></svg>
+
+<!-- ============ NEWS ============ -->
+<section id="news">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker" data-i18n="news_kicker">NEWS</div>
+      <h2 data-i18n="news_h2">最新消息</h2>
+      <p data-i18n="news_p">最新的招募職缺、說明會時程與法規政策更新，都會公布在這裡。</p>
+    </div>
+    <div class="news-list">
+      <a href="#" class="news-item">
+        <span class="news-date">2026.08.15</span>
+        <span class="news-tag" data-i18n="news1_tag">職缺公告</span>
+        <span class="news-title" data-i18n="news1_title">新增護理／介護人才特定技能職缺，即日起開放應徵</span>
+        <span class="news-arrow">→</span>
+      </a>
+      <a href="#" class="news-item">
+        <span class="news-date">2026.07.28</span>
+        <span class="news-tag" data-i18n="news2_tag">說明會</span>
+        <span class="news-title" data-i18n="news2_title">8 月企業說明會場次公布，歡迎有引進需求的企業報名參加</span>
+        <span class="news-arrow">→</span>
+      </a>
+      <a href="#" class="news-item">
+        <span class="news-date">2026.07.10</span>
+        <span class="news-tag" data-i18n="news3_tag">法規更新</span>
+        <span class="news-title" data-i18n="news3_title">特定技能受入人數配額調整公告，詳情請見制度說明區塊</span>
+        <span class="news-arrow">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+<svg class="wave-divider to-bg2" viewBox="0 0 1440 60" preserveAspectRatio="none" style="background:var(--bg);"><path d="M0,28 C240,4 480,50 720,28 C960,6 1200,48 1440,24 L1440,60 L0,60 Z"/></svg>
 
 <!-- ============ WORKER / EMPLOYER TABS ============ -->
 <!-- ============ SPECIFIED SKILLED PROGRAM ============ -->
@@ -1231,6 +1288,16 @@ const I18N = {
   tg_kicker:{zh:"SPECIFIED SKILLED WORKER",ja:"SPECIFIED SKILLED WORKER",en:"SPECIFIED SKILLED WORKER",my:"SPECIFIED SKILLED WORKER"},
   tg_lead:{zh:"制度背景、與技能實習的差異，以及企業引進特定技能人才的優勢。",ja:"制度の背景、技能実習との違い、そして特定技能人材受入れのメリットをご紹介します。",en:"Program background, differences from Technical Intern Training, and the advantages of hiring Specified Skilled Workers.",my:"စနစ်နောက်ခံ၊ နည်းပညာအလုပ်သင်နှင့်ကွာခြားချက်နှင့် အထူးကျွမ်းကျင်လုပ်သားခေါ်ယူခြင်း၏ အားသာချက်များ။"},
   nav_program:{zh:"制度說明",ja:"制度について",en:"Program Overview",my:"စနစ်ရှင်းလင်းချက်"},
+  nav_news:{zh:"最新消息",ja:"お知らせ",en:"News",my:"သတင်းများ"},
+  news_kicker:{zh:"NEWS",ja:"NEWS",en:"NEWS",my:"NEWS"},
+  news_h2:{zh:"最新消息",ja:"お知らせ",en:"Latest News",my:"နောက်ဆုံးသတင်းများ"},
+  news_p:{zh:"最新的招募職缺、說明會時程與法規政策更新，都會公布在這裡。",ja:"最新の求人情報、説明会の日程、法改正情報などをこちらでお知らせします。",en:"Find the latest job openings, seminar schedules, and policy updates here.",my:"နောက်ဆုံးလုပ်ငန်းရာထူးများ၊ ရှင်းလင်းပွဲအချိန်ဇယားနှင့် ဥပဒေမွမ်းမံမှုများကို ဤနေရာတွင် ကြေညာပါမည်။"},
+  news1_tag:{zh:"職缺公告",ja:"求人情報",en:"Job Posting",my:"အလုပ်ကြေညာချက်"},
+  news1_title:{zh:"新增護理／介護人才特定技能職缺，即日起開放應徵",ja:"介護分野の特定技能求人を新規追加、本日より応募受付開始",en:"New Specified Skilled nursing care openings now accepting applications",my:"သူနာပြု/စောင့်ရှောက်ရေး အထူးကျွမ်းကျင်အလုပ်များ အသစ်ထည့်သွင်းပြီး ယနေ့မှစတင်လျှောက်ထားနိုင်ပါပြီ"},
+  news2_tag:{zh:"說明會",ja:"説明会",en:"Seminar",my:"ရှင်းလင်းပွဲ"},
+  news2_title:{zh:"8 月企業說明會場次公布，歡迎有引進需求的企業報名參加",ja:"8月度企業向け説明会の日程を公開、受入をご検討中の企業様はぜひご参加ください",en:"August employer seminar schedule released — sign up if you're considering hiring",my:"သြဂုတ်လအတွက် ကုမ္ပဏီရှင်းလင်းပွဲအစီအစဉ် ထုတ်ပြန်ပြီ၊ စိတ်ဝင်စားသောကုမ္ပဏီများ တက်ရောက်နိုင်ပါသည်"},
+  news3_tag:{zh:"法規更新",ja:"制度改正",en:"Policy Update",my:"မူဝါဒမွမ်းမံမှု"},
+  news3_title:{zh:"特定技能受入人數配額調整公告，詳情請見制度說明區塊",ja:"特定技能の受入人数枠が改定されました。詳細は制度説明セクションをご覧ください",en:"Specified Skilled Worker quota adjustment announced — see program overview for details",my:"အထူးကျွမ်းကျင်လက်ခံနိုင်သူဦးရေ ပြင်ဆင်ကြေညာချက်၊ အသေးစိတ်ကို စနစ်ရှင်းလင်းချက်တွင်ကြည့်ပါ"},
   sidenav_ws:{zh:"求職/企業",ja:"求職者/企業",en:"Jobs/Employers",my:"အလုပ်ရှာသူ/အလုပ်ရှင်"},
   tg_h1:{zh:"什麼是「特定技能」在留資格？",ja:"「特定技能」在留資格とは？",en:"What is the \"Specified Skilled Worker\" Status?",my:"「အထူးကျွမ်းကျင်」နေထိုင်ခွင့်ဆိုသည်မှာ？"},
   tg_p1:{zh:"日本政府於 2018 年 12 月通過出入國管理法修正案，自 2019 年 4 月 1 日起正式實施「特定技能」在留資格。",ja:"日本政府は2018年12月に出入国管理法の改正案を可決し、2019年4月1日より「特定技能」在留資格を正式に施行しました。",en:"The Japanese government passed an amendment to the Immigration Control Act in December 2018, and the \"Specified Skilled Worker\" status officially took effect on April 1, 2019.",my:"ဂျပန်အစိုးရသည် ၂၀၁၈ ခုနှစ် ဒီဇင်ဘာလတွင် လူဝင်မှုကြီးကြပ်ရေးဥပဒေပြင်ဆင်ချက်ကို အတည်ပြုခဲ့ပြီး ၂၀၁၉ ခုနှစ် ဧပြီလ ၁ ရက်နေ့မှစ၍ 「အထူးကျွမ်းကျင်」နေထိုင်ခွင့်ကို တရားဝင်စတင်ကျင့်သုံးခဲ့သည်။"},
