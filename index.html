@@ -660,13 +660,13 @@
         <span class="news-title" data-i18n="news2_title">8 月企業說明會場次公布，歡迎有引進需求的企業報名參加</span>
         <span class="news-arrow">→</span>
       </button>
-      <button type="button" class="news-item" onclick="openNewsModal(this)" data-date="2026.07.10" data-key-tag="news3_tag" data-key-title="news3_title" data-key-detail="news3_detail" data-link="#program">
+      <button type="button" class="news-item" onclick="openNewsModal(this)" data-date="2026.07.10" data-key-tag="news3_tag" data-key-title="news3_title" data-key-detail="news3_detail">
         <span class="news-date">2026.07.10</span>
         <span class="news-tag" data-i18n="news3_tag">法規更新</span>
         <span class="news-title" data-i18n="news3_title">特定技能受入人數配額調整公告，詳情請見制度說明區塊</span>
         <span class="news-arrow">→</span>
       </button>
-      <button type="button" class="news-item" onclick="openNewsModal(this)" data-date="2026.06.30" data-key-tag="news4_tag" data-key-title="news4_title" data-key-detail="news4_detail" data-link="notice-2026-seminar.html" data-link-text-key="news4_link_text">
+      <button type="button" class="news-item" onclick="openNewsModal(this)" data-date="2026.06.30" data-key-tag="news4_tag" data-key-title="news4_title" data-key-detail="news4_detail" data-link="files/notice-2026-seminar.html" data-link-text-key="news4_link_text">
         <span class="news-date">2026.06.30</span>
         <span class="news-tag" data-i18n="news4_tag">下載資料</span>
         <span class="news-title" data-i18n="news4_title">8 月說明會完整議程與場地資訊，點此下載詳細資料</span>
@@ -689,7 +689,7 @@
     <div class="news-modal-tag" id="newsModalTag"></div>
     <h3 class="news-modal-title" id="newsModalTitle"></h3>
     <div class="news-modal-body" id="newsModalBody"></div>
-    <a href="#" class="btn btn-primary news-modal-link" id="newsModalLink" onclick="handleNewsModalLinkClick(event)" data-i18n="news_modal_link_text">查看詳情</a>
+    <a href="#" class="btn btn-primary news-modal-link" id="newsModalLink" data-i18n="news_modal_link_text">查看詳情</a>
   </div>
 </div>
 </section>
@@ -1220,21 +1220,6 @@ function openNewsModal(btn){
 function closeNewsModal(){
   document.getElementById('newsModalBackdrop').classList.remove('open');
   document.body.style.overflow = '';
-}
-
-function handleNewsModalLinkClick(e){
-  var href = document.getElementById('newsModalLink').getAttribute('href') || '';
-  if(href.indexOf('#') === 0){
-    e.preventDefault();
-    closeNewsModal();
-    setTimeout(function(){
-      var target = document.querySelector(href);
-      if(target){ target.scrollIntoView({behavior:'smooth', block:'start'}); }
-    }, 320);
-  } else {
-    closeNewsModal();
-    // external URL or internal file: let the browser handle it normally (opens in new tab via target set below)
-  }
 }
 
 document.addEventListener('keydown', function(e){
