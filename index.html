@@ -216,6 +216,8 @@
   .news-item{
     display:flex;align-items:center;gap:18px;padding:20px 4px;border-bottom:1px solid var(--line);
     text-decoration:none;color:var(--ink);transition:background .2s var(--ease);flex-wrap:wrap;
+    width:100%;background:none;border-left:none;border-right:none;border-top:none;cursor:pointer;
+    font-family:'Noto Sans TC','Noto Sans JP','Noto Sans Myanmar',sans-serif;text-align:left;
   }
   .news-item:hover{background:var(--bg-2);}
   .news-item:hover .news-title{color:var(--navy);}
@@ -224,6 +226,7 @@
   .news-title{flex:1;font-size:14.5px;color:var(--ink);transition:color .2s var(--ease);}
   .news-arrow{flex:none;color:var(--peach);font-weight:700;opacity:0;transition:all .2s var(--ease);}
   .news-item:hover .news-arrow{opacity:1;transform:translateX(3px);}
+  .news-item.news-hidden{display:none;}
   @media(max-width:640px){
     .news-item{gap:8px;}
     .news-tag{order:1;}
@@ -231,6 +234,41 @@
     .news-title{order:4;width:100%;margin-top:4px;}
     .news-arrow{display:none;}
   }
+
+  .news-loadmore-wrap{display:flex;justify-content:center;margin-top:24px;}
+  .news-loadmore-wrap.hide{display:none;}
+  .news-loadmore{
+    background:var(--bg-2);border:1px solid var(--line);border-radius:999px;padding:11px 28px;
+    font-size:13.5px;font-weight:600;color:var(--navy);cursor:pointer;transition:all .2s var(--ease);
+    font-family:'Noto Sans TC','Noto Sans JP','Noto Sans Myanmar',sans-serif;
+  }
+  .news-loadmore:hover{background:var(--navy);color:#fff;border-color:var(--navy);}
+
+  /* ---- news modal ---- */
+  .news-modal-backdrop{
+    position:fixed;inset:0;background:rgba(15,32,68,0.55);z-index:200;
+    display:flex;align-items:center;justify-content:center;padding:20px;
+    opacity:0;visibility:hidden;transition:all .25s var(--ease);
+  }
+  .news-modal-backdrop.open{opacity:1;visibility:visible;}
+  .news-modal{
+    background:var(--bg);border-radius:var(--radius);padding:36px;max-width:560px;width:100%;
+    max-height:85vh;overflow-y:auto;position:relative;box-shadow:var(--shadow-lg);
+    transform:translateY(16px);transition:transform .25s var(--ease);
+  }
+  .news-modal-backdrop.open .news-modal{transform:translateY(0);}
+  .news-modal-close{
+    position:absolute;top:16px;right:16px;width:32px;height:32px;border-radius:50%;border:none;
+    background:var(--bg-2);color:var(--ink-soft);font-size:20px;line-height:1;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;transition:all .2s var(--ease);
+  }
+  .news-modal-close:hover{background:var(--navy);color:#fff;}
+  .news-modal-date{font-size:13px;color:var(--ink-soft);font-weight:500;margin-bottom:8px;}
+  .news-modal-tag{display:inline-block;font-size:12px;font-weight:700;color:var(--navy);background:var(--bg-2);padding:4px 12px;border-radius:12px;margin-bottom:16px;}
+  .news-modal-title{font-size:20px;color:var(--navy);font-weight:700;margin-bottom:16px;line-height:1.5;}
+  .news-modal-body{font-size:14.5px;color:var(--ink-soft);line-height:1.8;margin-bottom:24px;}
+  .news-modal-link{display:none;}
+  .news-modal-link.show{display:inline-block;}
 
   .pill-row{display:flex;gap:20px;flex-wrap:wrap;margin-bottom:40px;}
   .pill-box{flex:1;min-width:220px;border:1px solid var(--line);border-radius:var(--radius);background:var(--bg-2);padding:22px;transition:all .25s var(--ease);position:relative;overflow:hidden;}
@@ -609,27 +647,51 @@
       <h2 data-i18n="news_h2">最新消息</h2>
       <p data-i18n="news_p">最新的招募職缺、說明會時程與法規政策更新，都會公布在這裡。</p>
     </div>
-    <div class="news-list">
-      <a href="#" class="news-item">
+    <div class="news-list" id="newsList">
+      <button type="button" class="news-item" onclick="openNewsModal(this)" data-date="2026.08.15" data-key-tag="news1_tag" data-key-title="news1_title" data-key-detail="news1_detail">
         <span class="news-date">2026.08.15</span>
         <span class="news-tag" data-i18n="news1_tag">職缺公告</span>
         <span class="news-title" data-i18n="news1_title">新增護理／介護人才特定技能職缺，即日起開放應徵</span>
         <span class="news-arrow">→</span>
-      </a>
-      <a href="#" class="news-item">
+      </button>
+      <button type="button" class="news-item" onclick="openNewsModal(this)" data-date="2026.07.28" data-key-tag="news2_tag" data-key-title="news2_title" data-key-detail="news2_detail">
         <span class="news-date">2026.07.28</span>
         <span class="news-tag" data-i18n="news2_tag">說明會</span>
         <span class="news-title" data-i18n="news2_title">8 月企業說明會場次公布，歡迎有引進需求的企業報名參加</span>
         <span class="news-arrow">→</span>
-      </a>
-      <a href="#" class="news-item">
+      </button>
+      <button type="button" class="news-item" onclick="openNewsModal(this)" data-date="2026.07.10" data-key-tag="news3_tag" data-key-title="news3_title" data-key-detail="news3_detail" data-link="#program">
         <span class="news-date">2026.07.10</span>
         <span class="news-tag" data-i18n="news3_tag">法規更新</span>
         <span class="news-title" data-i18n="news3_title">特定技能受入人數配額調整公告，詳情請見制度說明區塊</span>
         <span class="news-arrow">→</span>
-      </a>
+      </button>
+      <button type="button" class="news-item" onclick="openNewsModal(this)" data-date="2026.06.30" data-key-tag="news4_tag" data-key-title="news4_title" data-key-detail="news4_detail" data-link="notice-2026-seminar.html" data-link-text-key="news4_link_text">
+        <span class="news-date">2026.06.30</span>
+        <span class="news-tag" data-i18n="news4_tag">下載資料</span>
+        <span class="news-title" data-i18n="news4_title">8 月說明會完整議程與場地資訊，點此下載詳細資料</span>
+        <span class="news-arrow">→</span>
+      </button>
+    </div>
+    <div class="news-loadmore-wrap" id="newsLoadMoreWrap">
+      <button type="button" class="news-loadmore" id="newsLoadMoreBtn" onclick="loadMoreNews()">
+        <span data-i18n="news_load_more">載入更多消息</span>
+      </button>
     </div>
   </div>
+</section>
+
+<!-- ============ NEWS MODAL ============ -->
+<div class="news-modal-backdrop" id="newsModalBackdrop" onclick="if(event.target===this){closeNewsModal();}">
+  <div class="news-modal" role="dialog" aria-modal="true">
+    <button type="button" class="news-modal-close" onclick="closeNewsModal()" aria-label="Close">&times;</button>
+    <div class="news-modal-date" id="newsModalDate"></div>
+    <div class="news-modal-tag" id="newsModalTag"></div>
+    <h3 class="news-modal-title" id="newsModalTitle"></h3>
+    <div class="news-modal-body" id="newsModalBody"></div>
+    <a href="#" class="btn btn-primary news-modal-link" id="newsModalLink" onclick="handleNewsModalLinkClick(event)" data-i18n="news_modal_link_text">查看詳情</a>
+  </div>
+</div>
 </section>
 <svg class="wave-divider to-bg2" viewBox="0 0 1440 60" preserveAspectRatio="none" style="background:var(--bg);"><path d="M0,28 C240,4 480,50 720,28 C960,6 1200,48 1440,24 L1440,60 L0,60 Z"/></svg>
 
@@ -1090,6 +1152,100 @@
 <script>
 var currentLang = 'ja';
 
+var NEWS_PAGE_SIZE = 6;
+var newsRevealedCount = NEWS_PAGE_SIZE;
+
+function refreshNewsPagination(){
+  var items = document.querySelectorAll('#newsList .news-item');
+  items.forEach(function(item, idx){
+    if(idx < newsRevealedCount){ item.classList.remove('news-hidden'); }
+    else{ item.classList.add('news-hidden'); }
+  });
+  var wrap = document.getElementById('newsLoadMoreWrap');
+  if(wrap){
+    if(items.length > newsRevealedCount){ wrap.classList.remove('hide'); }
+    else{ wrap.classList.add('hide'); }
+  }
+}
+
+function loadMoreNews(){
+  newsRevealedCount += NEWS_PAGE_SIZE;
+  refreshNewsPagination();
+}
+
+function openNewsModal(btn){
+  var dateEl = document.getElementById('newsModalDate');
+  var tagEl = document.getElementById('newsModalTag');
+  var titleEl = document.getElementById('newsModalTitle');
+  var bodyEl = document.getElementById('newsModalBody');
+  var linkEl = document.getElementById('newsModalLink');
+
+  dateEl.textContent = btn.getAttribute('data-date') || '';
+
+  var tagKey = btn.getAttribute('data-key-tag');
+  var titleKey = btn.getAttribute('data-key-title');
+  var detailKey = btn.getAttribute('data-key-detail');
+  tagEl.textContent = (I18N[tagKey] && I18N[tagKey][currentLang]) || '';
+  titleEl.textContent = (I18N[titleKey] && I18N[titleKey][currentLang]) || '';
+
+  var detailText = (detailKey && I18N[detailKey] && I18N[detailKey][currentLang]) || '';
+  bodyEl.innerHTML = '';
+  detailText.split(/\n\s*\n/).forEach(function(para){
+    if(!para.trim()) return;
+    var p = document.createElement('p');
+    p.textContent = para.trim();
+    p.style.marginBottom = '14px';
+    bodyEl.appendChild(p);
+  });
+
+  var link = btn.getAttribute('data-link');
+  var linkText = btn.getAttribute('data-link-text');
+  var linkTextKey = btn.getAttribute('data-link-text-key');
+  if(link){
+    linkEl.setAttribute('href', link);
+    linkEl.classList.add('show');
+    if(link.indexOf('#') === 0){ linkEl.removeAttribute('target'); }
+    else { linkEl.setAttribute('target', '_blank'); linkEl.setAttribute('rel', 'noopener'); }
+    if(linkTextKey && I18N[linkTextKey]){ linkEl.textContent = I18N[linkTextKey][currentLang]; }
+    else if(linkText){ linkEl.textContent = linkText; }
+    else if(I18N['news_modal_link_text']){ linkEl.textContent = I18N['news_modal_link_text'][currentLang]; }
+  } else {
+    linkEl.classList.remove('show');
+  }
+
+  document.getElementById('newsModalBackdrop').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeNewsModal(){
+  document.getElementById('newsModalBackdrop').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function handleNewsModalLinkClick(e){
+  var href = document.getElementById('newsModalLink').getAttribute('href') || '';
+  if(href.indexOf('#') === 0){
+    e.preventDefault();
+    closeNewsModal();
+    setTimeout(function(){
+      var target = document.querySelector(href);
+      if(target){ target.scrollIntoView({behavior:'smooth', block:'start'}); }
+    }, 320);
+  } else {
+    closeNewsModal();
+    // external URL or internal file: let the browser handle it normally (opens in new tab via target set below)
+  }
+}
+
+document.addEventListener('keydown', function(e){
+  if(e.key === 'Escape'){
+    var backdrop = document.getElementById('newsModalBackdrop');
+    if(backdrop && backdrop.classList.contains('open')){
+      closeNewsModal();
+    }
+  }
+});
+
 function toggleFaq(btn){
   var item = btn.closest('.faq-item');
   var wasOpen = item.classList.contains('open');
@@ -1298,6 +1454,15 @@ const I18N = {
   news2_title:{zh:"8 月企業說明會場次公布，歡迎有引進需求的企業報名參加",ja:"8月度企業向け説明会の日程を公開、受入をご検討中の企業様はぜひご参加ください",en:"August employer seminar schedule released — sign up if you're considering hiring",my:"သြဂုတ်လအတွက် ကုမ္ပဏီရှင်းလင်းပွဲအစီအစဉ် ထုတ်ပြန်ပြီ၊ စိတ်ဝင်စားသောကုမ္ပဏီများ တက်ရောက်နိုင်ပါသည်"},
   news3_tag:{zh:"法規更新",ja:"制度改正",en:"Policy Update",my:"မူဝါဒမွမ်းမံမှု"},
   news3_title:{zh:"特定技能受入人數配額調整公告，詳情請見制度說明區塊",ja:"特定技能の受入人数枠が改定されました。詳細は制度説明セクションをご覧ください",en:"Specified Skilled Worker quota adjustment announced — see program overview for details",my:"အထူးကျွမ်းကျင်လက်ခံနိုင်သူဦးရေ ပြင်ဆင်ကြေညာချက်၊ အသေးစိတ်ကို စနစ်ရှင်းလင်းချက်တွင်ကြည့်ပါ"},
+  news1_detail:{zh:"因應合作企業引進需求增加，即日起新增護理／介護領域的特定技能職缺，開放全國企業媒合應徵。有興趣的求職者可透過求職者專區的線上應徵管道，或直接來電洽詢，顧問將協助說明後續申請流程與所需資格。",ja:"提携企業様からの受入ニーズ増加に伴い、本日より介護分野の特定技能求人を新規追加いたしました。全国の企業様とのマッチングを受け付けております。ご興味のある方は求職者ページよりお問合せいただくか、お電話でご相談ください。担当者が申請フローや必要資格についてご案内いたします。",en:"Due to growing demand from partner companies, we've added new Specified Skilled nursing care openings, now accepting applications nationwide. Interested candidates can apply through the Worker Portal or call us directly — our consultants will guide you through the process and requirements.",my:"မိတ်ဖက်ကုမ္ပဏီများ၏ လိုအင်တိုးပွားလာမှုကြောင့် ယနေ့မှစတင်၍ သူနာပြု/စောင့်ရှောက်ရေးနယ်ပယ်တွင် အထူးကျွမ်းကျင်အလုပ်များ အသစ်ထည့်သွင်းပါသည်။ စိတ်ဝင်စားသူများသည် အလုပ်ရှာသူစာမျက်နှာမှတဆင့် လျှောက်ထားနိုင်ပါသည်။"},
+  news2_detail:{zh:"為協助有引進特定技能／技能實習人才需求的日本企業，我們將於 8 月舉辦數場企業說明會，內容涵蓋制度介紹、費用結構、申請流程與現場問答。場次時間與地點將陸續公布，歡迎有興趣的企業提前登記，我們將優先通知場次確認資訊。",ja:"特定技能・技能実習人材の受入をご検討中の企業様向けに、8月に複数回の説明会を開催いたします。制度のご紹介、費用体系、申請フロー、質疑応答を予定しております。日程・会場は順次公開いたしますので、ご興味のある企業様は事前登録をお願いいたします。",en:"To support companies interested in hiring Specified Skilled or Technical Intern talent, we're holding several seminars in August covering the program, cost structure, application process, and Q&A. Dates and venues will be announced soon — sign up early to be notified first.",my:"အထူးကျွမ်းကျင်/နည်းပညာအလုပ်သင်လုပ်သားများ ခေါ်ယူလိုသောကုမ္ပဏီများအတွက် သြဂုတ်လတွင် ရှင်းလင်းပွဲများစွာကျင်းပပါမည်။"},
+  news3_detail:{zh:"依出入國在留管理廳最新公告，特定技能各領域受入人數配額已進行調整，部分產業別配額有所提升。詳細的配額異動內容與計算方式，已整理於制度說明區塊的「基本受入人數配額」表格中，歡迎企業洽詢顧問確認貴公司適用的最新配額。",ja:"出入国在留管理庁の最新発表により、特定技能各分野の受入人数枠が改定され、一部業種で枠が拡大されました。詳細な変更内容は制度説明セクションの受入人数枠表をご覧ください。貴社の最新枠についてはお気軽にご相談ください。",en:"Per the latest announcement from the Immigration Services Agency, Specified Skilled Worker quotas have been adjusted, with increases in some sectors. See the quota table in the Program Overview section for details, or contact us to confirm your company's updated allowance.",my:"လူဝင်မှုကြီးကြပ်ရေးဌာန၏ နောက်ဆုံးကြေညာချက်အရ အထူးကျွမ်းကျင်နယ်ပယ်အသီးသီး၏ လက်ခံနိုင်သူဦးရေ ပြင်ဆင်ခံရပါသည်။"},
+  news_load_more:{zh:"載入更多消息",ja:"もっと見る",en:"Load More",my:"ပိုမိုကြည့်ရှုရန်"},
+  news_modal_link_text:{zh:"查看詳情",ja:"詳細を見る",en:"View Details",my:"အသေးစိတ်ကြည့်ရန်"},
+  news4_tag:{zh:"下載資料",ja:"資料ダウンロード",en:"Download",my:"ဒေါင်းလုတ်"},
+  news4_title:{zh:"8 月說明會完整議程與場地資訊，點此下載詳細資料",ja:"8月説明会の詳細な日程・会場情報はこちらからダウンロードいただけます",en:"Full agenda and venue details for the August seminar — download here",my:"သြဂုတ်လရှင်းလင်းပွဲ အစီအစဉ်အပြည့်အစုံနှင့် နေရာအချက်အလက်များကို ဤနေရာမှ ဒေါင်းလုတ်ရယူပါ"},
+  news4_detail:{zh:"為方便企業事前準備，我們整理了 8 月企業說明會的完整議程、兩場場次的地點交通資訊，以及線上場次的連線方式，歡迎下載參考。若有任何問題，也歡迎於說明會現場或事前來電洽詢。",ja:"企業様の事前準備にお役立ていただけるよう、8月説明会の詳細な議程、会場アクセス情報、オンライン開催の接続方法をまとめました。ぜひダウンロードしてご確認ください。ご不明点がございましたらお気軽にお問合せください。",en:"To help companies prepare, we've compiled the full agenda, venue access details, and online session instructions for the August seminars. Download the file for reference, or contact us with any questions.",my:"ကုမ္ပဏီများ ကြိုတင်ပြင်ဆင်နိုင်ရန် သြဂုတ်လရှင်းလင်းပွဲ၏ အစီအစဉ်အပြည့်အစုံ၊ နေရာသွားလာရေးအချက်အလက်နှင့် အွန်လိုင်းချိတ်ဆက်နည်းများကို စုစည်းထားပါသည်။"},
+  news4_link_text:{zh:"下載完整資料",ja:"資料をダウンロード",en:"Download Full Info",my:"အပြည့်အစုံဒေါင်းလုတ်ရယူရန်"},
   sidenav_ws:{zh:"求職/企業",ja:"求職者/企業",en:"Jobs/Employers",my:"အလုပ်ရှာသူ/အလုပ်ရှင်"},
   tg_h1:{zh:"什麼是「特定技能」在留資格？",ja:"「特定技能」在留資格とは？",en:"What is the \"Specified Skilled Worker\" Status?",my:"「အထူးကျွမ်းကျင်」နေထိုင်ခွင့်ဆိုသည်မှာ？"},
   tg_p1:{zh:"日本政府於 2018 年 12 月通過出入國管理法修正案，自 2019 年 4 月 1 日起正式實施「特定技能」在留資格。",ja:"日本政府は2018年12月に出入国管理法の改正案を可決し、2019年4月1日より「特定技能」在留資格を正式に施行しました。",en:"The Japanese government passed an amendment to the Immigration Control Act in December 2018, and the \"Specified Skilled Worker\" status officially took effect on April 1, 2019.",my:"ဂျပန်အစိုးရသည် ၂၀၁၈ ခုနှစ် ဒီဇင်ဘာလတွင် လူဝင်မှုကြီးကြပ်ရေးဥပဒေပြင်ဆင်ချက်ကို အတည်ပြုခဲ့ပြီး ၂၀၁၉ ခုနှစ် ဧပြီလ ၁ ရက်နေ့မှစ၍ 「အထူးကျွမ်းကျင်」နေထိုင်ခွင့်ကို တရားဝင်စတင်ကျင့်သုံးခဲ့သည်။"},
@@ -1486,6 +1651,8 @@ function setLang(lang, btn){
 document.addEventListener('DOMContentLoaded', function(){
   var jaBtn = document.querySelector('.lang-option[data-lang="ja"]');
   if(jaBtn) setLang('ja', jaBtn);
+
+  refreshNewsPagination();
 
   document.querySelectorAll('.subnav').forEach(function(nav){
     var links = nav.querySelectorAll('a');
