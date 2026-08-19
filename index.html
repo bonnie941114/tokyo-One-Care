@@ -89,6 +89,7 @@
   }
   .fc-box h4{font-size:17px;color:var(--fc-color,var(--navy));font-weight:700;line-height:1.4;}
   .fc-box p{font-size:13.5px;color:var(--ink-soft);line-height:1.6;}
+  .fc-note{display:inline-block;margin-top:8px;font-size:12px;font-weight:600;color:var(--stucco);background:#FFF3E8;padding:4px 10px;border-radius:8px;line-height:1.5;}
   .fc-h-arrow-right{display:flex;align-items:center;justify-content:center;padding:0 6px;}
   .fc-h-arrow-right svg{width:34px;height:24px;stroke-width:5;}
   @media(max-width:900px){
@@ -97,7 +98,7 @@
     .fc-h-arrow-down{display:none;}
   }
 
-  .hero{position:relative;background:linear-gradient(115deg,#0B2C5C 0%,#154B96 26%,#1C6FE0 38%,#3E8CE8 48%,#7A87B8 56%,#B87F6E 62%,#E08248 70%,#FF8A1E 76%,#FFA83D 84%,#F0C400 94%,#F5D94A 100%);color:#fff;padding:100px 0 80px;overflow:hidden;}
+  .hero{position:relative;background-image:linear-gradient(180deg,rgba(11,30,58,0.55) 0%,rgba(11,30,58,0.35) 45%,rgba(11,30,58,0.55) 100%),url('hero-bg.jpg');background-size:cover;background-position:center;color:#fff;padding:100px 0 80px;overflow:hidden;}
   .hero::after{content:"";position:absolute;right:-100px;top:-100px;width:420px;height:420px;border-radius:50%;border:2px solid rgba(255,255,255,0.25);}
   .hero-blob-1{position:absolute;top:16%;right:8%;width:170px;height:170px;border-radius:50%;background:rgba(11,44,92,0.45);z-index:1;}
   .hero .wrap{position:relative;z-index:2;}
@@ -107,6 +108,9 @@
   .eyebrow span:nth-child(2){color:var(--peach);}
   .eyebrow::before{display:none;}
   .hero h1{font-size:clamp(26px,4.2vw,42px);line-height:1.5;font-weight:700;max-width:760px;margin-bottom:18px;overflow-wrap:break-word;}
+  .brand-glow{display:inline-block;font-size:1.35em;letter-spacing:.5px;color:#fff;text-shadow:0 0 6px rgba(255,255,255,0.45),0 0 14px rgba(255,200,120,0.3);animation:brandGlowPulse 3s ease-in-out infinite;}
+  .hero-subline{display:inline-block;font-size:.68em;font-weight:500;color:#E4EAF0;}
+  @keyframes brandGlowPulse{0%,100%{text-shadow:0 0 6px rgba(255,255,255,0.45),0 0 14px rgba(255,200,120,0.3);}50%{text-shadow:0 0 9px rgba(255,255,255,0.6),0 0 18px rgba(255,200,120,0.4);}}
   .hero p{font-size:17px;color:#E4EAF0;max-width:560px;margin-bottom:32px;overflow-wrap:break-word;}
 
   /* ---- Burmese script needs extra line-height for stacked diacritics ---- */
@@ -147,12 +151,19 @@
   .section-head h2{font-size:32px;font-weight:700;color:var(--navy);margin-bottom:12px;}
   .section-head p{color:var(--ink-soft);font-size:16px;}
 
-  .tabbar{display:flex;gap:6px;background:var(--bg-2);border-radius:999px;padding:6px;margin:0 0 44px;width:fit-content;}
-  .tabbtn{padding:12px 26px;font-size:16px;letter-spacing:.3px;color:var(--ink-soft);border-radius:999px;cursor:pointer;background:none;border:none;font-family:'Noto Sans TC',sans-serif;transition:all .25s var(--ease);}
-  .tabbtn.active{color:#fff;background:var(--navy);font-weight:600;box-shadow:var(--shadow-sm);}
-  .tabbtn:not(.active):hover{color:var(--navy);}
+  .tabbar{display:flex;gap:6px;background:var(--bg-2);border:1px solid var(--line);border-radius:999px;padding:6px;margin:0 0 12px;width:fit-content;}
+  .tabbtn{display:flex;align-items:center;gap:8px;padding:12px 26px;font-size:16px;letter-spacing:.3px;color:var(--ink-soft);font-weight:500;border-radius:999px;cursor:pointer;background:#fff;border:1.5px solid var(--line);font-family:'Noto Sans TC',sans-serif;transition:all .25s var(--ease);}
+  .tabbtn-icon{width:18px;height:18px;stroke-width:2;flex:none;opacity:.75;}
+  .tabbtn.active{color:#fff;background:var(--navy);border-color:var(--navy);font-weight:700;box-shadow:var(--shadow-md);transform:translateY(-1px);}
+  .tabbtn.active .tabbtn-icon{opacity:1;}
+  .tabbtn:not(.active):hover{color:var(--navy);border-color:var(--provence);box-shadow:var(--shadow-sm);transform:translateY(-1px);}
+  .tabbtn:not(.active):active{transform:scale(.97);}
+  .tabbtn:focus-visible{outline:2px solid var(--provence);outline-offset:2px;}
   .tabpanel{display:none;}
   .tabpanel.active{display:block;animation:fadeIn .35s var(--ease);}
+  .tabbar-hint{display:flex;align-items:center;gap:6px;margin:0 0 40px;font-size:13px;color:var(--ink-soft);}
+  .tabbar-hint-icon{width:14px;height:14px;stroke-width:2.4;color:var(--babyblue);animation:hintBounce 1.6s ease-in-out infinite;}
+  @keyframes hintBounce{0%,100%{transform:translateY(0);}50%{transform:translateY(-4px);}}
   @keyframes fadeIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
 
   h3.blocktitle{font-size:20px;color:var(--navy);margin:0 0 22px;font-weight:700;scroll-margin-top:104px;}
@@ -211,6 +222,13 @@
   .back-to-top.show{opacity:1;visibility:visible;transform:translateY(0);}
   .back-to-top:hover{background:var(--peach);color:#3A2210;transform:translateY(-3px);}
 
+  .email-toast{
+    position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);
+    background:var(--navy);color:#fff;padding:12px 22px;border-radius:999px;font-size:14px;
+    box-shadow:var(--shadow-lg);z-index:300;opacity:0;transition:all .3s var(--ease);white-space:nowrap;
+  }
+  .email-toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
   /* ---- news list ---- */
   .news-list{border-top:1px solid var(--line);}
   .news-item{
@@ -264,6 +282,30 @@
   }
   .news-modal-close:hover{background:var(--navy);color:#fff;}
   .news-modal-date{font-size:13px;color:var(--ink-soft);font-weight:500;margin-bottom:8px;}
+  .news-modal-carousel{display:none;position:relative;margin-bottom:18px;}
+  .news-modal-carousel.show{display:block;}
+  .news-carousel-track{
+    display:flex;overflow-x:auto;scroll-snap-type:x mandatory;border-radius:var(--radius-sm);
+    -webkit-overflow-scrolling:touch;scrollbar-width:none;
+  }
+  .news-carousel-track::-webkit-scrollbar{display:none;}
+  .news-carousel-slide{
+    flex:0 0 100%;scroll-snap-align:center;height:200px;background:var(--bg-2);border:1.5px dashed var(--line);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;
+    color:var(--ink-soft);font-size:13px;box-sizing:border-box;
+  }
+  .news-carousel-arrow{
+    position:absolute;top:50%;transform:translateY(-50%);width:32px;height:32px;border-radius:50%;
+    background:rgba(255,255,255,0.92);border:1px solid var(--line);box-shadow:var(--shadow-sm);
+    display:flex;align-items:center;justify-content:center;color:var(--navy);cursor:pointer;
+    transition:all .2s var(--ease);
+  }
+  .news-carousel-arrow:hover{background:var(--navy);color:#fff;}
+  .news-carousel-arrow.prev{left:8px;}
+  .news-carousel-arrow.next{right:8px;}
+  .news-carousel-dots{display:flex;justify-content:center;gap:6px;margin-top:10px;}
+  .news-carousel-dot{width:6px;height:6px;border-radius:50%;background:var(--line);cursor:pointer;transition:all .2s var(--ease);}
+  .news-carousel-dot.active{background:var(--navy);width:16px;border-radius:4px;}
   .news-modal-tag{display:inline-block;font-size:12px;font-weight:700;color:var(--navy);background:var(--bg-2);padding:4px 12px;border-radius:12px;margin-bottom:16px;}
   .news-modal-title{font-size:20px;color:var(--navy);font-weight:700;margin-bottom:16px;line-height:1.5;}
   .news-modal-body{font-size:14.5px;color:var(--ink-soft);line-height:1.8;margin-bottom:24px;}
@@ -310,7 +352,6 @@
   .job-card .job-icon{width:46px;height:46px;background:var(--navy);color:#fff;margin-bottom:14px;}
   .job-card .job-icon.ic-visa-dual{background:linear-gradient(135deg,var(--navy),var(--provence));}
   .job-card .job-icon.ic-visa-single{background:linear-gradient(135deg,var(--navy),var(--peach));}
-  .job-card .job-icon.ic-student{background:linear-gradient(135deg,var(--provence),var(--babyblue));}
   .job-card .job-icon .icon{width:21px;height:21px;}
   .job-card h4{font-size:17px;color:var(--navy);margin-bottom:10px;font-weight:700;}
   .job-tags-sm{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px;}
@@ -348,6 +389,11 @@
   .pain-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg);}
   .pain-card h4{font-size:17px;margin-bottom:10px;color:var(--peach);font-weight:700;}
   .pain-card p{font-size:15px;color:#D4DEE8;}
+  .pain-card p+p{margin-top:12px;}
+  .pain-list{margin:14px 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px;}
+  .pain-list li{font-size:14.5px;color:#D4DEE8;line-height:1.6;padding-left:18px;position:relative;}
+  .pain-list li::before{content:"";position:absolute;left:0;top:9px;width:6px;height:6px;border-radius:50%;background:var(--peach);}
+  .pain-list li strong{color:#fff;font-weight:700;}
 
   .respo-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:52px;}
   .respo-card{border:1px solid var(--line);border-radius:var(--radius);padding:26px;background:var(--bg-2);transition:transform .25s var(--ease),box-shadow .25s var(--ease);}
@@ -447,6 +493,10 @@
   .core-list li{padding:14px 0;border-bottom:1px solid var(--line);font-size:15.5px;color:var(--ink-soft);}
   .core-list li:last-child{border-bottom:none;}
   .core-list b{color:var(--navy);}
+  .adv-sublist{list-style:none;margin-top:12px;padding:0;display:flex;flex-direction:column;gap:10px;}
+  .adv-sublist li{font-size:13.5px;color:var(--ink-soft);line-height:1.65;padding-left:16px;position:relative;}
+  .adv-sublist li::before{content:"";position:absolute;left:0;top:8px;width:5px;height:5px;border-radius:50%;background:var(--navy);}
+  .adv-sublist b{color:var(--navy);}
   .map-embed{width:100%;height:240px;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);margin-top:20px;box-shadow:var(--shadow-sm);}
   .map-embed iframe{width:100%;height:100%;border:0;display:block;}
 
@@ -506,7 +556,7 @@
     .voice-photo{width:100%;height:64px;}
     .navlinks{display:none;}
     .tabbar{width:100%;}
-    .tabbtn{flex:1;text-align:center;}
+    .tabbtn{flex:1;justify-content:center;}
   }
 
   /* ---- mobile layout fixes ---- */
@@ -611,16 +661,16 @@
   <symbol id="ic-leaf" viewBox="0 0 24 24"><path d="M20 4C10 4 4 10 4 18c8 0 14-6 14-14z"/><path d="M6 18C10 14 14 10 19 5"/></symbol>
   <symbol id="ic-no" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M6 6l12 12"/></symbol>
   <symbol id="ic-warning" viewBox="0 0 24 24"><path d="M12 3.5L22 20H2z"/><path d="M12 9.5v5"/><circle cx="12" cy="17.3" r="0.6" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="ic-chevron-up" viewBox="0 0 24 24"><path d="M5 15l7-7 7 7" fill="none"/></symbol>
 </defs>
 </svg>
 
 <nav class="side-nav" id="sideNav">
   <a href="#home" data-target="home"><span class="side-label" data-i18n="nav_home">首頁</span><span class="side-dot"></span></a>
   <a href="#news" data-target="news"><span class="side-label" data-i18n="nav_news">最新消息</span><span class="side-dot"></span></a>
-  <a href="#program" data-target="program"><span class="side-label" data-i18n="nav_program">制度說明</span><span class="side-dot"></span></a>
+  <a href="#training" data-target="training"><span class="side-label" data-i18n="nav_program">制度說明</span><span class="side-dot"></span></a>
   <a href="#worker" data-target="worker"><span class="side-label" id="sideLabelWS" data-i18n="sidenav_ws">求職/企業</span><span class="side-dot"></span></a>
   <a href="#about" data-target="about"><span class="side-label" data-i18n="nav_about">關於我們</span><span class="side-dot"></span></a>
-  <a href="#voices" data-target="voices"><span class="side-label" data-i18n="nav_voices">會員回饋</span><span class="side-dot"></span></a>
   <a href="#contact" data-target="contact"><span class="side-label" data-i18n="nav_contact">聯絡我們</span><span class="side-dot"></span></a>
 </nav>
 
@@ -634,11 +684,10 @@
     <div class="navlinks">
       <a href="#home" data-i18n="nav_home">首頁</a>
       <a href="#news" data-i18n="nav_news">最新消息</a>
-      <a href="#program" data-i18n="nav_program">制度說明</a>
+      <a href="#training" data-i18n="nav_program">制度說明</a>
       <a href="#worker" data-i18n="nav_worker">求職者專區</a>
       <a href="javascript:void(0)" onclick="goToTab('employer')" data-i18n="nav_employer">企業專區</a>
       <a href="#about" data-i18n="nav_about">關於我們</a>
-      <a href="#voices" data-i18n="nav_voices">會員回饋</a>
       <a href="#contact" data-i18n="nav_contact">聯絡我們</a>
     </div>
     <div class="navcta">
@@ -668,7 +717,7 @@
       <span data-i18n="badge1">監理團體許可 許2004000273</span>
       <span data-i18n="badge2">登錄支援機關 25登‐011346</span>
     </div>
-    <h1 data-i18n="hero_title">Tokyo One Care協同組合<br>您最值得信賴的外國人才引進與監理支援夥伴</h1>
+    <h1 data-i18n="hero_title"><span class="brand-glow">Tokyo One Care協同組合</span><br><span class="hero-subline">您最值得信賴的外國人才引進與監理支援夥伴</span></h1>
     <p data-i18n="hero_desc">專注緬甸人才引進、一貫化管理體制、多元人力方案、與緬甸大使館的深厚信任——我們陪企業與外國人才走完每一段旅程。</p>
     <div class="hero-actions">
       <a href="#worker" class="btn btn-primary" data-i18n="hero_btn1">我要找工作</a>
@@ -678,16 +727,16 @@
     <div class="adv-grid">
       <div class="adv-card"><div class="icon-badge"><svg class="icon"><use href="#ic-people"/></svg></div><h4 data-i18n="adv1_h">專注緬甸人才</h4><p data-i18n="adv1_p">技能實習專精引進緬甸人才，配置緬甸籍專任職員，溝通無障礙。</p></div>
       <div class="adv-card"><div class="icon-badge"><svg class="icon"><use href="#ic-chain"/></svg></div><h4 data-i18n="adv2_h">一貫管理體制</h4><p data-i18n="adv2_p">從當地語言學校、派遣機關、入國後講習到監理，全程 Tokyo One 集團統一管理。</p></div>
-      <div class="adv-card"><div class="icon-badge"><svg class="icon"><use href="#ic-blocks"/></svg></div><h4 data-i18n="adv3_h">多元人才確保提案</h4><p data-i18n="adv3_p">彈性結合技能實習生、特定技能外國人及留學生打工等多樣化人力方案。</p></div>
+      <div class="adv-card"><div class="icon-badge"><svg class="icon"><use href="#ic-blocks"/></svg></div><h4 data-i18n="adv3_h">多元人才確保提案</h4><p data-i18n="adv3_p">彈性結合技能實習生與特定技能外國人等多樣化人力方案。</p></div>
       <div class="adv-card"><div class="icon-badge"><svg class="icon"><use href="#ic-handshake"/></svg></div><h4 data-i18n="adv4_h">緬甸大使館深厚信任</h4><p data-i18n="adv4_p">長期協助大使館業務，建立緊密合作關係與良好諮詢管道。</p></div>
     </div>
 
     <div class="job-tags">
-      <span class="job-tag"><span class="tag-icon"><svg class="icon"><use href="#ic-care"/></svg></span><span data-i18n="tag1">介護（護理）</span></span>
-      <span class="job-tag"><span class="tag-icon"><svg class="icon"><use href="#ic-helmet"/></svg></span><span data-i18n="tag2">營建作業員</span></span>
-      <span class="job-tag"><span class="tag-icon"><svg class="icon"><use href="#ic-factory"/></svg></span><span data-i18n="tag3">食品工廠</span></span>
-      <span class="job-tag"><span class="tag-icon"><svg class="icon"><use href="#ic-gear"/></svg></span><span data-i18n="tag4">機械加工</span></span>
-      <span class="job-tag"><span class="tag-icon"><svg class="icon"><use href="#ic-fork"/></svg></span><span data-i18n="tag5">餐飲店（特定技能）</span></span>
+      <span class="job-tag"><span class="tag-icon"><svg class="icon"><use href="#ic-care"/></svg></span><span data-i18n="tag1">介護職業</span></span>
+      <span class="job-tag"><span class="tag-icon"><svg class="icon"><use href="#ic-helmet"/></svg></span><span data-i18n="tag2">建設業</span></span>
+      <span class="job-tag"><span class="tag-icon"><svg class="icon"><use href="#ic-factory"/></svg></span><span data-i18n="tag3">食品製造業</span></span>
+      <span class="job-tag"><span class="tag-icon"><svg class="icon"><use href="#ic-gear"/></svg></span><span data-i18n="tag4">機械加工業</span></span>
+      <span class="job-tag"><span class="tag-icon"><svg class="icon"><use href="#ic-fork"/></svg></span><span data-i18n="tag5">外食業</span></span>
       <span class="job-tag"><span class="tag-icon"><svg class="icon"><use href="#ic-leaf"/></svg></span><span data-i18n="tag6">農業</span></span>
     </div>
   </div>
@@ -703,7 +752,7 @@
       <p data-i18n="news_p">最新的招募職缺、說明會時程與法規政策更新，都會公布在這裡。</p>
     </div>
     <div class="news-list" id="newsList">
-      <button type="button" class="news-item" onclick="openNewsModal(this)" data-date="2026.08.15" data-key-tag="news1_tag" data-key-title="news1_title" data-key-detail="news1_detail">
+      <button type="button" class="news-item" onclick="openNewsModal(this)" data-date="2026.08.15" data-key-tag="news1_tag" data-key-title="news1_title" data-key-detail="news1_detail" data-image="true">
         <span class="news-date">2026.08.15</span>
         <span class="news-tag" data-i18n="news1_tag">職缺公告</span>
         <span class="news-title" data-i18n="news1_title">新增護理／介護人才特定技能職缺，即日起開放應徵</span>
@@ -740,6 +789,18 @@
 <div class="news-modal-backdrop" id="newsModalBackdrop" onclick="if(event.target===this){closeNewsModal();}">
   <div class="news-modal" role="dialog" aria-modal="true">
     <button type="button" class="news-modal-close" onclick="closeNewsModal()" aria-label="Close">&times;</button>
+    <div class="news-modal-carousel" id="newsModalImage">
+      <div class="news-carousel-track" id="newsCarouselTrack">
+        <div class="news-carousel-slide"><svg class="icon" style="width:30px;height:30px;stroke-width:1.4;"><use href="#ic-blocks"/></svg><span>圖片 1</span></div>
+        <div class="news-carousel-slide"><svg class="icon" style="width:30px;height:30px;stroke-width:1.4;"><use href="#ic-blocks"/></svg><span>圖片 2</span></div>
+        <div class="news-carousel-slide"><svg class="icon" style="width:30px;height:30px;stroke-width:1.4;"><use href="#ic-blocks"/></svg><span>圖片 3</span></div>
+        <div class="news-carousel-slide"><svg class="icon" style="width:30px;height:30px;stroke-width:1.4;"><use href="#ic-blocks"/></svg><span>圖片 4</span></div>
+        <div class="news-carousel-slide"><svg class="icon" style="width:30px;height:30px;stroke-width:1.4;"><use href="#ic-blocks"/></svg><span>圖片 5</span></div>
+      </div>
+      <button type="button" class="news-carousel-arrow prev" onclick="newsCarouselNav(-1)" aria-label="Previous"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+      <button type="button" class="news-carousel-arrow next" onclick="newsCarouselNav(1)" aria-label="Next"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
+      <div class="news-carousel-dots" id="newsCarouselDots"></div>
+    </div>
     <div class="news-modal-date" id="newsModalDate"></div>
     <div class="news-modal-tag" id="newsModalTag"></div>
     <h3 class="news-modal-title" id="newsModalTitle"></h3>
@@ -747,16 +808,98 @@
     <a href="#" class="btn btn-primary news-modal-link" id="newsModalLink" data-i18n="news_modal_link_text">查看詳情</a>
   </div>
 </div>
-</section>
 <svg class="wave-divider to-bg2" viewBox="0 0 1440 60" preserveAspectRatio="none" style="background:var(--bg);"><path d="M0,28 C240,4 480,50 720,28 C960,6 1200,48 1440,24 L1440,60 L0,60 Z"/></svg>
 
 <!-- ============ WORKER / EMPLOYER TABS ============ -->
+<!-- ============ TECHNICAL INTERN TRAINING ============ -->
+<section id="training" style="background:var(--bg-2);">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker" data-i18n="ti_kicker">TECHNICAL INTERN TRAINING</div>
+      <h2 data-i18n="ti_h1">什麼是「技能實習制度」？</h2>
+      <p data-i18n="ti_p1">技能實習制度旨在讓發展中國家的青年，透過在日本企業實際工作來修得日本的先進技術，並將技術帶回母國，以此貢獻於國際社會的技術交流與人才培育。</p>
+    </div>
+
+    <h3 class="blocktitle" data-i18n="ti_h2_models">1. 兩大接收模式</h3>
+    <div class="respo-grid" style="margin-bottom:32px;">
+      <div class="respo-card" style="background:var(--bg);">
+        <h4 data-i18n="ti_model1_h">企業單獨型</h4>
+        <p style="font-size:13.5px;color:var(--ink-soft);" data-i18n="ti_model1_p">由日本企業直接引進其海外當地法人、合資企業或合作廠商的員工至日本進行實習。</p>
+      </div>
+      <div class="respo-card" style="background:var(--bg);">
+        <h4 data-i18n="ti_model2_h">團體監理型（本組合採行模式）</h4>
+        <p style="font-size:13.5px;color:var(--ink-soft);" data-i18n="ti_model2_p">由非營利團體（如商工會、協同組合等「監理團體」）負責接收實習生，並派駐至其伞下的成員企業（實習實施者）進行技能實習。</p>
+      </div>
+    </div>
+
+    <h3 class="blocktitle" data-i18n="ti_h2_stages">2. 三大階段與升級考核機制</h3>
+    <p style="font-size:14px;color:var(--ink-soft);margin-bottom:4px;" data-i18n="ti_stages_p">技能實習期最長可達 5 年，共分為三個主要在留資格階段：</p>
+    <ul class="core-list">
+      <li><b data-i18n="ti_stage1_b">技能實習第 1 號（第 1 年）：</b><span data-i18n="ti_stage1_p">基礎技能的「修得」階段（在留資格「技能實習第 1 號ロ」）。</span></li>
+      <li><b data-i18n="ti_stage2_b">技能實習第 2 號（第 2–3 年）：</b><span data-i18n="ti_stage2_p">技能的「習熟」階段（在留資格「技能實習第 2 號ロ」）。實習生必須在第一年結束前，通過指定的技能評價考試（包含學科與實技）方可升級。</span></li>
+      <li><b data-i18n="ti_stage3_b">技能實習第 3 號（第 4–5 年）：</b><span data-i18n="ti_stage3_p">技能的「熟達」階段（在留資格「技能實習第 3 號ロ」）。實習生必須通過技能評價考試的「實技」方可升級，且接收企業必須符合優良基準適合者資格。</span></li>
+    </ul>
+    <div class="warn-box info-box" style="margin-top:16px;">
+      <svg class="icon warn-box-icon"><use href="#ic-bulb"/></svg>
+      <div><span data-i18n="ti_stage_note">＊可轉換至第 2 號或第 3 號的職種與作業，均有嚴格的法律規範（主務省令）限制。</span></div>
+    </div>
+
+    <h3 class="blocktitle" style="margin-top:48px;" data-i18n="ti_h2_legal">監理團體（組合）與接收企業的法律權責分工</h3>
+    <p style="font-size:14px;color:var(--ink-soft);margin-bottom:4px;" data-i18n="ti_legal_p"><strong>「監理團體不是人力派遣公司」</strong>。在團體監理型制度下，雙方有著明確且嚴格的法律責任界線：</p>
+
+    <h4 style="font-size:16px;color:var(--navy);margin:24px 0 4px;" data-i18n="ti_legal1_h">1. 監理團體（組合）的核心職責</h4>
+    <ul class="core-list">
+      <li><b data-i18n="ti_legal1_b1">審核與指導：</b><span data-i18n="ti_legal1_p1">負責指導企業撰寫並申請「技能實習計畫」，並定期進行現場訪問指導與審查訪問，確保實習過程適法合規。</span></li>
+      <li><b data-i18n="ti_legal1_b2">行政與協調：</b><span data-i18n="ti_legal1_p2">負責處理實習生的在留資格管理、技能考試管理、報告徵收（包含實習狀況與歸國報告），並作為日本企業與海外派遣機關之間的溝通與權益保護橋樑。</span></li>
+    </ul>
+
+    <h4 style="font-size:16px;color:var(--navy);margin:24px 0 4px;" data-i18n="ti_legal2_h">2. 接收企業（實習實施者）的責任與義務</h4>
+    <ul class="core-list">
+      <li><b data-i18n="ti_legal2_b1">直接僱用責任：</b><span data-i18n="ti_legal2_p1">企業必須與實習生簽署直接僱用契約，承擔雇主責任，並嚴格遵守《勞動基準法》與《技能實習法》等相關法令。</span></li>
+      <li>
+        <b data-i18n="ti_legal2_b2">配置專責管理人員：</b>
+        <ul style="list-style:none;margin-top:10px;padding-left:0;">
+          <li style="padding:6px 0;font-size:14.5px;color:var(--ink-soft);"><b style="color:var(--navy);" data-i18n="ti_legal2_sub1_b">技能實習指導員：</b><span data-i18n="ti_legal2_sub1_p">負責實習現場的技能傳授與技術品質管理。</span></li>
+          <li style="padding:6px 0;font-size:14.5px;color:var(--ink-soft);"><b style="color:var(--navy);" data-i18n="ti_legal2_sub2_b">生活指導員：</b><span data-i18n="ti_legal2_sub2_p">負責實習生的日常生活管理、心理輔導與適應狀況細節照料。</span></li>
+        </ul>
+      </li>
+    </ul>
+
+    <h3 class="blocktitle" style="margin-top:48px;" data-i18n="ti_h2_adv">接收技能實習生的核心優勢</h3>
+    <p style="font-size:14px;color:var(--ink-soft);margin-bottom:20px;" data-i18n="ti_adv_p">相較於特定技能（特定技能生擁有轉職自由，易面臨跳槽風險），引進技能實習生對於企業而言有著不可取代的戰略優勢：</p>
+
+    <div class="respo-grid" style="margin-bottom:16px;">
+      <div class="respo-card" style="background:var(--bg);">
+        <h4 data-i18n="ti_adv1_h">優勢 1：確保穩定且長期的核心人力 🌟</h4>
+        <ul class="adv-sublist">
+          <li><b data-i18n="ti_adv1_b1">基本上無轉職風險：</b><span data-i18n="ti_adv1_p1">技能實習是「特定實習場所與指定職種」的在留資格，實習生在實習期間原則上無法任意換工作或轉職（僅極少數因不可抗力的個人因素歸國）。</span></li>
+          <li><b data-i18n="ti_adv1_b2">人力規劃高預測性：</b><span data-i18n="ti_adv1_p2">企業能與實習生在 3 至 5 年間建立穩定、持續且深厚的技術傳承關係。企業可利用穩定的配額機制，以 3 至 5 年為週期規律地輪替人力，確保現場永遠有技術熟練的技術人才在籍。</span></li>
+        </ul>
+      </div>
+      <div class="respo-card" style="background:var(--bg);">
+        <h4 data-i18n="ti_adv2_h">優勢 2：作為企業「海外事業拓展」的橋頭堡與幹部儲備 🗺️</h4>
+        <ul class="adv-sublist">
+          <li><b data-i18n="ti_adv2_b1">建立海外市場管道：</b><span data-i18n="ti_adv2_p1">透過與組合合作的海外送出機關建立深厚管道，企業能更深入了解當地市場。</span></li>
+          <li><b data-i18n="ti_adv2_b2">培育歸國後的海外骨幹：</b><span data-i18n="ti_adv2_p2">實習生在日本學習了 3 至 5 年，不僅精通日語與日本企業文化，更熟稔公司的核心技術與工作流程。當他們實習期滿歸國時，正是企業開拓海外市場（如在當地開設子公司、辦事處或合資企業）時，最合適的現成本地管理幹部與技術支柱。</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="respo-grid" style="grid-template-columns:1fr;">
+      <div class="respo-card" style="background:var(--bg);">
+        <h4 data-i18n="ti_adv3_h">優勢 3：實踐企業的「國際貢獻」與社會責任 🤝</h4>
+        <p style="font-size:13.5px;color:var(--ink-soft);"><b data-i18n="ti_adv3_b1">落實國際技術轉移：</b><span data-i18n="ti_adv3_p1">將日本的專業技術與管理觀念，藉由栽培海外優秀青年，傳遞至開發中國家。這不僅是技能實習制度的核心宗旨，更能大幅提升接收企業的社會形象與國際評價。</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ============ SPECIFIED SKILLED PROGRAM ============ -->
 <section id="program" style="background:var(--bg-2);">
   <div class="wrap">
     <div class="section-head">
       <div class="kicker" data-i18n="tg_kicker">SPECIFIED SKILLED WORKER</div>
       <h2 data-i18n="tg_h1">什麼是「特定技能」在留資格？</h2>
+
       <p data-i18n="tg_lead">制度背景、與技能實習的差異，以及企業引進特定技能人才的優勢。</p>
     </div>
 
@@ -801,7 +944,7 @@
       </div>
       <div class="respo-card" style="background:var(--bg);">
         <h4 data-i18n="tg_adv4_h">04・未來外國勞動力的核心</h4>
-        <p style="font-size:13.5px;color:var(--ink-soft);" data-i18n="tg_adv4_p">相較於留學生（每週工時上限 28 小時）或其他特定領域資格，特定技能因其就勞型態的靈活性與專業性，正逐漸成為未來日本引進外國勞動力的中核在留資格。</p>
+        <p style="font-size:13.5px;color:var(--ink-soft);" data-i18n="tg_adv4_p">相較於其他特定領域資格，特定技能因其就勞型態的靈活性與專業性，正逐漸成為未來日本引進外國勞動力的中核在留資格。</p>
       </div>
     </div>
 
@@ -833,8 +976,12 @@
     </div>
 
     <div class="tabbar">
-      <button class="tabbtn active" onclick="showTab('worker',event)" data-i18n="tabbtn_worker">求職者專區</button>
-      <button class="tabbtn" onclick="showTab('employer',event)" data-i18n="tabbtn_employer">企業專區</button>
+      <button class="tabbtn active" onclick="showTab('worker',event)"><svg class="icon tabbtn-icon"><use href="#ic-people"/></svg><span data-i18n="tabbtn_worker">求職者專區</span></button>
+      <button class="tabbtn" onclick="showTab('employer',event)"><svg class="icon tabbtn-icon"><use href="#ic-building"/></svg><span data-i18n="tabbtn_employer">企業專區</span></button>
+    </div>
+    <div class="tabbar-hint">
+      <svg class="icon tabbar-hint-icon"><use href="#ic-chevron-up"/></svg>
+      <span data-i18n="tabbar_hint">點擊上方按鈕，切換查看求職者或企業所需資訊</span>
     </div>
 
     <!-- WORKER -->
@@ -867,8 +1014,7 @@
         <div class="pill-box">
           <h4 data-i18n="pill3_h">招募國家範圍</h4>
           <ul>
-            <li data-i18n="pill3_li1">技能實習生：專精緬甸人才</li>
-            <li data-i18n="pill3_li2">特定技能／留學生：印尼、菲律賓、越南、緬甸、中國等</li>
+            <li data-i18n="pill3_li1">特定技能及技能生招募範圍：緬甸、印尼、菲律賓、越南、中國等</li>
           </ul>
         </div>
       </div>
@@ -907,7 +1053,7 @@
           <div class="fc-box" style="--fc-color:var(--navy)">
             <span class="fc-num">5</span>
             <div class="fc-icon"><svg class="icon"><use href="#ic-class"/></svg></div>
-            <div><h4 data-i18n="flow5_h">1 個月集合法定講習</h4><p data-i18n="flow5_p">Tokyo One 日語學校千葉本校進行入國後講習。</p></div>
+            <div><h4 data-i18n="flow5_h">1 個月集合法定講習</h4><p data-i18n="flow5_p">Tokyo One 日語學校千葉本校進行入國後講習。</p><span class="fc-note" data-i18n="flow5_note">＊特定技能不需此講習，僅適用技能實習生</span></div>
           </div>
           <div class="fc-h-arrow-right"><svg class="icon" style="color:var(--peach)"><use href="#ic-arrow-right"/></svg></div>
           <div class="fc-box" style="--fc-color:var(--peach)">
@@ -918,10 +1064,6 @@
         </div>
       </div>
 
-
-
-
-
       <h3 class="blocktitle" id="w-service" data-i18n="w_h3_3">我們的服務與支援內容</h3>
       <div class="service-grid">
         <div class="service-card"><div class="icon-badge" style="background:var(--bg-2);color:var(--navy);"><svg class="icon"><use href="#ic-book"/></svg></div><div class="tag" data-i18n="svc1_tag">學習與生活輔導</div><h4 data-i18n="svc1_h">日語學習與考試輔導</h4><p data-i18n="svc1_p">提供日語學習指導、技能評價考試輔導與日本生活習慣指導。</p></div>
@@ -930,7 +1072,7 @@
 
       <h3 class="blocktitle" id="w-jobs" data-i18n="w_h3_4">職缺一覽</h3>
       <div class="job-grid">
-        <div class="job-cat-label" data-i18n="jcat1">CATEGORY 01 ・ 雙簽證對應（技能實習・特定技能）</div>
+        <div class="job-cat-label" data-i18n="jcat1">CATEGORY 01 ・ 主要對應職種</div>
         <div class="job-card">
           <div class="icon-badge job-icon ic-visa-dual"><svg class="icon"><use href="#ic-care"/></svg></div>
           <h4 data-i18n="job1_h">護理／介護人員</h4>
@@ -961,34 +1103,17 @@
           <div class="job-tags-sm"><span class="tag-core" data-i18n="job6_s1">技能實習・特定技能</span></div>
           <p><strong data-i18n="job6_kw">工作內容：</strong><span data-i18n="job6_note">於農場從事栽培、採收與包裝，適合喜歡戶外工作者。</span></p>
         </div>
-
-        <div class="job-cat-label" data-i18n="jcat_group234">CATEGORY 02–04 ・ 特定技能／學生兼職／無法對應</div>
         <div class="job-card">
-          <div class="job-card-tag" data-i18n="jcat2">CATEGORY 02 ・ 單一特定技能</div>
           <div class="icon-badge job-icon ic-visa-single"><svg class="icon"><use href="#ic-fork"/></svg></div>
           <h4 data-i18n="job5_h">餐飲店員工</h4>
           <div class="job-tags-sm"><span class="tag-core" data-i18n="job5_s1">僅適用特定技能</span><span class="tag-limit" data-i18n="job5_s2">技能實習不適用</span></div>
           <p><strong data-i18n="job5_kw">工作內容：</strong><span data-i18n="job5_note">於餐飲店從事外場接待與內場備餐工作。</span></p>
         </div>
-        <div class="job-card">
-          <div class="job-card-tag" data-i18n="jcat3">CATEGORY 03 ・ 學生兼職</div>
-          <div class="icon-badge job-icon ic-student"><svg class="icon"><use href="#ic-book"/></svg></div>
-          <h4 data-i18n="job7_h">留學生兼職打工</h4>
-          <div class="job-tags-sm"><span class="tag-attr" data-i18n="job7_s1">無職種限制</span><span class="tag-limit" data-i18n="job7_s2">每週工時上限 28 小時</span></div>
-          <p><strong data-i18n="job7_kw">工作內容：</strong><span data-i18n="job7_note">僅能於課餘時間從事兼職工作，工時受嚴格限制。</span></p>
-        </div>
-        <div class="job-card job-card-warn">
-          <div class="job-card-tag" data-i18n="jcat4" style="color:#B23A2A;">CATEGORY 04 ・ 無法對應</div>
-          <div class="icon-badge job-icon job-icon-warn"><svg class="icon"><use href="#ic-no"/></svg></div>
-          <h4 data-i18n="job_warn_h">無法對應職種</h4>
-          <div class="job-tags-sm"><span class="tag-limit" data-i18n="job_warn_t1">司機（駕駛員）</span><span class="tag-limit" data-i18n="job_warn_t2">物流倉庫作業</span></div>
-          <p data-i18n="job_warn_note">以上職種目前不受理引進申請。</p>
-        </div>
       </div>
 
       <h3 class="blocktitle" id="w-faq" style="margin-top:48px;" data-i18n="w_h3_5">常見問答 FAQ</h3>
       <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span data-i18n="faq1_q">實習期間可以換工作嗎？</span><span class="faq-toggle-icon">+</span></button><div class="faq-a-wrap"><div class="faq-a" data-i18n="faq1_a">技能實習是指定實習場所的簽證，原則上無法任意換工作（轉職），可在同一企業安定工作 3–5 年。</div></div></div>
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span data-i18n="faq2_q">留學生打工的時間有限制嗎？</span><span class="faq-toggle-icon">+</span></button><div class="faq-a-wrap"><div class="faq-a" data-i18n="faq2_a">有，法定嚴格限制每週工作時間不可超過 28 小時。</div></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span data-i18n="faq4_q">特定技能可以換工作嗎？</span><span class="faq-toggle-icon">+</span></button><div class="faq-a-wrap"><div class="faq-a" data-i18n="faq4_a">可以，特定技能人才擁有轉職自由，只要在同一產業領域內，可自由轉換至其他雇用企業，與技能實習不同。</div></div></div>
       <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span data-i18n="faq3_q">護理職種可以做居家照顧嗎？</span><span class="faq-toggle-icon">+</span></button><div class="faq-a-wrap"><div class="faq-a" data-i18n="faq3_a">不可以，護理職種不包含居家訪問看護。</div></div></div>
     </div>
 
@@ -1010,7 +1135,18 @@
       <h3 class="blocktitle" id="e-pain" data-i18n="e_h3_1">企業痛點與解決方案</h3>
       <div class="pain-grid">
         <div class="pain-card"><div class="icon-badge"><svg class="icon"><use href="#ic-people"/></svg></div><h4 data-i18n="pain1_h">企業痛點</h4><p data-i18n="pain1_p">面臨日本國內人手不足，且希望確保能長期安定工作的作業人力。</p></div>
-        <div class="pain-card"><div class="icon-badge"><svg class="icon"><use href="#ic-bulb"/></svg></div><h4 data-i18n="pain2_h">解決方案</h4><p data-i18n="pain2_p">安定人力確保（3–5 年不轉職）、彈性人力組合（特定技能＋留學生兼職）、獨家監理費折抵優惠（床舖清潔、冷氣拆洗、花王業務用產品採購、次氯酸水噴霧服務）。</p></div>
+        <div class="pain-card">
+          <div class="icon-badge"><svg class="icon"><use href="#ic-bulb"/></svg></div>
+          <h4 data-i18n="pain2_h">解決方案</h4>
+          <p data-i18n="pain2_intro">透過導入技能實習生與特定技能外國人才，持續確保穩定的人力資源。</p>
+          <ul class="pain-list">
+            <li><strong data-i18n="pain2_li1_h">技能實習生：</strong><span data-i18n="pain2_li1">引進年輕且積極的外國人才，透過實務培訓成長。</span></li>
+            <li><strong data-i18n="pain2_li2_h">特定技能人才：</strong><span data-i18n="pain2_li2">具備一定技能與日語能力，可作為即戰力確保。</span></li>
+            <li><strong data-i18n="pain2_li3_h">持續性人才招募：</strong><span data-i18n="pain2_li3">善用從技能實習轉換至特定技能的管道，銜接長期雇用。</span></li>
+            <li><strong data-i18n="pain2_li4_h">生活與就業支援：</strong><span data-i18n="pain2_li4">入職後持續提供支援，提升職場穩定留任率。</span></li>
+          </ul>
+          <p data-i18n="pain2_outro">透過技能實習生與特定技能人才的組合，從「人才確保」到「培育與留任」，全方位協助企業解決長期缺工問題。</p>
+        </div>
       </div>
 
       <h3 class="blocktitle" id="e-support" data-i18n="e_h3_2">支援業務委託內容（權責分工）</h3>
@@ -1060,35 +1196,103 @@
           <div class="fc-box" style="--fc-color:var(--navy)">
             <span class="fc-num">3</span>
             <div class="fc-icon"><svg class="icon"><use href="#ic-building"/></svg></div>
-            <div><h4 data-i18n="eflow3_h">入境後 1 個月</h4><p data-i18n="eflow3_p">集合座學培訓，隨後配屬至企業實施僱用。</p></div>
+            <div><h4 data-i18n="eflow3_h">入境後 1 個月</h4><p data-i18n="eflow3_p">集合座學培訓，隨後配屬至企業實施僱用。</p><span class="fc-note" data-i18n="eflow3_note">＊特定技能不需此講習，僅適用技能實習生</span></div>
           </div>
         </div>
       </div>
 
-      <h3 class="blocktitle" id="e-quota" data-i18n="e_h3_4">基本受入人數配額（一般職種）</h3>
+      <h3 class="blocktitle" id="e-quota" data-i18n="e_h3_4">基本受入人數配額</h3>
+
+      <h4 style="font-size:16px;color:var(--navy);margin:0 0 12px;" data-i18n="quota_sub1">＜一般職種＞</h4>
       <div class="table-scroll">
       <div class="table-scroll-inner">
-      <table class="quota" style="min-width:420px;">
-        <tr><th data-i18n="quota_th1">企業常勤員工人數</th><th data-i18n="quota_th2">每年第 1 號基本配額</th></tr>
-        <tr><td data-i18n="quota_r1_1">30 人以下</td><td data-i18n="quota_r1_2">3 人（3 年累積最多 9 人）</td></tr>
+      <table class="quota" style="min-width:680px;">
+        <tr>
+          <th rowspan="2" data-i18n="quota_th1">實習實施者的常勤職員總數</th>
+          <th data-i18n="quota_th_g1">第 1 號（1 年間）</th>
+          <th data-i18n="quota_th_g2">第 2 號（2 年間）</th>
+          <th colspan="3" data-i18n="quota_th_g3">優良基準適合者</th>
+        </tr>
+        <tr>
+          <th data-i18n="quota_th_basic">基本人數枠</th>
+          <th data-i18n="quota_th_x2a">基本人數枠的 2 倍</th>
+          <th data-i18n="quota_th_g3_1">第 1 號（1 年間）</th>
+          <th data-i18n="quota_th_g3_2">第 2 號（2 年間）</th>
+          <th data-i18n="quota_th_g3_3">第 3 號（2 年間）</th>
+        </tr>
+        <tr><td data-i18n="quota_r1_1">30 人以下</td><td data-i18n="quota_r1_2">3 人</td><td rowspan="7" data-i18n="quota_x2">基本人數枠的 2 倍</td><td rowspan="7" data-i18n="quota_x2b">基本人數枠的 2 倍</td><td rowspan="7" data-i18n="quota_x4">基本人數枠的 4 倍</td><td rowspan="7" data-i18n="quota_x6">基本人數枠的 6 倍</td></tr>
         <tr><td data-i18n="quota_r2_1">31～40 人</td><td data-i18n="quota_r2_2">4 人</td></tr>
         <tr><td data-i18n="quota_r3_1">41～50 人</td><td data-i18n="quota_r3_2">5 人</td></tr>
         <tr><td data-i18n="quota_r4_1">51～100 人</td><td data-i18n="quota_r4_2">6 人</td></tr>
         <tr><td data-i18n="quota_r5_1">101～200 人</td><td data-i18n="quota_r5_2">10 人</td></tr>
         <tr><td data-i18n="quota_r6_1">201～300 人</td><td data-i18n="quota_r6_2">15 人</td></tr>
-        <tr><td data-i18n="quota_r7_1">301 人以上</td><td data-i18n="quota_r7_2">常勤人數 1/20</td></tr>
+        <tr><td data-i18n="quota_r7_1">301 人以上</td><td data-i18n="quota_r7_2">常勤職員總數的 20 分之 1</td></tr>
       </table>
       </div>
       <div class="table-scroll-hint" data-i18n="table_scroll_hint">← 左右滑動查看完整表格 →</div>
       </div>
-      <p style="font-size:14.5px;color:var(--ink-soft);margin-top:10px;" data-i18n="quota_note">＊若取得優良實施者認定，配額可擴充至 2 倍，並可引進第 3 號 4–5 年實習生。</p>
+      <div class="warn-box info-box" style="margin-top:16px;align-items:flex-start;">
+        <svg class="icon warn-box-icon"><use href="#ic-bulb"/></svg>
+        <div>
+          <strong data-i18n="quota_note_h">配額計算相關規定：</strong>
+          <ul style="margin:8px 0 0;padding-left:18px;font-size:13.5px;color:var(--ink-soft);line-height:1.8;">
+            <li data-i18n="quota_note1">上述可受入人數，指「1 年內」可新受入之技能實習第 1 號人數。當該名實習生於第 2 年順利移行至第 2 號後，隔年即可再次新增第 1 號名額，配額可逐年持續疊加，並非一次性總量上限。</li>
+            <li data-i18n="quota_note2">技能實習第 1 號的在職人數，於任何時間點均不可超過該企業之「常勤職員總數」，此為法定上限，非僅限申請當年度。</li>
+            <li data-i18n="quota_note3">「常勤職員總數」以前一年度決算申報時的正式雇用人數為計算基準，不包含技能實習生本人、兼職人員與派遣人員。</li>
+            <li data-i18n="quota_note4">企業若同時受入一般職種與介護職種之技能實習生，兩者配額須分開計算，不得合併使用或互相流用。</li>
+          </ul>
+        </div>
+      </div>
+
+      <h4 style="font-size:16px;color:var(--navy);margin:40px 0 12px;" data-i18n="quota_sub2">＜介護職種＞</h4>
+      <div class="table-scroll">
+      <div class="table-scroll-inner">
+      <table class="quota" style="min-width:680px;">
+        <tr>
+          <th rowspan="2" data-i18n="cquota_th0">事業所的常勤照護職員總數</th>
+          <th colspan="2" data-i18n="cquota_th_g1">一般的實習實施者</th>
+          <th colspan="2" data-i18n="cquota_th_g2">優良的實習實施者</th>
+        </tr>
+        <tr>
+          <th data-i18n="cquota_th_1">第 1 號</th>
+          <th data-i18n="cquota_th_all">全體（第 1・2 號）</th>
+          <th data-i18n="cquota_th_1b">第 1 號</th>
+          <th data-i18n="cquota_th_allb">全體（第 1・2・3 號）</th>
+        </tr>
+        <tr><td data-i18n="cquota_r1_0">1</td><td data-i18n="cquota_r1_1">1</td><td data-i18n="cquota_r1_2">1</td><td data-i18n="cquota_r1_3">1</td><td data-i18n="cquota_r1_4">1</td></tr>
+        <tr><td data-i18n="cquota_r2_0">2</td><td data-i18n="cquota_r2_1">1</td><td data-i18n="cquota_r2_2">2</td><td data-i18n="cquota_r2_3">2</td><td data-i18n="cquota_r2_4">2</td></tr>
+        <tr><td data-i18n="cquota_r3_0">3～10</td><td data-i18n="cquota_r3_1">1</td><td data-i18n="cquota_r3_2">3</td><td data-i18n="cquota_r3_3">2</td><td data-i18n="cquota_r3_4">6</td></tr>
+        <tr><td data-i18n="cquota_r4_0">11～20</td><td data-i18n="cquota_r4_1">2</td><td data-i18n="cquota_r4_2">6</td><td data-i18n="cquota_r4_3">4</td><td data-i18n="cquota_r4_4">12</td></tr>
+        <tr><td data-i18n="cquota_r5_0">21～30</td><td data-i18n="cquota_r5_1">3</td><td data-i18n="cquota_r5_2">9</td><td data-i18n="cquota_r5_3">6</td><td data-i18n="cquota_r5_4">18</td></tr>
+        <tr><td data-i18n="cquota_r6_0">31～40</td><td data-i18n="cquota_r6_1">4</td><td data-i18n="cquota_r6_2">12</td><td data-i18n="cquota_r6_3">8</td><td data-i18n="cquota_r6_4">24</td></tr>
+        <tr><td data-i18n="cquota_r7_0">41～50</td><td data-i18n="cquota_r7_1">5</td><td data-i18n="cquota_r7_2">15</td><td data-i18n="cquota_r7_3">10</td><td data-i18n="cquota_r7_4">30</td></tr>
+        <tr><td data-i18n="cquota_r8_0">51～71</td><td data-i18n="cquota_r8_1">6</td><td data-i18n="cquota_r8_2">18</td><td data-i18n="cquota_r8_3">12</td><td data-i18n="cquota_r8_4">36</td></tr>
+        <tr><td data-i18n="cquota_r9_0">72～100</td><td data-i18n="cquota_r9_1">6</td><td data-i18n="cquota_r9_2">18</td><td data-i18n="cquota_r9_3">12</td><td data-i18n="cquota_r9_4">36</td></tr>
+        <tr><td data-i18n="cquota_r10_0">101～119</td><td data-i18n="cquota_r10_1">10</td><td data-i18n="cquota_r10_2">30</td><td data-i18n="cquota_r10_3">20</td><td data-i18n="cquota_r10_4">60</td></tr>
+        <tr><td data-i18n="cquota_r11_0">120～200</td><td data-i18n="cquota_r11_1">10</td><td data-i18n="cquota_r11_2">30</td><td data-i18n="cquota_r11_3">20</td><td data-i18n="cquota_r11_4">60</td></tr>
+        <tr><td data-i18n="cquota_r12_0">201～300</td><td data-i18n="cquota_r12_1">15</td><td data-i18n="cquota_r12_2">45</td><td data-i18n="cquota_r12_3">30</td><td data-i18n="cquota_r12_4">90</td></tr>
+        <tr><td data-i18n="cquota_r13_0">301～</td><td data-i18n="cquota_r13_1">常勤照護職員的 20 分之 1</td><td data-i18n="cquota_r13_2">常勤照護職員的 20 分之 3</td><td data-i18n="cquota_r13_3">常勤照護職員的 10 分之 1</td><td data-i18n="cquota_r13_4">常勤照護職員的 5 分之 3</td></tr>
+      </table>
+      </div>
+      <div class="table-scroll-hint" data-i18n="table_scroll_hint">← 左右滑動查看完整表格 →</div>
+      </div>
+      <div class="warn-box info-box" style="margin-top:16px;align-items:flex-start;">
+        <svg class="icon warn-box-icon"><use href="#ic-bulb"/></svg>
+        <div>
+          <strong data-i18n="quota_note5_h">優良基準適合者相關規定：</strong>
+          <ul style="margin:8px 0 0;padding-left:18px;font-size:13.5px;color:var(--ink-soft);line-height:1.8;">
+            <li data-i18n="quota_note5">若企業取得「優良實施者」認定（須通過技能評價合格率、法令遵守狀況、支援體制等綜合審查），受入配額最高可擴充至一般標準的 2 倍，介護職種第 1 號配額則可提升至一般標準的 2 倍、全體（第 1～3 號）配額可提升至 6 倍。</li>
+            <li data-i18n="quota_note6">唯有取得優良實施者認定之企業，方可進一步引進技能實習第 3 號（第 4–5 年）實習生；未取得認定者，實習期最長僅至第 2 號（第 2–3 年）為止。</li>
+          </ul>
+        </div>
+      </div>
 
       <div class="cta-strip" style="margin-top:48px;">
         <div>
           <h3 data-i18n="e_cta_h">諮詢表單</h3>
           <p data-i18n="e_cta_p">由專人試算企業人數配額、評估對應職種，並提供監理費折抵方案。</p>
         </div>
-        <a href="#contact" class="btn" style="background:var(--peach);border-color:var(--peach);color:#402713;" data-i18n="e_cta_btn">立即洽詢</a>
+        <a href="mailto:info@tokyo-one-care.jp" class="btn" style="background:var(--peach);border-color:var(--peach);color:#402713;" data-i18n="e_cta_btn" onclick="copyEmailFallback(event,'info@tokyo-one-care.jp')">立即洽詢</a>
       </div>
     </div>
   </div>
@@ -1119,59 +1323,19 @@
         </div>
       </div>
       <div>
-        <h3 class="blocktitle" data-i18n="core_h">核心競爭力</h3>
+        <h3 class="blocktitle" data-i18n="core_h">當監理團體的特徵</h3>
         <ul class="core-list">
-          <li><b data-i18n="core1_b">緬甸人才特化：</b><span data-i18n="core1_p">緬甸人多信仰佛教、性格溫和易融入日本社會、高學歷者多且希望長期留日。配置 2 名精通日語的緬甸籍專任員工及 1 名歸化幹部，溝通零障礙。</span></li>
-          <li><b data-i18n="core2_b">一貫化管理：</b><span data-i18n="core2_p">從當地培訓到日本監理全程 Tokyo One 集團管理，建立極高信任度。</span></li>
-          <li><b data-i18n="core3_b">深厚外交信任：</b><span data-i18n="core3_p">長期協助緬甸大使館市場調查與活動企劃，諮詢事項均能獲良好協助。</span></li>
+          <li><b data-i18n="core1_b">① 緬甸人才專精：</b><span data-i18n="core1_p">技能實習生的引進專注於緬甸人才，深耕單一國家建立高度信賴管道。</span></li>
+          <li><b data-i18n="core2_b">② 一貫化管理體制：</b><span data-i18n="core2_p">從緬甸當地人才發掘到日本入國後講習，全程由 Tokyo One 集團一手管理。</span></li>
+          <li><b data-i18n="core3_b">③ 多樣化人才確保手段：</b><span data-i18n="core3_p">技能實習生、特定技能外國人等多元管道，依企業需求彈性提案。</span></li>
+          <li><b data-i18n="core4_b">④ 與緬甸大使館的緊密關係：</b><span data-i18n="core4_p">長期協助緬甸大使館市場調查與活動企劃，建立深厚信賴關係。</span></li>
         </ul>
       </div>
     </div>
-  </div>
-</section>
-<svg class="wave-divider" viewBox="0 0 1440 60" preserveAspectRatio="none" style="background:var(--bg-2);"><path d="M0,28 C240,4 480,50 720,28 C960,6 1200,48 1440,24 L1440,60 L0,60 Z"/></svg>
 
-<!-- ============ TESTIMONIALS ============ -->
-<section id="voices">
-  <div class="wrap">
-    <div class="section-head">
-      <div class="kicker" data-i18n="voice_kicker">MEMBER VOICES</div>
-      <h2 data-i18n="voice_h2">來自我們會員企業的聲音</h2>
-      <p data-i18n="voice_p">實際合作的日本企業回饋，真實反映導入外國人才後的改變。</p>
-    </div>
-    <div class="voice-grid">
-      <div class="voice-card">
-        <div class="voice-photo"><svg class="icon" style="width:34px;height:34px;stroke-width:1.4;"><use href="#ic-people"/></svg></div>
-        <div class="voice-body">
-          <p data-i18n="voice1_p">過去自行招募常常錄用沒多久就離職，人才成了工作的一部分。透過 Tokyo One Care 的介紹，從流程到後續追蹤都很順暢，日語溝通完全沒有問題，技術能力也讓我們驚艷。</p>
-          <div class="voice-tag" data-i18n="voice1_tag">水產加工業・關東地區</div>
-        </div>
-      </div>
-      <div class="voice-card">
-        <div class="voice-photo"><svg class="icon" style="width:34px;height:34px;stroke-width:1.4;"><use href="#ic-people"/></svg></div>
-        <div class="voice-body">
-          <p data-i18n="voice2_p">之前配合其他監理團體，聽朋友介紹後轉換過來。每月固定費用降低了不少，遇到小問題也能立刻獲得處理，不是只會說不會做，真的幫了大忙。</p>
-          <div class="voice-tag" data-i18n="voice2_tag">機械／金屬相關產業</div>
-        </div>
-      </div>
-      <div class="voice-card">
-        <div class="voice-photo"><svg class="icon" style="width:34px;height:34px;stroke-width:1.4;"><use href="#ic-people"/></svg></div>
-        <div class="voice-body">
-          <p data-i18n="voice3_p">疫情期間連生活上的擔憂都會細心提醒與協助，之前合作的組合完全沒有這樣的服務，切換過來真的是正確的決定，能感受到團隊的用心。</p>
-          <div class="voice-tag" data-i18n="voice3_tag">食品製造業</div>
-        </div>
-      </div>
-      <div class="voice-card">
-        <div class="voice-photo"><svg class="icon" style="width:34px;height:34px;stroke-width:1.4;"><use href="#ic-people"/></svg></div>
-        <div class="voice-body">
-          <p data-i18n="voice4_p">實習生們年輕又開朗，讓職場氣氛變得更有活力。不只是對公司體貼，平時也很用心提升每一位實習生的能力，完全沒有讓人不滿意的地方，未來會持續積極採用。</p>
-          <div class="voice-tag" data-i18n="voice4_tag">營建業</div>
-        </div>
-      </div>
-    </div>
   </div>
 </section>
-<svg class="wave-divider to-footer" viewBox="0 0 1440 60" preserveAspectRatio="none" style="background:var(--bg);"><path d="M0,30 C240,6 480,54 720,30 C960,6 1200,50 1440,26 L1440,60 L0,60 Z"/></svg>
+<svg class="wave-divider to-footer" viewBox="0 0 1440 60" preserveAspectRatio="none" style="background:var(--bg-2);"><path d="M0,28 C240,4 480,50 720,28 C960,6 1200,48 1440,24 L1440,60 L0,60 Z"/></svg>
 
 <!-- ============ CONTACT ============ -->
 <footer id="contact">
@@ -1186,10 +1350,10 @@
       </div>
       <div>
         <h5 data-i18n="foot_h5_1">求職者</h5>
-        <a href="#worker" data-i18n="foot_l1">制度介紹</a>
-        <a href="#worker" data-i18n="foot_l2">申請流程</a>
-        <a href="#worker" data-i18n="foot_l3">職缺一覽</a>
-        <a href="#worker" data-i18n="foot_l4">常見問答</a>
+        <a href="#w-visa" onclick="goToWorkerSection('w-visa');return false;" data-i18n="foot_l1">制度介紹</a>
+        <a href="#w-flow" onclick="goToWorkerSection('w-flow');return false;" data-i18n="foot_l2">申請流程</a>
+        <a href="#w-jobs" onclick="goToWorkerSection('w-jobs');return false;" data-i18n="foot_l3">職缺一覽</a>
+        <a href="#w-faq" onclick="goToWorkerSection('w-faq');return false;" data-i18n="foot_l4">常見問答</a>
       </div>
       <div>
         <h5 data-i18n="foot_h5_2">企業／其他</h5>
@@ -1234,6 +1398,15 @@ function openNewsModal(btn){
   var titleEl = document.getElementById('newsModalTitle');
   var bodyEl = document.getElementById('newsModalBody');
   var linkEl = document.getElementById('newsModalLink');
+  var imageEl = document.getElementById('newsModalImage');
+
+  var imageSrc = btn.getAttribute('data-image');
+  if(imageSrc){
+    imageEl.classList.add('show');
+    initNewsCarousel();
+  } else {
+    imageEl.classList.remove('show');
+  }
 
   dateEl.textContent = btn.getAttribute('data-date') || '';
 
@@ -1272,9 +1445,70 @@ function openNewsModal(btn){
   document.body.style.overflow = 'hidden';
 }
 
+function copyEmailFallback(e, email){
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(email).then(function(){
+      showEmailToast(email);
+    }).catch(function(){});
+  }
+}
+
+function showEmailToast(email){
+  var existing = document.getElementById('emailToast');
+  if(existing) existing.remove();
+  var toast = document.createElement('div');
+  toast.id = 'emailToast';
+  toast.className = 'email-toast';
+  var label = (I18N['email_copied_toast'] && I18N['email_copied_toast'][currentLang]) || '已複製信箱地址：';
+  toast.textContent = label + email;
+  document.body.appendChild(toast);
+  requestAnimationFrame(function(){ toast.classList.add('show'); });
+  setTimeout(function(){
+    toast.classList.remove('show');
+    setTimeout(function(){ toast.remove(); }, 300);
+  }, 3000);
+}
+
 function closeNewsModal(){
   document.getElementById('newsModalBackdrop').classList.remove('open');
   document.body.style.overflow = '';
+}
+
+function initNewsCarousel(){
+  var track = document.getElementById('newsCarouselTrack');
+  var dotsWrap = document.getElementById('newsCarouselDots');
+  var slides = track.querySelectorAll('.news-carousel-slide');
+
+  dotsWrap.innerHTML = '';
+  slides.forEach(function(_, i){
+    var dot = document.createElement('span');
+    dot.className = 'news-carousel-dot' + (i === 0 ? ' active' : '');
+    dot.onclick = function(){ newsCarouselGoTo(i); };
+    dotsWrap.appendChild(dot);
+  });
+
+  track.scrollLeft = 0;
+
+  if(track._newsScrollBound) return;
+  track._newsScrollBound = true;
+  track.addEventListener('scroll', function(){
+    var idx = Math.round(track.scrollLeft / track.clientWidth);
+    var dots = dotsWrap.querySelectorAll('.news-carousel-dot');
+    dots.forEach(function(d,i){ d.classList.toggle('active', i === idx); });
+  });
+}
+
+function newsCarouselGoTo(index){
+  var track = document.getElementById('newsCarouselTrack');
+  track.scrollTo({left: index * track.clientWidth, behavior: 'smooth'});
+}
+
+function newsCarouselNav(dir){
+  var track = document.getElementById('newsCarouselTrack');
+  var slideCount = track.querySelectorAll('.news-carousel-slide').length;
+  var current = Math.round(track.scrollLeft / track.clientWidth);
+  var next = Math.max(0, Math.min(slideCount - 1, current + dir));
+  newsCarouselGoTo(next);
 }
 
 document.addEventListener('keydown', function(e){
@@ -1288,9 +1522,7 @@ document.addEventListener('keydown', function(e){
 
 function toggleFaq(btn){
   var item = btn.closest('.faq-item');
-  var wasOpen = item.classList.contains('open');
-  item.parentElement.querySelectorAll('.faq-item').forEach(function(i){ i.classList.remove('open'); });
-  if(!wasOpen) item.classList.add('open');
+  item.classList.toggle('open');
 }
 
 function updateSideLabel(name){
@@ -1305,7 +1537,7 @@ function updateSideLabel(name){
 function showTab(name,e){
   document.querySelectorAll('.tabbtn').forEach(b=>b.classList.remove('active'));
   document.querySelectorAll('.tabpanel').forEach(p=>p.classList.remove('active'));
-  e.target.classList.add('active');
+  (e.currentTarget||e.target).classList.add('active');
   document.getElementById('tab-'+name).classList.add('active');
   updateSideLabel(name);
 }
@@ -1319,6 +1551,20 @@ function goToTab(name){
   document.getElementById('tab-'+name).classList.add('active');
   document.getElementById('worker').scrollIntoView({behavior:'smooth'});
   updateSideLabel(name);
+}
+
+function goToWorkerSection(anchorId){
+  document.querySelectorAll('.tabbtn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.tabpanel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tabbtn').forEach(b=>{
+    if(b.getAttribute('onclick') && b.getAttribute('onclick').includes("'worker'")) b.classList.add('active');
+  });
+  document.getElementById('tab-worker').classList.add('active');
+  updateSideLabel('worker');
+  requestAnimationFrame(function(){
+    var target = document.getElementById(anchorId);
+    if(target) target.scrollIntoView({behavior:'smooth'});
+  });
 }
 
 const I18N = {
@@ -1345,10 +1591,10 @@ const I18N = {
   badge1:{zh:"監理團體許可 許2004000273",ja:"監理団体許可 許2004000273",en:"Supervising Org. Permit No. 2004000273",my:"ကြီးကြပ်ရေးအဖွဲ့ လိုင်စင်အမှတ် 2004000273"},
   badge2:{zh:"登錄支援機關 25登‐011346",ja:"登録支援機関 25登‐011346",en:"Registered Support Org. No. 25-011346",my:"မှတ်ပုံတင်ထောက်ခံရေးအဖွဲ့ 25登-011346"},
   hero_title:{
-    zh:"Tokyo One Care協同組合<br>您最值得信賴的外國人才引進與監理支援夥伴",
-    ja:"Tokyo One Care協同組合<br>外国人材の受入れと監理を支える、信頼のパートナー",
-    en:"Tokyo One Care Cooperative<br>Your Trusted Partner for Foreign Talent & Supervision",
-    my:"Tokyo One Care ပူးပေါင်းအသင်း<br>နိုင်ငံခြားလုပ်သားခေါ်ယူရေးနှင့် ကြီးကြပ်ရေးအတွက် ယုံကြည်ရသော မိတ်ဖက်"
+    zh:"<span class=\"brand-glow\">Tokyo One Care協同組合</span><br><span class=\"hero-subline\">您最值得信賴的外國人才引進與監理支援夥伴</span>",
+    ja:"<span class=\"brand-glow\">Tokyo One Care協同組合</span><br><span class=\"hero-subline\">外国人材の受入れと監理を支える、信頼のパートナー</span>",
+    en:"<span class=\"brand-glow\">Tokyo One Care協同組合</span><br><span class=\"hero-subline\">Your Trusted Partner for Foreign Talent & Supervision</span>",
+    my:"<span class=\"brand-glow\">Tokyo One Care協同組合</span><br><span class=\"hero-subline\">နိုင်ငံခြားလုပ်သားခေါ်ယူရေးနှင့် ကြီးကြပ်ရေးအတွက် ယုံကြည်ရသော မိတ်ဖက်</span>"
   },
   hero_desc:{
     zh:"專注緬甸人才引進、一貫化管理體制、多元人力方案、與緬甸大使館的深厚信任——我們陪企業與外國人才走完每一段旅程。",
@@ -1364,16 +1610,16 @@ const I18N = {
   adv2_h:{zh:"一貫管理體制",ja:"一貫管理体制",en:"End-to-End Management",my:"တစ်စိုက်တစ်ခဲတည်းစီမံမှု"},
   adv2_p:{zh:"從當地語言學校、派遣機關、入國後講習到監理，全程 Tokyo One 集團統一管理。",ja:"現地日本語学校・送出機関・入国後講習から監理まで、Tokyo Oneグループが一貫して管理。",en:"From local language school and dispatch to post-arrival training and supervision — all managed by Tokyo One Group.",my:"ဒေသန္တရဘာသာစကားကျောင်းမှ စတင်ကာ စေလွှတ်ရေးအဖွဲ့၊ ဂျပန်ရောက်ပြီးသင်တန်းနှင့် ကြီးကြပ်မှုအထိ Tokyo One အုပ်စုမှ တစ်စိုက်တစ်ခဲတည်း စီမံသည်။"},
   adv3_h:{zh:"多元人才確保提案",ja:"多様な人材確保プラン",en:"Flexible Workforce Solutions",my:"လုပ်သားရွေးချယ်မှု အစီအစဉ်များ"},
-  adv3_p:{zh:"彈性結合技能實習生、特定技能外國人及留學生打工等多樣化人力方案。",ja:"技能実習生・特定技能外国人・留学生アルバイトを組み合わせた柔軟な人材確保をご提案。",en:"Flexibly combine technical intern trainees, specified skilled workers, and part-time international students.",my:"နည်းပညာအလုပ်သင်များ၊ အထူးကျွမ်းကျင်လုပ်သားများနှင့် ကျောင်းသားအချိန်ပိုင်းလုပ်သားများကို ပေါင်းစပ်ကာ လုပ်သားအစီအစဉ်များ ပေးအပ်နိုင်သည်။"},
+  adv3_p:{zh:"彈性結合技能實習生與特定技能外國人等多樣化人力方案。",ja:"技能実習生・特定技能外国人を組み合わせた柔軟な人材確保をご提案。",en:"Flexibly combine technical intern trainees and specified skilled workers.",my:"နည်းပညာအလုပ်သင်များနှင့် အထူးကျွမ်းကျင်လုပ်သားများကို ပေါင်းစပ်ကာ လုပ်သားအစီအစဉ်များ ပေးအပ်နိုင်သည်။"},
   adv4_h:{zh:"緬甸大使館深厚信任",ja:"ミャンマー大使館との厚い信頼",en:"Strong Ties with Myanmar Embassy",my:"မြန်မာသံရုံးနှင့် ခိုင်မာသောယုံကြည်မှု"},
   adv4_p:{zh:"長期協助大使館業務，建立緊密合作關係與良好諮詢管道。",ja:"大使館業務への長年の協力により、緊密な連携と円滑な相談ルートを構築。",en:"Years of collaboration with the Embassy have built close ties and a reliable consultation channel.",my:"သံရုံးလုပ်ငန်းများကို ကြာမြင့်စွာ ကူညီခဲ့ခြင်းကြောင့် နီးကပ်သောပူးပေါင်းဆောင်ရွက်မှုနှင့် တိုင်ပင်ရေးလမ်းကြောင်း ကောင်းမွန်စွာတည်ဆောက်နိုင်ခဲ့သည်။"},
 
-  tag1:{zh:"介護（護理）",ja:"介護",en:"Nursing Care",my:"သူနာပြု/စောင့်ရှောက်ရေး"},
-  tag2:{zh:"營建作業員",ja:"建設作業員",en:"Construction Worker",my:"ဆောက်လုပ်ရေးလုပ်သား"},
-  tag3:{zh:"食品工廠",ja:"食品工場",en:"Food Processing",my:"အစားအစာစက်ရုံ"},
-  tag4:{zh:"機械加工",ja:"機械加工",en:"Machine Processing",my:"စက်မှုလုပ်ငန်း"},
-  tag5:{zh:"餐飲店（特定技能）",ja:"飲食店（特定技能）",en:"Food Service (Specified Skilled)",my:"စားသောက်ဆိုင် (အထူးကျွမ်းကျင်)"},
-  tag6:{zh:"農業",ja:"農業",en:"Agriculture",my:"စိုက်ပျိုးရေး"},
+  tag1:{zh:"介護職業",ja:"介護",en:"Nursing Care",my:"သူနာပြု/စောင့်ရှောက်ရေး"},
+  tag2:{zh:"建設業",ja:"建設業",en:"Construction",my:"ဆောက်လုပ်ရေးလုပ်ငန်း"},
+  tag3:{zh:"食品製造業",ja:"食品製造業",en:"Food Manufacturing",my:"အစားအစာထုတ်လုပ်ရေးလုပ်ငန်း"},
+  tag4:{zh:"機械加工業",ja:"機械加工業",en:"Machinery Processing",my:"စက်ပစ္စည်းထုတ်လုပ်ရေးလုပ်ငန်း"},
+  tag5:{zh:"外食業",ja:"外食業",en:"Food Service",my:"စားသောက်ဝန်ဆောင်မှုလုပ်ငန်း"},
+  tag6:{zh:"農業",ja:"農業",en:"Agriculture",my:"စိုက်ပျိုးရေးလုပ်ငန်း"},
 
   sec2_h2:{zh:"依身份查看對應內容",ja:"立場に応じた情報をご覧ください",en:"Content Tailored to Your Role",my:"သင့်အခန်းကဏ္ဍနှင့်ကိုက်ညီသောအချက်အလက်များ"},
   sec2_p:{zh:"切換分頁瀏覽求職者與企業所需的服務資訊。",ja:"タブを切り替えて、求職者・企業それぞれの情報をご覧いただけます。",en:"Switch tabs to view information for job seekers or employers.",my:"tab များပြောင်းကာ အလုပ်ရှာသူ (သို့) အလုပ်ရှင်အတွက် အချက်အလက်များကိုကြည့်ရှုနိုင်သည်။"},
@@ -1394,6 +1640,7 @@ const I18N = {
   jc6_p:{zh:"於農場從事栽培、採收與包裝等農事作業，適合喜歡戶外工作者。",ja:"農場にて栽培・収穫・梱包などの農作業に従事。屋外作業が好きな方に適しています。",en:"Farm work including cultivation, harvesting, and packing — ideal for those who enjoy outdoor work.",my:"လယ်ယာတွင် စိုက်ပျိုးခြင်း၊ ရိတ်သိမ်းခြင်းနှင့် ထုပ်ပိုးခြင်း လုပ်ငန်းများ လုပ်ကိုင်ရသည်။ ပြင်ပလုပ်ငန်းကြိုက်နှစ်သက်သူများအတွက် သင့်တော်သည်။"},
   tabbtn_worker:{zh:"求職者專區",ja:"求職者の方へ",en:"Job Seekers",my:"အလုပ်ရှာသူများ"},
   tabbtn_employer:{zh:"企業專區",ja:"企業の方へ",en:"Employers",my:"အလုပ်ရှင်များ"},
+  tabbar_hint:{zh:"點擊上方按鈕，切換查看求職者或企業所需資訊",ja:"上のボタンをクリックして、求職者向け・企業向けの情報を切り替えられます",en:"Click the buttons above to switch between job seeker and employer information",my:"အထက်ပါခလုတ်ကိုနှိပ်ပြီး အလုပ်ရှာသူနှင့် အလုပ်ရှင်အချက်အလက်များကို ပြောင်းလဲကြည့်ရှုနိုင်ပါသည်"},
 
   w_h3_1:{zh:"在留資格分類",ja:"在留資格の種類",en:"Types of Residence Status",my:"နေထိုင်ခွင့်အမျိုးအစားများ"},
   pill1_h:{zh:"技能實習",ja:"技能実習",en:"Technical Intern Training",my:"နည်းပညာအလုပ်သင်"},
@@ -1404,8 +1651,7 @@ const I18N = {
   pill2_li1:{zh:"可從事全職常僱工作",ja:"正社員として就労可能",en:"Eligible for full-time employment",my:"အချိန်ပြည့်အလုပ်လုပ်နိုင်သည်"},
   pill2_li2:{zh:"涵蓋更多多元職種",ja:"より幅広い職種に対応",en:"Covers a wider range of job types",my:"အလုပ်အမျိုးအစားများစွာလွှမ်းခြုံသည်"},
   pill3_h:{zh:"招募國家範圍",ja:"募集国の範囲",en:"Recruitment Countries",my:"လုပ်သားခေါ်ယူသည့်နိုင်ငံများ"},
-  pill3_li1:{zh:"技能實習生：專精緬甸人才",ja:"技能実習生：ミャンマー人材に特化",en:"Technical Intern Trainees: Myanmar specialization",my:"နည်းပညာအလုပ်သင်များ：မြန်မာလုပ်သားကို အထူးပြု"},
-  pill3_li2:{zh:"特定技能／留學生：印尼、菲律賓、越南、緬甸、中國等",ja:"特定技能／留学生：インドネシア、フィリピン、ベトナム、ミャンマー、中国など",en:"Specified Skilled/Students: Indonesia, Philippines, Vietnam, Myanmar, China, etc.",my:"အထူးကျွမ်းကျင်/ကျောင်းသားများ：အင်ဒိုနီးရှား၊ ဖိလစ်ပိုင်၊ ဗီယက်နမ်၊ မြန်မာ၊ တရုတ် စသည်"},
+  pill3_li1:{zh:"特定技能及技能生招募範圍：緬甸、印尼、菲律賓、越南、中國等",ja:"特定技能・技能実習生の募集範囲：ミャンマー、インドネシア、フィリピン、ベトナム、中国など",en:"Specified Skilled & Technical Intern Recruitment: Myanmar, Indonesia, Philippines, Vietnam, China, etc.",my:"အထူးကျွမ်းကျင်နှင့် နည်းပညာအလုပ်သင် လုပ်သားခေါ်ယူသည့်နိုင်ငံများ：မြန်မာ၊ အင်ဒိုနီးရှား၊ ဖိလစ်ပိုင်၊ ဗီယက်နမ်၊ တရုတ် စသည်"},
 
   w_h3_2:{zh:"申請流程全解析",ja:"申請フロー",en:"Application Process",my:"လျှောက်ထားမှုအဆင့်ဆင့်"},
   flow1_h:{zh:"母國面試與選拔",ja:"現地面接・選考",en:"Home Country Interview & Selection",my:"မိခင်နိုင်ငံအင်တာဗျူးနှင့်ရွေးချယ်ခြင်း"},
@@ -1418,6 +1664,7 @@ const I18N = {
   flow4_p:{zh:"正式入境，展開日本生活。",ja:"正式に入国し、日本での生活を開始。",en:"Official entry and the start of life in Japan.",my:"တရားဝင်ဝင်ရောက်ကာ ဂျပန်တွင်နေထိုင်မှု စတင်သည်။"},
   flow5_h:{zh:"1 個月集合法定講習",ja:"1ヶ月間の集合講習（入国後講習）",en:"1-Month Post-Arrival Training",my:"၁ လကြာ ဥပဒေအရ စုပေါင်းသင်တန်း"},
   flow5_p:{zh:"Tokyo One 日語學校千葉本校進行入國後講習。",ja:"Tokyo One日本語学校千葉本校にて入国後講習を実施。",en:"Post-arrival orientation at Tokyo One Japanese School (Chiba main campus).",my:"Tokyo One ဂျပန်ဘာသာကျောင်း (ချိဘာမူလကျောင်း) တွင် ဂျပန်ရောက်ပြီးသင်တန်းပေးသည်။"},
+  flow5_note:{zh:"＊特定技能不需此講習，僅適用技能實習生",ja:"＊特定技能はこの講習不要、技能実習生のみ対象",en:"＊Not required for Specified Skilled Workers — applies to Technical Intern Trainees only",my:"＊အထူးကျွမ်းကျင်အတွက် ဤသင်တန်းမလိုအပ်ပါ၊ နည်းပညာအလုပ်သင်များသာ သက်ဆိုင်သည်"},
   flow6_h:{zh:"正式配屬至企業",ja:"企業への配属",en:"Assignment to Employer",my:"ကုမ္ပဏီသို့ တာဝန်ချထားခြင်း"},
   flow6_p:{zh:"開始僱用與實習，展開職場生活。",ja:"雇用・実習を開始し、職場生活がスタート。",en:"Employment and training begin, starting workplace life.",my:"အလုပ်ခန့်အပ်ခြင်းနှင့် အလုပ်သင်ခြင်းစတင်ကာ အလုပ်ခွင်ဘဝအစပြုသည်။"},
 
@@ -1430,24 +1677,21 @@ const I18N = {
   svc2_p:{zh:"嚴格監督接收企業遵守《技能實習法》與《勞動基準法》，確保工作環境安全。",ja:"技能実習法・労働基準法の遵守を厳格に監督し、安全な職場環境を確保。",en:"Strictly supervising employer compliance with the Technical Intern Training Act and Labor Standards Act to ensure a safe workplace.",my:"နည်းပညာအလုပ်သင်ဥပဒေနှင့် အလုပ်သမားအခြေခံဥပဒေများကို လိုက်နာစေရန် တင်းကျပ်စွာ ကြီးကြပ်ကာ ဘေးကင်းသောအလုပ်ခွင်ပတ်ဝန်းကျင်ကို သေချာစေသည်။"},
 
   w_h3_4:{zh:"職缺一覽",ja:"職種一覧",en:"Job Categories",my:"အလုပ်အမျိုးအစားများ"},
-  job1_h:{zh:"護理／介護人員",ja:"介護職",en:"Nursing Care Worker",my:"သူနာပြု/စောင့်ရှောက်ရေးလုပ်သား"},
+  job1_h:{zh:"介護職業",ja:"介護",en:"Nursing Care",my:"သူနာပြု/စောင့်ရှောက်ရေး"},
   job1_s1:{zh:"技能實習・特定技能",ja:"技能実習・特定技能",en:"Technical Intern / Specified Skilled",my:"နည်းပညာအလုပ်သင်/အထူးကျွမ်းကျင်"},
   job1_s2:{zh:"不包含居家訪問看護",ja:"訪問介護は対象外",en:"Excludes home visit care",my:"အိမ်တိုင်ရာရောက်စောင့်ရှောက်မှု မပါဝင်ပါ"},
-  job2_h:{zh:"營建作業員",ja:"建設作業員",en:"Construction Worker",my:"ဆောက်လုပ်ရေးလုပ်သား"},
+  job2_h:{zh:"建設業",ja:"建設業",en:"Construction",my:"ဆောက်လုပ်ရေးလုပ်ငန်း"},
   job2_s1:{zh:"技能實習・特定技能",ja:"技能実習・特定技能",en:"Technical Intern / Specified Skilled",my:"နည်းပညာအလုပ်သင်/အထူးကျွမ်းကျင်"},
   job2_s2:{zh:"接收企業需具備建設業許可",ja:"受入企業は建設業許可が必要",en:"Employer must hold a construction business license",my:"လက်ခံကုမ္ပဏီသည် ဆောက်လုပ်ရေးလုပ်ငန်းလိုင်စင် ရှိရမည်"},
-  job3_h:{zh:"食品工廠作業員",ja:"食品製造作業員",en:"Food Factory Worker",my:"အစားအစာစက်ရုံလုပ်သား"},
+  job3_h:{zh:"食品製造業",ja:"食品製造業",en:"Food Manufacturing",my:"အစားအစာထုတ်လုပ်ရေးလုပ်ငန်း"},
   job3_s1:{zh:"技能實習・特定技能",ja:"技能実習・特定技能",en:"Technical Intern / Specified Skilled",my:"နည်းပညာအလုပ်သင်/အထူးကျွမ်းကျင်"},
-  job4_h:{zh:"機械加工工廠作業員",ja:"機械加工作業員",en:"Machine Processing Worker",my:"စက်မှုလုပ်ငန်းလုပ်သား"},
+  job4_h:{zh:"機械加工業",ja:"機械加工業",en:"Machinery Processing",my:"စက်ပစ္စည်းထုတ်လုပ်ရေးလုပ်ငန်း"},
   job4_s1:{zh:"技能實習・特定技能",ja:"技能実習・特定技能",en:"Technical Intern / Specified Skilled",my:"နည်းပညာအလုပ်သင်/အထူးကျွမ်းကျင်"},
-  job5_h:{zh:"餐飲店員工",ja:"飲食店スタッフ",en:"Food Service Staff",my:"စားသောက်ဆိုင်ဝန်ထမ်း"},
+  job5_h:{zh:"外食業",ja:"外食業",en:"Food Service",my:"စားသောက်ဝန်ဆောင်မှုလုပ်ငန်း"},
   job5_s1:{zh:"僅適用特定技能",ja:"特定技能のみ対象",en:"Specified Skilled only",my:"အထူးကျွမ်းကျင် အတွက်သာ"},
   job5_s2:{zh:"技能實習不適用",ja:"技能実習は対象外",en:"Not available for Technical Intern",my:"နည်းပညာအလုပ်သင်အတွက် မသက်ဆိုင်ပါ"},
-  job6_h:{zh:"農業從業者",ja:"農業従事者",en:"Agricultural Worker",my:"စိုက်ပျိုးရေးလုပ်သား"},
+  job6_h:{zh:"農業",ja:"農業",en:"Agriculture",my:"စိုက်ပျိုးရေးလုပ်ငန်း"},
   job6_s1:{zh:"技能實習・特定技能",ja:"技能実習・特定技能",en:"Technical Intern / Specified Skilled",my:"နည်းပညာအလုပ်သင်/အထူးကျွမ်းကျင်"},
-  job7_h:{zh:"留學生兼職打工",ja:"留学生アルバイト",en:"International Student Part-time",my:"ကျောင်းသားအချိန်ပိုင်းအလုပ်"},
-  job7_s1:{zh:"無職種限制",ja:"職種制限なし",en:"No job restrictions",my:"အလုပ်အမျိုးအစား ကန့်သတ်ချက်မရှိ"},
-  job7_s2:{zh:"每週工時上限 28 小時",ja:"週28時間以内",en:"Max 28 hrs/week",my:"တစ်ပတ်လျှင် ၂၈ နာရီအထိ"},
   job1_kw:{zh:"工作內容：",ja:"業務内容：",en:"Duties: ",my:"လုပ်ငန်းတာဝန်："},
   job1_note:{zh:"於日本照護機構從事日常照護與生活協助。",ja:"日本の介護施設にて日常介護・生活支援業務に従事します。",en:"Daily care and life support at Japanese care facilities.",my:"ဂျပန်၏စောင့်ရှောက်ရေးဌာနတွင် နေ့စဉ်စောင့်ရှောက်မှုနှင့် နေထိုင်မှုကူညီရေး လုပ်ကိုင်ရသည်။"},
   job2_kw:{zh:"工作內容：",ja:"業務内容：",en:"Duties: ",my:"လုပ်ငန်းတာဝန်："},
@@ -1460,26 +1704,68 @@ const I18N = {
   job5_note:{zh:"於餐飲店從事外場接待與內場備餐工作。",ja:"飲食店にてホール接客・厨房業務等に従事します。",en:"Front-of-house service and kitchen prep at restaurants.",my:"စားသောက်ဆိုင်တွင် ဧည့်ခံလက်ခံခြင်းနှင့် အစားအစာပြင်ဆင်ခြင်း လုပ်ကိုင်ရသည်။"},
   job6_kw:{zh:"工作內容：",ja:"業務内容：",en:"Duties: ",my:"လုပ်ငန်းတာဝန်："},
   job6_note:{zh:"於農場從事栽培、採收與包裝，適合喜歡戶外工作者。",ja:"農場にて栽培・収穫・梱包などに従事。屋外作業が好きな方に適しています。",en:"Cultivation, harvesting, and packing — ideal for outdoor work.",my:"လယ်ယာတွင် စိုက်ပျိုးခြင်း၊ ရိတ်သိမ်းခြင်းနှင့် ထုပ်ပိုးခြင်း လုပ်ကိုင်ရသည်။"},
-  job7_kw:{zh:"工作內容：",ja:"業務内容：",en:"Duties: ",my:"လုပ်ငန်းတာဝန်："},
-  job7_note:{zh:"僅能於課餘時間從事兼職工作，工時受嚴格限制。",ja:"授業のない時間帯のみアルバイト可能で、労働時間は厳しく制限されます。",en:"Only permitted outside class hours, with strict time limits.",my:"သင်တန်းအချိန်ပြင်ပတွင်သာ အလုပ်လုပ်ကိုင်ခွင့်ရှိပြီး အလုပ်ချိန်ကို တင်းကျပ်စွာ ကန့်သတ်ထားသည်။"},
-  jcat1:{zh:"CATEGORY 01 ・ 雙簽證對應（技能實習・特定技能）",ja:"CATEGORY 01 ・ 二重ビザ対応（技能実習・特定技能）",en:"CATEGORY 01 ・ Dual Visa (Technical Intern / Specified Skilled)",my:"အမျိုးအစား ၀၁ ・ ဗီဇာနှစ်မျိုး (နည်းပညာအလုပ်သင်/အထူးကျွမ်းကျင်)"},
+  jcat1:{zh:"CATEGORY 01 ・ 主要對應職種",ja:"CATEGORY 01 ・ 主な対応職種",en:"CATEGORY 01 ・ Main Occupations",my:"အမျိုးအစား ၀၁ ・ အဓိကလုပ်ကိုင်နိုင်သောအလုပ်များ"},
   jcat1_short:{zh:"CATEGORY 01",ja:"CATEGORY 01",en:"CATEGORY 01",my:"CATEGORY 01"},
-  jcat_group234:{zh:"CATEGORY 02–04 ・ 特定技能／學生兼職／無法對應",ja:"CATEGORY 02–04 ・ 特定技能／留学生アルバイト／対応不可",en:"CATEGORY 02–04 ・ Specified Skilled / Student / Not Available",my:"အမျိုးအစား ၀၂–၀၄ ・ အထူးကျွမ်းကျင်/ကျောင်းသား/မလုပ်ကိုင်နိုင်"},
-  jcat2:{zh:"CATEGORY 02 ・ 單一特定技能",ja:"CATEGORY 02 ・ 特定技能のみ",en:"CATEGORY 02 ・ Specified Skilled Only",my:"အမျိုးအစား ၀၂ ・ အထူးကျွမ်းကျင်သာ"},
-  jcat3:{zh:"CATEGORY 03 ・ 學生兼職",ja:"CATEGORY 03 ・ 留学生アルバイト",en:"CATEGORY 03 ・ Student Part-time",my:"အမျိုးအစား ၀၃ ・ ကျောင်းသားအချိန်ပိုင်း"},
-  jcat4:{zh:"CATEGORY 04 ・ 無法對應",ja:"CATEGORY 04 ・ 対応不可",en:"CATEGORY 04 ・ Not Available",my:"အမျိုးအစား ၀၄ ・ မလုပ်ကိုင်နိုင်"},
-  job_warn_h:{zh:"無法對應職種",ja:"対応不可職種",en:"Not Available",my:"မလုပ်ကိုင်နိုင်သောအလုပ်"},
-  job_warn_t1:{zh:"司機（駕駛員）",ja:"運転手（ドライバー）",en:"Drivers",my:"ယာဉ်မောင်း"},
-  job_warn_t2:{zh:"物流倉庫作業",ja:"物流倉庫作業",en:"Logistics / Warehouse",my:"သိုလှောင်ရုံလုပ်ငန်း"},
-  job_warn_note:{zh:"以上職種目前不受理引進申請。",ja:"上記職種は現在受入対応を行っておりません。",en:"These occupations are not currently accepted.",my:"အထက်ပါအလုပ်များကို လက်ရှိတွင် လက်ခံခြင်းမပြုပါ။"},
 
   w_h3_5:{zh:"常見問答 FAQ",ja:"よくある質問",en:"FAQ",my:"အမေးများသောမေးခွန်းများ"},
   faq1_q:{zh:"實習期間可以換工作嗎？",ja:"実習期間中に転職はできますか？",en:"Can trainees change jobs during training?",my:"အလုပ်သင်ကာလအတွင်း အလုပ်ပြောင်းနိုင်ပါသလား？"},
   faq1_a:{zh:"技能實習是指定實習場所的簽證，原則上無法任意換工作（轉職），可在同一企業安定工作 3–5 年。",ja:"技能実習は実習実施場所を指定した在留資格のため、原則転職はできません。同一企業で3〜5年安定して就労します。",en:"Technical Intern Training visas are tied to a designated workplace, so job changes are generally not permitted. Trainees work stably at the same company for 3–5 years.",my:"နည်းပညာအလုပ်သင်ဗီဇာသည် သတ်မှတ်ထားသောနေရာအတွက်သာ ဖြစ်သောကြောင့် အလုပ်ပြောင်းရန် အတည်ပြုချက်မရှိပါ။ ကုမ္ပဏီတစ်ခုတည်းတွင် ၃-၅ နှစ် တည်ငြိမ်စွာအလုပ်လုပ်ရသည်။"},
-  faq2_q:{zh:"留學生打工的時間有限制嗎？",ja:"留学生のアルバイト時間に制限はありますか？",en:"Are there work hour limits for international students?",my:"ကျောင်းသားများ၏ အချိန်ပိုင်းအလုပ်တွင် အချိန်ကန့်သတ်ချက်ရှိပါသလား？"},
-  faq2_a:{zh:"有，法定嚴格限制每週工作時間不可超過 28 小時。",ja:"あります。法律により週28時間を超えて働くことはできません。",en:"Yes, by law students cannot work more than 28 hours per week.",my:"ရှိသည်။ ဥပဒေအရ တစ်ပတ်လျှင် ၂၈ နာရီထက် ပိုမလုပ်ရပါ။"},
+  faq4_q:{zh:"特定技能可以換工作嗎？",ja:"特定技能は転職できますか？",en:"Can Specified Skilled Workers change jobs?",my:"အထူးကျွမ်းကျင်လုပ်သားများ အလုပ်ပြောင်းနိုင်ပါသလား？"},
+  faq4_a:{zh:"可以，特定技能人才擁有轉職自由，只要在同一產業領域內，可自由轉換至其他雇用企業，與技能實習不同。",ja:"はい、特定技能人材は転職の自由があり、同一産業分野内であれば他の雇用企業へ自由に移ることができます。技能実習とは異なります。",en:"Yes. Specified Skilled Workers have freedom to change employers within the same industry field — unlike Technical Intern Trainees.",my:"ရနိုင်ပါသည်။ အထူးကျွမ်းကျင်လုပ်သားများသည် အလုပ်ပြောင်းလွတ်လပ်ခွင့်ရှိပြီး တူညီသောစက်မှုနယ်ပယ်အတွင်း အခြားအလုပ်ရှင်ကုမ္ပဏီသို့ လွတ်လပ်စွာပြောင်းလဲနိုင်သည်၊ နည်းပညာအလုပ်သင်နှင့် ကွာခြားသည်။"},
   faq3_q:{zh:"護理職種可以做居家照顧嗎？",ja:"介護職は訪問介護もできますか？",en:"Can nursing care workers do home visit care?",my:"သူနာပြုလုပ်သားများသည် အိမ်တိုင်ရာရောက်စောင့်ရှောက်မှု ပြုလုပ်နိုင်ပါသလား？"},
   faq3_a:{zh:"不可以，護理職種不包含居家訪問看護。",ja:"できません。介護職には訪問介護は含まれません。",en:"No, home visit care is not included in the nursing care category.",my:"မရနိုင်ပါ။ အိမ်တိုင်ရာရောက်စောင့်ရှောက်မှုသည် သူနာပြုအလုပ်အမျိုးအစားတွင် မပါဝင်ပါ။"},
+
+  ti_kicker:{zh:"TECHNICAL INTERN TRAINING",ja:"TECHNICAL INTERN TRAINING",en:"TECHNICAL INTERN TRAINING",my:"TECHNICAL INTERN TRAINING"},
+  ti_h1:{zh:"什麼是「技能實習制度」？",ja:"「技能実習制度」とは？",en:"What is the Technical Intern Training Program?",my:"「နည်းပညာအလုပ်သင်စနစ်」ဆိုသည်မှာ အဘယ်နည်း။"},
+  ti_p1:{zh:"技能實習制度旨在讓發展中國家的青年，透過在日本企業實際工作來修得日本的先進技術，並將技術帶回母國，以此貢獻於國際社會的技術交流與人才培育。",ja:"技能実習制度は、開発途上国の若者が日本企業での実務を通じて日本の先進技術を修得し、その技術を母国へ持ち帰ることで、国際社会における技術交流と人材育成に貢献することを目的としています。",en:"The Technical Intern Training Program allows young people from developing countries to acquire advanced Japanese skills through hands-on work at Japanese companies, then bring that knowledge back home — contributing to international technical exchange and talent development.",my:"နည်းပညာအလုပ်သင်စနစ်သည် ဖွံ့ဖြိုးဆဲနိုင်ငံများမှ လူငယ်များအား ဂျပန်ကုမ္ပဏီများတွင် လက်တွေ့အလုပ်လုပ်ကိုင်ခြင်းမှတဆင့် ဂျပန်၏ခေတ်မီနည်းပညာများကို သင်ယူစေပြီး မိမိမိခင်နိုင်ငံသို့ ပြန်လည်ယူဆောင်သွားစေရန် ရည်ရွယ်ထားပြီး နိုင်ငံတကာလူ့အဖွဲ့အစည်း၏ နည်းပညာဖလှယ်ရေးနှင့် ကျွမ်းကျင်လုပ်သားပျိုးထောင်ရေးကို ပံ့ပိုးပေးရန် ဖြစ်သည်။"},
+
+  ti_h2_models:{zh:"1. 兩大接收模式",ja:"1. 二つの受入方式",en:"1. Two Acceptance Models",my:"၁။ လက်ခံနည်းလမ်း နှစ်မျိုး"},
+  ti_model1_h:{zh:"企業單獨型",ja:"企業単独型",en:"Enterprise-Based Type",my:"လုပ်ငန်းတစ်ခုတည်းလက်ခံသည့်ပုံစံ"},
+  ti_model1_p:{zh:"由日本企業直接引進其海外當地法人、合資企業或合作廠商的員工至日本進行實習。",ja:"日本企業が自社の海外現地法人、合弁企業または提携先企業の職員を直接日本へ受け入れ、実習を実施する方式です。",en:"Japanese companies directly bring employees from their overseas subsidiaries, joint ventures, or partner firms to Japan for training.",my:"ဂျပန်ကုမ္ပဏီများက ၎င်းတို့၏ နိုင်ငံခြားရှိ ကုမ္ပဏီခွဲ၊ ဖက်စပ်လုပ်ငန်း သို့မဟုတ် ပူးပေါင်းလုပ်ကိုင်သည့်ကုမ္ပဏီများမှ ဝန်ထမ်းများကို ဂျပန်သို့ တိုက်ရိုက်ခေါ်ယူကာ အလုပ်သင်ပေးသည့်ပုံစံ ဖြစ်သည်။"},
+  ti_model2_h:{zh:"團體監理型（本組合採行模式）",ja:"団体監理型（当組合の採用方式）",en:"Supervised Group Type (Adopted by our Cooperative)",my:"အုပ်စုကြီးကြပ်သည့်ပုံစံ（ကျွန်ုပ်တို့အသင်းအသုံးပြုသောပုံစံ）"},
+  ti_model2_p:{zh:"由非營利團體（如商工會、協同組合等「監理團體」）負責接收實習生，並派駐至其伞下的成員企業（實習實施者）進行技能實習。",ja:"非営利団体（商工会、協同組合等の「監理団体」）が実習生を受け入れ、傘下の会員企業（実習実施者）へ派遣し技能実習を実施する方式です。",en:"A non-profit organization (such as a chamber of commerce or cooperative acting as a \"supervising organization\") accepts the trainees and dispatches them to its member companies (host organizations) for training.",my:"အကျိုးအမြတ်မယူသောအဖွဲ့အစည်း（ကုန်သည်ကြီးအသင်း၊ ပူးပေါင်းအသင်းကဲ့သို့ 「ကြီးကြပ်ရေးအဖွဲ့」）က အလုပ်သင်များကို လက်ခံပြီး ၎င်း၏အောက်ရှိအဖွဲ့ဝင်ကုမ္ပဏီများ（အလုပ်သင်လက်ခံသူ）သို့ စေလွှတ်၍ နည်းပညာအလုပ်သင်ပေးသည့်ပုံစံ ဖြစ်သည်။"},
+
+  ti_h2_stages:{zh:"2. 三大階段與升級考核機制",ja:"2. 三つの段階と昇級評価制度",en:"2. Three Stages and Advancement Assessment",my:"၂။ အဆင့်သုံးဆင့်နှင့် အဆင့်တိုးအကဲဖြတ်စနစ်"},
+  ti_stages_p:{zh:"技能實習期最長可達 5 年，共分為三個主要在留資格階段：",ja:"技能実習期間は最長5年間で、主に三つの在留資格段階に分かれます：",en:"Technical intern training can last up to 5 years, divided into three main residence status stages:",my:"နည်းပညာအလုပ်သင်ကာလသည် အများဆုံး ၅ နှစ်ရှိပြီး နေထိုင်ခွင့်အဓိကအဆင့် သုံးဆင့်ခွဲထားသည်："},
+  ti_stage1_b:{zh:"技能實習第 1 號（第 1 年）：",ja:"技能実習第1号（1年目）：",en:"Technical Intern Training (i) — Year 1: ",my:"နည်းပညာအလုပ်သင် အမှတ် ၁ （၁ နှစ်မြောက်）："},
+  ti_stage1_p:{zh:"基礎技能的「修得」階段（在留資格「技能實習第 1 號ロ」）。",ja:"基礎技能を「修得」する段階です（在留資格「技能実習第1号ロ」）。",en:"The \"acquisition\" stage for basic skills (residence status \"Technical Intern Training (i)(b)\").",my:"အခြေခံကျွမ်းကျင်မှုကို 「သင်ယူသည့်」 အဆင့် ဖြစ်သည် （နေထိုင်ခွင့် 「နည်းပညာအလုပ်သင် အမှတ် ၁ ロ」）။"},
+  ti_stage2_b:{zh:"技能實習第 2 號（第 2–3 年）：",ja:"技能実習第2号（2〜3年目）：",en:"Technical Intern Training (ii) — Years 2–3: ",my:"နည်းပညာအလုပ်သင် အမှတ် ၂ （၂-၃ နှစ်မြောက်）："},
+  ti_stage2_p:{zh:"技能的「習熟」階段（在留資格「技能實習第 2 號ロ」）。實習生必須在第一年結束前，通過指定的技能評價考試（包含學科與實技）方可升級。",ja:"技能を「習熟」する段階です（在留資格「技能実習第2号ロ」）。実習生は1年目終了までに指定の技能評価試験（学科・実技）に合格する必要があります。",en:"The \"proficiency\" stage (residence status \"Technical Intern Training (ii)(b)\"). Trainees must pass a designated skills assessment (written and practical) before the end of year one to advance.",my:"ကျွမ်းကျင်မှုကို 「ကျွမ်းကျင်စေသည့်」 အဆင့် ဖြစ်သည် （နေထိုင်ခွင့် 「နည်းပညာအလုပ်သင် အမှတ် ၂ ロ」）။ အလုပ်သင်များသည် ပထမနှစ်မကုန်ဆုံးမီ သတ်မှတ်ထားသော ကျွမ်းကျင်မှုအကဲဖြတ်စာမေးပွဲ（သီအိုရီနှင့်လက်တွေ့）ကို အောင်မြင်မှသာ အဆင့်တက်နိုင်သည်။"},
+  ti_stage3_b:{zh:"技能實習第 3 號（第 4–5 年）：",ja:"技能実習第3号（4〜5年目）：",en:"Technical Intern Training (iii) — Years 4–5: ",my:"နည်းပညာအလုပ်သင် အမှတ် ၃ （၄-၅ နှစ်မြောက်）："},
+  ti_stage3_p:{zh:"技能的「熟達」階段（在留資格「技能實習第 3 號ロ」）。實習生必須通過技能評價考試的「實技」方可升級，且接收企業必須符合優良基準適合者資格。",ja:"技能を「熟達」する段階です（在留資格「技能実習第3号ロ」）。実習生は技能評価試験の「実技」に合格する必要があり、受入企業は優良基準適合者の資格を満たす必要があります。",en:"The \"mastery\" stage (residence status \"Technical Intern Training (iii)(b)\"). Trainees must pass the practical skills assessment, and the host company must meet \"excellent operator\" criteria.",my:"ကျွမ်းကျင်မှုကို 「ကျွမ်းကျင်ကျင်လည်စေသည့်」 အဆင့် ဖြစ်သည် （နေထိုင်ခွင့် 「နည်းပညာအလုပ်သင် အမှတ် ၃ ロ」）။ အလုပ်သင်များသည် ကျွမ်းကျင်မှုအကဲဖြတ်စာမေးပွဲ၏ 「လက်တွေ့」ကို အောင်မြင်မှသာ အဆင့်တက်နိုင်ပြီး လက်ခံကုမ္ပဏီသည်လည်း ကောင်းမွန်သောစံနှုန်းနှင့် ကိုက်ညီရမည်။"},
+  ti_stage_note:{zh:"＊可轉換至第 2 號或第 3 號的職種與作業，均有嚴格的法律規範（主務省令）限制。",ja:"＊第2号または第3号へ移行できる職種・作業は、法令（主務省令）により厳格に定められています。",en:"＊The occupations and tasks eligible for transfer to Stage 2 or 3 are strictly regulated by law (Ministerial Ordinance).",my:"＊အမှတ် ၂ သို့မဟုတ် အမှတ် ၃ သို့ ပြောင်းလဲနိုင်သော အလုပ်အမျိုးအစားနှင့် လုပ်ငန်းများသည် ဥပဒေ（ဝန်ကြီးဌာနစည်းမျဉ်း）ဖြင့် တင်းကျပ်စွာ ကန့်သတ်ထားသည်။"},
+
+  ti_h2_legal:{zh:"監理團體（組合）與接收企業的法律權責分工",ja:"監理団体（組合）と受入企業の法的役割分担",en:"Legal Division of Responsibility: Supervising Organization & Host Company",my:"ကြီးကြပ်ရေးအဖွဲ့（အသင်း）နှင့် လက်ခံကုမ္ပဏီ၏ ဥပဒေအရတာဝန်ခွဲဝေမှု"},
+  ti_legal_p:{zh:"「監理團體不是人力派遣公司」。在團體監理型制度下，雙方有著明確且嚴格的法律責任界線：",ja:"「監理団体は人材派遣会社ではありません」。団体監理型制度において、両者には明確かつ厳格な法的責任の線引きがあります：",en:"\"A supervising organization is not a staffing agency.\" Under the supervised group model, the two parties have clearly defined, strictly separated legal responsibilities:",my:"「ကြီးကြပ်ရေးအဖွဲ့သည် လုပ်သားငှားရမ်းရေးကုမ္ပဏီ မဟုတ်ပါ」။ အုပ်စုကြီးကြပ်ရေးစနစ်အောက်တွင် နှစ်ဖက်စလုံးတွင် ရှင်းလင်းပြီး တင်းကျပ်သော ဥပဒေတာဝန်နယ်နိမိတ်ရှိသည်："},
+  ti_legal1_h:{zh:"1. 監理團體（組合）的核心職責",ja:"1. 監理団体（組合）の主な責務",en:"1. Core Responsibilities of the Supervising Organization",my:"၁။ ကြီးကြပ်ရေးအဖွဲ့（အသင်း）၏ အဓိကတာဝန်များ"},
+  ti_legal1_b1:{zh:"審核與指導：",ja:"審査・指導：",en:"Review & Guidance: ",my:"စစ်ဆေးခြင်းနှင့် လမ်းညွှန်ခြင်း："},
+  ti_legal1_p1:{zh:"負責指導企業撰寫並申請「技能實習計畫」，並定期進行現場訪問指導與審查訪問，確保實習過程適法合規。",ja:"企業による「技能実習計画」の作成・申請を指導し、定期的な巡回指導・監査訪問を実施して実習の適法性を確保します。",en:"Guides companies in drafting and applying for the \"Technical Intern Training Plan,\" and conducts regular on-site guidance and audit visits to ensure legal compliance.",my:"ကုမ္ပဏီများအား 「နည်းပညာအလုပ်သင်အစီအစဉ်」 ရေးဆွဲ၍ လျှောက်ထားရန် လမ်းညွှန်ပေးပြီး ပုံမှန်လုပ်ငန်းခွင်လာရောက်ကြည့်ရှုစစ်ဆေးမှုများပြုလုပ်ကာ အလုပ်သင်လုပ်ငန်းစဉ်သည် ဥပဒေနှင့်ညီညွတ်စေရန် သေချာစေသည်။"},
+  ti_legal1_b2:{zh:"行政與協調：",ja:"行政・調整：",en:"Administration & Coordination: ",my:"အုပ်ချုပ်ရေးနှင့် ညှိနှိုင်းမှု："},
+  ti_legal1_p2:{zh:"負責處理實習生的在留資格管理、技能考試管理、報告徵收（包含實習狀況與歸國報告），並作為日本企業與海外派遣機關之間的溝通與權益保護橋樑。",ja:"実習生の在留資格管理、技能試験の管理、報告の徴収（実習状況・帰国報告等）を行い、日本企業と海外送出機関との連絡・権利保護の橋渡し役を担います。",en:"Manages trainees' residence status and skills exams, collects reports (training status, repatriation reports, etc.), and serves as a communication and rights-protection bridge between the Japanese company and the overseas sending organization.",my:"အလုပ်သင်များ၏ နေထိုင်ခွင့်စီမံခန့်ခွဲမှု၊ ကျွမ်းကျင်မှုစာမေးပွဲစီမံခန့်ခွဲမှု၊ အစီရင်ခံစာများ（အလုပ်သင်အခြေအနေနှင့် ပြန်လည်နေရပ်ပြန်ခြင်းအစီရင်ခံစာများအပါအဝင်）စုဆောင်းခြင်းတို့ကို တာဝန်ယူပြီး ဂျပန်ကုမ္ပဏီနှင့် နိုင်ငံခြားစေလွှတ်ရေးအဖွဲ့အကြား ဆက်သွယ်ရေးနှင့် အခွင့်အရေးကာကွယ်ရေးတံတားအဖြစ် ဆောင်ရွက်ပေးသည်။"},
+  ti_legal2_h:{zh:"2. 接收企業（實習實施者）的責任與義務",ja:"2. 受入企業（実習実施者）の責任と義務",en:"2. Responsibilities of the Host Company (Implementing Organization)",my:"၂။ လက်ခံကုမ္ပဏီ（အလုပ်သင်လက်ခံသူ）၏ တာဝန်နှင့် ဝတ္တရားများ"},
+  ti_legal2_b1:{zh:"直接僱用責任：",ja:"直接雇用責任：",en:"Direct Employment Responsibility: ",my:"တိုက်ရိုက်ခန့်အပ်မှုတာဝန်："},
+  ti_legal2_p1:{zh:"企業必須與實習生簽署直接僱用契約，承擔雇主責任，並嚴格遵守《勞動基準法》與《技能實習法》等相關法令。",ja:"企業は実習生と直接雇用契約を締結し、雇用主としての責任を負い、労働基準法・技能実習法等の関連法令を厳格に遵守する必要があります。",en:"The company must sign a direct employment contract with the trainee, assume employer responsibilities, and strictly comply with the Labor Standards Act, the Technical Intern Training Act, and related laws.",my:"ကုမ္ပဏီသည် အလုပ်သင်နှင့် တိုက်ရိုက်ခန့်အပ်မှုစာချုပ်ချုပ်ဆိုရမည်ဖြစ်ပြီး အလုပ်ရှင်တာဝန်ကို ထမ်းဆောင်ရမည်ဖြစ်ကာ အလုပ်သမားစံနှုန်းဥပဒေနှင့် နည်းပညာအလုပ်သင်ဥပဒေအပါအဝင် သက်ဆိုင်ရာဥပဒေများကို တင်းကျပ်စွာလိုက်နာရမည်။"},
+  ti_legal2_b2:{zh:"配置專責管理人員：",ja:"専任管理者の配置：",en:"Designated Management Staff: ",my:"တာဝန်ခံစီမံခန့်ခွဲသူ ခန့်အပ်ခြင်း："},
+  ti_legal2_sub1_b:{zh:"技能實習指導員：",ja:"技能実習指導員：",en:"Technical Intern Training Instructor: ",my:"နည်းပညာအလုပ်သင် လမ်းညွှန်ဆရာ："},
+  ti_legal2_sub1_p:{zh:"負責實習現場的技能傳授與技術品質管理。",ja:"実習現場での技能指導と技術品質管理を担当します。",en:"Responsible for on-site skills instruction and technical quality control.",my:"အလုပ်သင်လုပ်ငန်းခွင်တွင် ကျွမ်းကျင်မှုသင်ကြားပေးခြင်းနှင့် နည်းပညာအရည်အသွေးစီမံခန့်ခွဲမှုကို တာဝန်ယူသည်။"},
+  ti_legal2_sub2_b:{zh:"生活指導員：",ja:"生活指導員：",en:"Life Supervisor: ",my:"နေထိုင်မှုလမ်းညွှန်ဆရာ："},
+  ti_legal2_sub2_p:{zh:"負責實習生的日常生活管理、心理輔導與適應狀況細節照料。",ja:"実習生の日常生活管理、心理的サポート、適応状況の細やかなケアを担当します。",en:"Responsible for trainees' daily life management, emotional support, and detailed care for their adjustment.",my:"အလုပ်သင်များ၏ နေ့စဉ်နေထိုင်မှုစီမံခန့်ခွဲမှု၊ စိတ်ပိုင်းဆိုင်ရာလမ်းညွှန်မှုနှင့် လိုက်လျောညီထွေဖြစ်မှုအခြေအနေအသေးစိတ်ကို ဂရုစိုက်ကြည့်ရှုပေးသည်။"},
+
+  ti_h2_adv:{zh:"接收技能實習生的核心優勢",ja:"技能実習生受入れの主なメリット",en:"Core Advantages of Accepting Technical Intern Trainees",my:"နည်းပညာအလုပ်သင်များ လက်ခံခြင်း၏ အဓိကအားသာချက်များ"},
+  ti_adv_p:{zh:"相較於特定技能（特定技能生擁有轉職自由，易面臨跳槽風險），引進技能實習生對於企業而言有著不可取代的戰略優勢：",ja:"特定技能（転職の自由があり離職リスクが高い）と比較して、技能実習生の受入れには企業にとって代替の効かない戦略的メリットがあります：",en:"Compared to Specified Skilled Workers (who can freely change jobs and carry a higher turnover risk), accepting technical intern trainees offers companies irreplaceable strategic advantages:",my:"အထူးကျွမ်းကျင်（အလုပ်ပြောင်းလွတ်လပ်ခွင့်ရှိပြီး အလုပ်ထွက်ခြင်းအန္တရာယ်များသည့်）နှင့်နှိုင်းယှဉ်လျှင် နည်းပညာအလုပ်သင်များကို လက်ခံခြင်းသည် ကုမ္ပဏီအတွက် အစားထိုးမရသော မဟာဗျူဟာမြောက်အားသာချက်များ ရှိသည်："},
+  ti_adv1_h:{zh:"優勢 1：確保穩定且長期的核心人力 🌟",ja:"メリット1：安定した長期の中核人材を確保 🌟",en:"Advantage 1: Secure Stable, Long-Term Core Staff 🌟",my:"အားသာချက် ၁：တည်ငြိမ်ပြီး ကြာရှည်တည်တံ့သော အဓိကလုပ်သားများကို ရရှိနိုင်ခြင်း 🌟"},
+  ti_adv1_b1:{zh:"基本上無轉職風險：",ja:"転職リスクがほぼゼロ：",en:"Virtually No Turnover Risk: ",my:"အလုပ်ပြောင်းရန် အန္တရာယ် အခြေခံအားဖြင့် မရှိခြင်း："},
+  ti_adv1_p1:{zh:"技能實習是「特定實習場所與指定職種」的在留資格，實習生在實習期間原則上無法任意換工作或轉職（僅極少數因不可抗力的個人因素歸國）。",ja:"技能実習は「特定の実習場所・指定職種」に紐づく在留資格であり、実習期間中は原則として自由な転職はできません（不可抗力による個人的事情での帰国はごく少数）。",en:"Technical Intern status is tied to a specific workplace and designated occupation — trainees generally cannot freely change jobs during the training period (only a small number return home due to unavoidable personal circumstances).",my:"နည်းပညာအလုပ်သင်သည် 「သတ်မှတ်ထားသောလုပ်ငန်းခွင်နှင့် အလုပ်အမျိုးအစား」နှင့်ဆက်စပ်နေသော နေထိုင်ခွင့်ဖြစ်ပြီး အလုပ်သင်ကာလအတွင်း အလုပ်အလွတ်ပြောင်းခွင့်မရှိပါ（မလွှဲမရှောင်သာသော ကိုယ်ရေးကိုယ်တာအကြောင်းကြောင့် နေရပ်ပြန်ရသူများသည် အလွန်နည်းပါးသည်）။"},
+  ti_adv1_b2:{zh:"人力規劃高預測性：",ja:"人材計画の高い予測可能性：",en:"Highly Predictable Workforce Planning: ",my:"လုပ်သားအစီအစဉ် မြင့်မားသော ခန့်မှန်းနိုင်မှု："},
+  ti_adv1_p2:{zh:"企業能與實習生在 3 至 5 年間建立穩定、持續且深厚的技術傳承關係。企業可利用穩定的配額機制，以 3 至 5 年為週期規律地輪替人力，確保現場永遠有技術熟練的技術人才在籍。",ja:"企業は実習生と3〜5年間、安定的かつ持続的で深い技術継承関係を築くことができます。安定した受入枠制度を活用し、3〜5年周期で計画的に人材を入れ替えることで、現場に常に熟練技術者が在籍する体制を確保できます。",en:"Companies can build stable, ongoing, deep technical mentorship relationships with trainees over 3–5 years. Using the stable quota system, companies can rotate staff on a regular 3–5 year cycle, ensuring skilled workers are always on-site.",my:"ကုမ္ပဏီများသည် အလုပ်သင်များနှင့် ၃ မှ ၅ နှစ်အတွင်း တည်ငြိမ်ပြီး စဉ်ဆက်မပြတ် နက်နဲသော နည်းပညာလွှဲပြောင်းမှု ဆက်ဆံရေးကို တည်ဆောက်နိုင်သည်။ ကုမ္ပဏီများသည် တည်ငြိမ်သော ခွင့်ပြုချက်စနစ်ကို အသုံးပြု၍ ၃ မှ ၅ နှစ်ကို လည်ပတ်ကာလအဖြစ်သတ်မှတ်၍ လုပ်သားများကို ပုံမှန်လှည့်ပြောင်းနိုင်ပြီး လုပ်ငန်းခွင်တွင် ကျွမ်းကျင်သောလုပ်သားရှိနေစေရန် သေချာစေသည်။"},
+  ti_adv2_h:{zh:"優勢 2：作為企業「海外事業拓展」的橋頭堡與幹部儲備 🗺️",ja:"メリット2：企業の「海外事業展開」の橋頭堡・幹部候補として 🗺️",en:"Advantage 2: A Beachhead for Overseas Expansion & Future Leadership 🗺️",my:"အားသာချက် ၂：ကုမ္ပဏီ၏ 「ပြည်ပလုပ်ငန်းချဲ့ထွင်ရေး」 အတွက် ခြေချရာနှင့် အနာဂတ်ခေါင်းဆောင်ပိုင်း ပြင်ဆင်ရေး 🗺️"},
+  ti_adv2_b1:{zh:"建立海外市場管道：",ja:"海外市場ルートの構築：",en:"Building Overseas Market Channels: ",my:"ပြည်ပစျေးကွက်လမ်းကြောင်းတည်ဆောက်ခြင်း："},
+  ti_adv2_p1:{zh:"透過與組合合作的海外送出機關建立深厚管道，企業能更深入了解當地市場。",ja:"組合と提携する海外送出機関との深いつながりを通じて、企業は現地市場をより深く理解できます。",en:"Through the cooperative's deep ties with overseas sending organizations, companies gain deeper insight into local markets.",my:"အသင်းနှင့်ပူးပေါင်းဆောင်ရွက်သော ပြည်ပစေလွှတ်ရေးအဖွဲ့များနှင့် နက်နဲသောဆက်နွယ်မှုများမှတဆင့် ကုမ္ပဏီများသည် ဒေသဆိုင်ရာစျေးကွက်ကို ပိုမိုနက်နဲစွာ နားလည်နိုင်သည်။"},
+  ti_adv2_b2:{zh:"培育歸國後的海外骨幹：",ja:"帰国後の海外拠点の中核人材を育成：",en:"Cultivating Future Overseas Cadres: ",my:"နေရပ်ပြန်ပြီးနောက် ပြည်ပအဓိကလုပ်သားများ ပျိုးထောင်ခြင်း："},
+  ti_adv2_p2:{zh:"實習生在日本學習了 3 至 5 年，不僅精通日語與日本企業文化，更熟稔公司的核心技術與工作流程。當他們實習期滿歸國時，正是企業開拓海外市場（如在當地開設子公司、辦事處或合資企業）時，最合適的現成本地管理幹部與技術支柱。",ja:"実習生は3〜5年間日本で学び、日本語や日本企業文化に精通するだけでなく、会社の中核技術・業務フローにも熟知します。実習期間満了後に帰国する際は、企業が海外市場を開拓する（現地に子会社・事務所・合弁会社を設立する等）際の、即戦力となる現地管理幹部・技術の支柱として最適な人材となります。",en:"After 3–5 years learning in Japan, trainees master not only the language and corporate culture but also the company's core technology and workflows. When they return home, they become ready-made local management leaders and technical pillars for the company's overseas expansion (e.g., opening subsidiaries, offices, or joint ventures).",my:"အလုပ်သင်များသည် ဂျပန်တွင် ၃ မှ ၅ နှစ်ကြာသင်ယူပြီး ဂျပန်ဘာသာစကားနှင့် ဂျပန်ကုမ္ပဏီယဉ်ကျေးမှုကို ကျွမ်းကျင်ရုံသာမက ကုမ္ပဏီ၏ အဓိကနည်းပညာနှင့် လုပ်ငန်းစဉ်ကိုပါ ကျွမ်းကျင်လာသည်။ အလုပ်သင်ကာလပြီးဆုံး၍ နေရပ်ပြန်ချိန်တွင် ကုမ္ပဏီက ပြည်ပစျေးကွက်ကို ဖော်ထုတ်ရာတွင်（ဒေသတွင်ကုမ္ပဏီခွဲ၊ ရုံးခွဲ သို့မဟုတ် ဖက်စပ်လုပ်ငန်းဖွင့်ခြင်းကဲ့သို့）အသင့်ရရှိနိုင်သော ဒေသဆိုင်ရာစီမံခန့်ခွဲမှုခေါင်းဆောင်နှင့် နည်းပညာအခြေခံအဖြစ် အသင့်တော်ဆုံးဖြစ်သည်။"},
+  ti_adv3_h:{zh:"優勢 3：實踐企業的「國際貢獻」與社會責任 🤝",ja:"メリット3：企業の「国際貢献」と社会的責任の実践 🤝",en:"Advantage 3: Fulfilling Corporate International Contribution & Social Responsibility 🤝",my:"အားသာချက် ၃：ကုမ္ပဏီ၏ 「နိုင်ငံတကာအထောက်အပံ့」နှင့် လူမှုတာဝန်ကို အကောင်အထည်ဖော်ခြင်း 🤝"},
+  ti_adv3_b1:{zh:"落實國際技術轉移：",ja:"国際的な技術移転の実現：",en:"Delivering International Technology Transfer: ",my:"နိုင်ငံတကာနည်းပညာလွှဲပြောင်းမှုကို အကောင်အထည်ဖော်ခြင်း："},
+  ti_adv3_p1:{zh:"將日本的專業技術與管理觀念，藉由栽培海外優秀青年，傳遞至開發中國家。這不僅是技能實習制度的核心宗旨，更能大幅提升接收企業的社會形象與國際評價。",ja:"日本の専門技術・経営理念を、海外の優秀な若者の育成を通じて開発途上国へ伝えます。これは技能実習制度の核心的な理念であるだけでなく、受入企業の社会的イメージと国際的評価を大きく高めます。",en:"Japan's specialized skills and management philosophy are passed on to developing countries by nurturing talented young people abroad. This is not only the core purpose of the Technical Intern Training Program, but also significantly enhances the host company's social image and international standing.",my:"ဂျပန်၏ ကျွမ်းကျင်မှုနည်းပညာနှင့် စီမံခန့်ခွဲမှုအယူအဆများကို ပြည်ပရှိ ထူးချွန်သောလူငယ်များ ပျိုးထောင်ခြင်းမှတဆင့် ဖွံ့ဖြိုးဆဲနိုင်ငံများသို့ လွှဲပြောင်းပေးသည်။ ၎င်းသည် နည်းပညာအလုပ်သင်စနစ်၏ အဓိကရည်ရွယ်ချက်သာမက လက်ခံကုမ္ပဏီ၏ လူမှုပုံရိပ်နှင့် နိုင်ငံတကာအသိအမှတ်ပြုမှုကိုပါ သိသိသာသာ မြှင့်တင်ပေးနိုင်သည်။"},
 
   tg_kicker:{zh:"SPECIFIED SKILLED WORKER",ja:"SPECIFIED SKILLED WORKER",en:"SPECIFIED SKILLED WORKER",my:"SPECIFIED SKILLED WORKER"},
   tg_lead:{zh:"制度背景、與技能實習的差異，以及企業引進特定技能人才的優勢。",ja:"制度の背景、技能実習との違い、そして特定技能人材受入れのメリットをご紹介します。",en:"Program background, differences from Technical Intern Training, and the advantages of hiring Specified Skilled Workers.",my:"စနစ်နောက်ခံ၊ နည်းပညာအလုပ်သင်နှင့်ကွာခြားချက်နှင့် အထူးကျွမ်းကျင်လုပ်သားခေါ်ယူခြင်း၏ အားသာချက်များ။"},
@@ -1541,7 +1827,7 @@ const I18N = {
   tg_adv3_h:{zh:"03・人才吸引力高，易招募優秀人才",ja:"03・魅力度が高く優秀な人材を確保しやすい",en:"03・High Appeal, Easier to Attract Talent",my:"၀၃・ဆွဲဆောင်မှုမြင့်မား၍ ကျွမ်းကျင်လုပ်သားရရှိရန်လွယ်ကူခြင်း"},
   tg_adv3_p:{zh:"特定技能允許外國人才在與日本人同等的勞動條件下就勞，因此在國際人才市場上的關注度與吸引力極高，企業更容易篩選並錄用優秀人才。",ja:"特定技能は日本人と同等の労働条件での就労が認められているため、国際人材市場での注目度・魅力が非常に高く、企業は優秀な人材を選びやすくなります。",en:"Since workers are employed under the same conditions as Japanese staff, this status is highly attractive in the global talent market, making it easier to recruit top candidates.",my:"အထူးကျွမ်းကျင်စနစ်သည် ဂျပန်လူမျိုးများနှင့်တန်းတူ အလုပ်ခွင့်အရေးအောက်တွင် အလုပ်လုပ်ခွင့်ပြုသောကြောင့် နိုင်ငံတကာလုပ်သားစျေးကွက်တွင် ဆွဲဆောင်မှုမြင့်မားပြီး ကုမ္ပဏီများအနေဖြင့် ကျွမ်းကျင်လုပ်သားများကို ရွေးချယ်ရန်လွယ်ကူသည်။"},
   tg_adv4_h:{zh:"04・未來外國勞動力的核心",ja:"04・将来の外国人労働力の中核",en:"04・The Future Core of Foreign Labor",my:"၀၄・အနာဂတ် နိုင်ငံခြားလုပ်သားအင်အား၏ အဓိကကျသောအစိတ်အပိုင်း"},
-  tg_adv4_p:{zh:"相較於留學生（每週工時上限 28 小時）或其他特定領域資格，特定技能因其就勞型態的靈活性與專業性，正逐漸成為未來日本引進外國勞動力的中核在留資格。",ja:"留学生（週28時間上限）や他の資格に比べ、特定技能はその柔軟性と専門性から、今後日本の外国人労働力受入れの中核的な在留資格になりつつあります。",en:"Compared to international students (28 hrs/week limit) or other statuses, its flexibility and professionalism are making it the central pathway for foreign labor in Japan's future.",my:"ကျောင်းသားများ（တစ်ပတ် ၂၈ နာရီကန့်သတ်）သို့မဟုတ် အခြားအရည်အချင်းများနှင့်နှိုင်းယှဉ်လျှင် အထူးကျွမ်းကျင်စနစ်သည် ၎င်း၏ ပြောင်းလွယ်ပြင်လွယ်နှင့် ကျွမ်းကျင်မှုကြောင့် ဂျပန်၏ နိုင်ငံခြားလုပ်သားအင်အားခေါ်ယူရေး အနာဂတ်အဓိကနေထိုင်ခွင့်အဖြစ် တဖြည်းဖြည်းဖြစ်လာနေသည်။"},
+  tg_adv4_p:{zh:"相較於其他特定領域資格，特定技能因其就勞型態的靈活性與專業性，正逐漸成為未來日本引進外國勞動力的中核在留資格。",ja:"他の資格に比べ、特定技能はその柔軟性と専門性から、今後日本の外国人労働力受入れの中核的な在留資格になりつつあります。",en:"Compared to other statuses, its flexibility and professionalism are making it the central pathway for foreign labor in Japan's future.",my:"အခြားအရည်အချင်းများနှင့်နှိုင်းယှဉ်လျှင် အထူးကျွမ်းကျင်စနစ်သည် ၎င်း၏ ပြောင်းလွယ်ပြင်လွယ်နှင့် ကျွမ်းကျင်မှုကြောင့် ဂျပန်၏ နိုင်ငံခြားလုပ်သားအင်အားခေါ်ယူရေး အနာဂတ်အဓိကနေထိုင်ခွင့်အဖြစ် တဖြည်းဖြည်းဖြစ်လာနေသည်။"},
 
   tg_note_h:{zh:"雇主的法定義務：",ja:"雇用主の法的義務：",en:"Employer's Legal Obligation:",my:"အလုပ်ရှင်၏ ဥပဒေအရတာဝန်："},
   tg_note_p:{zh:"當企業雇用「1 號特定技能外國人」時，依法必須為其規劃並切實執行涵蓋「職業生活、日常生活、社會生活」這三個層面的全方位生活支援計劃（即 1 號特定技能外國人支援）。",ja:"企業が「1号特定技能外国人」を雇用する場合、法律により「職業生活・日常生活・社会生活」の3側面を網羅する生活支援計画を策定し、確実に実施する義務があります（1号特定技能外国人支援）。",en:"When hiring a \"Category 1 Specified Skilled Worker,\" employers are legally required to plan and implement a comprehensive support program covering \"work life, daily life, and social life.\"",my:"ကုမ္ပဏီများသည် 「အမှတ် ၁ အထူးကျွမ်းကျင်နိုင်ငံခြားသား」ကို ခန့်အပ်သည့်အခါ ဥပဒေအရ 「အလုပ်ဘဝ၊ နေ့စဉ်ဘဝ၊ လူမှုဘဝ」ဟူသော အကျဉ်းချုပ်သုံးရပ်ကို လွှမ်းခြုံသော နေထိုင်မှုထောက်ခံရေးအစီအစဉ်ကို စီစဉ်ကာ တိကျစွာအကောင်အထည်ဖော်ရမည့် တာဝန်ရှိသည်။"},
@@ -1552,7 +1838,16 @@ const I18N = {
   pain1_h:{zh:"企業痛點",ja:"企業様の課題",en:"Challenges",my:"ပြဿနာများ"},
   pain1_p:{zh:"面臨日本國內人手不足，且希望確保能長期安定工作的作業人力。",ja:"国内の人手不足に直面し、長期的に安定した労働力を確保したい。",en:"Facing labor shortages in Japan and needing a stable, long-term workforce.",my:"ဂျပန်နိုင်ငံတွင်း လုပ်သားလိုအင်ရှားပါးမှုကို ရင်ဆိုင်နေရပြီး ကြာရှည်တည်ငြိမ်သောလုပ်သားများ လိုအပ်နေသည်။"},
   pain2_h:{zh:"解決方案",ja:"解決策",en:"Our Solution",my:"ဖြေရှင်းချက်"},
-  pain2_p:{zh:"安定人力確保（3–5 年不轉職）、彈性人力組合（特定技能＋留學生兼職）、獨家監理費折抵優惠（床舖清潔、冷氣拆洗、花王業務用產品採購、次氯酸水噴霧服務）。",ja:"安定した人材確保（3〜5年転職なし）、柔軟な人材組合せ（特定技能＋留学生アルバイト）、独自の監理費割引特典（寝具クリーニング、エアコン洗浄、花王業務用製品調達、次亜塩素酸水噴霧サービス）。",en:"Stable workforce (no turnover for 3–5 years), flexible combinations (specified skilled + student part-timers), and exclusive supervision fee discounts (bedding cleaning, AC cleaning, Kao business supplies, hypochlorous acid spray service).",my:"တည်ငြိမ်သောလုပ်သား（၃-၅ နှစ် အလုပ်မပြောင်း）၊ ပြောင်းလွယ်ပြင်လွယ်လုပ်သားပေါင်းစပ်မှု（အထူးကျွမ်းကျင်+ကျောင်းသားအချိန်ပိုင်း）နှင့် အထူးကြီးကြပ်ခ လျှော့စျေးအစီအစဉ်များ（ကုတင်အိပ်ရာသန့်ရှင်းရေး၊ လေအေးစက်ဆေးကြောခြင်း၊ Kao ကုန်ပစ္စည်းဝယ်ယူမှု၊ ပိုးသတ်ဆေးဖျန်းဝန်ဆောင်မှု）"},
+  pain2_intro:{zh:"透過導入技能實習生與特定技能外國人才，持續確保穩定的人力資源。",ja:"技能実習生・特定技能外国人材の受け入れにより、安定した人材を継続的に確保します。",en:"By accepting technical intern trainees and specified skilled foreign workers, we continuously secure a stable workforce.",my:"နည်းပညာအလုပ်သင်များနှင့် အထူးကျွမ်းကျင်နိုင်ငံခြားလုပ်သားများကို လက်ခံခြင်းဖြင့် တည်ငြိမ်သောလုပ်သားအင်အားကို စဉ်ဆက်မပြတ် ရရှိစေပါသည်။"},
+  pain2_li1_h:{zh:"技能實習生：",ja:"技能実習生：",en:"Technical Intern Trainees: ",my:"နည်းပညာအလုပ်သင်များ："},
+  pain2_li1:{zh:"引進年輕且積極的外國人才，透過實務培訓成長。",ja:"若く意欲のある外国人材を受け入れ、実務を通じて育成。",en:"Young, motivated foreign talent developed through hands-on training.",my:"လူငယ်နှင့် ဇွဲရှိသော နိုင်ငံခြားလုပ်သားများကို လက်ခံပြီး လက်တွေ့လုပ်ငန်းခွင်မှတဆင့် လေ့ကျင့်ပေးသည်။"},
+  pain2_li2_h:{zh:"特定技能人才：",ja:"特定技能生：",en:"Specified Skilled Workers: ",my:"အထူးကျွမ်းကျင်လုပ်သားများ："},
+  pain2_li2:{zh:"具備一定技能與日語能力，可作為即戰力確保。",ja:"一定の技能・日本語能力を持つ人材を即戦力として確保。",en:"Talent with proven skills and Japanese ability, ready to contribute immediately.",my:"အချို့သောကျွမ်းကျင်မှုနှင့် ဂျပန်စာအရည်အချင်းရှိသူများကို ချက်ချင်းအသုံးချနိုင်သော လုပ်သားအဖြစ် ရရှိသည်။"},
+  pain2_li3_h:{zh:"持續性人才招募：",ja:"継続的な人材採用：",en:"Continuous Recruitment: ",my:"စဉ်ဆက်မပြတ် လုပ်သားခေါ်ယူမှု："},
+  pain2_li3:{zh:"善用從技能實習轉換至特定技能的管道，銜接長期雇用。",ja:"技能実習から特定技能への移行も活用し、長期的な雇用につなげる。",en:"Leveraging the pathway from technical intern to specified skilled status for long-term employment.",my:"နည်းပညာအလုပ်သင်မှ အထူးကျွမ်းကျင်သို့ ပြောင်းလဲနိုင်သော လမ်းကြောင်းကိုအသုံးချကာ ကြာရှည်ခန့်အပ်မှုသို့ ဆက်စပ်ပေးသည်။"},
+  pain2_li4_h:{zh:"生活與就業支援：",ja:"生活・就労サポート：",en:"Life & Work Support: ",my:"နေထိုင်မှုနှင့် အလုပ်အကိုင်ထောက်ခံမှု："},
+  pain2_li4:{zh:"入職後持續提供支援，提升職場穩定留任率。",ja:"入社後もサポートを行い、職場への定着率向上を目指す。",en:"Ongoing support after joining to improve workplace retention.",my:"အလုပ်ဝင်ပြီးနောက်လည်း ဆက်လက်ထောက်ခံပေးပြီး အလုပ်ခွင်တွင် တည်ငြိမ်စွာနေထိုင်နိုင်မှုကို မြှင့်တင်ရန် ရည်ရွယ်သည်။"},
+  pain2_outro:{zh:"透過技能實習生與特定技能人才的組合，從「人才確保」到「培育與留任」，全方位協助企業解決長期缺工問題。",ja:"技能実習生と特定技能生を組み合わせることで、「人材の確保」から「育成・定着」まで、企業様の長期的な人手不足解消をサポートします。",en:"By combining technical intern trainees and specified skilled workers, we support your company from securing talent through to development and retention — resolving long-term labor shortages.",my:"နည်းပညာအလုပ်သင်များနှင့် အထူးကျွမ်းကျင်လုပ်သားများကို ပေါင်းစပ်ခြင်းဖြင့် 「လုပ်သားရရှိရေး」မှ 「ပျိုးထောင်ခြင်းနှင့် တည်ငြိမ်စေခြင်း」အထိ သင့်ကုမ္ပဏီ၏ ကြာရှည်လုပ်သားလိုအပ်ချက်ပြဿနာကို ဖြေရှင်းပေးပါမည်။"},
 
   e_h3_2:{zh:"支援業務委託內容（權責分工）",ja:"監理・支援業務の役割分担",en:"Support Services & Responsibility Breakdown",my:"ထောက်ခံရေးလုပ်ငန်းတာဝန်ခွဲဝေမှု"},
   respo1_h:{zh:"組合（監理團體）的主務",ja:"組合（監理団体）の主な業務",en:"Cooperative (Supervising Org.) Duties",my:"ပူးပေါင်းအသင်း (ကြီးကြပ်ရေးအဖွဲ့) ၏တာဝန်များ"},
@@ -1578,6 +1873,7 @@ const I18N = {
   eflow2_p:{zh:"向技能實習機構（OTIT）申請計畫認定、向入管申請在留資格（COE）。",ja:"外国人技能実習機構（OTIT）へ計画認定申請、入管へ在留資格認定（COE）申請。",en:"Apply for plan approval with OTIT and residence status (COE) with immigration.",my:"OTIT သို့ အစီအစဉ်အတည်ပြုမှု လျှောက်ထားခြင်းနှင့် လူဝင်မှုကြီးကြပ်ရေးသို့ COE လျှောက်ထားခြင်း"},
   eflow3_h:{zh:"入境後 1 個月",ja:"入国後1ヶ月間",en:"1 Month After Arrival",my:"ဝင်ရောက်ပြီး ၁ လ"},
   eflow3_p:{zh:"集合座學培訓，隨後配屬至企業實施僱用。",ja:"集合講習を実施後、企業へ配属し雇用開始。",en:"Group classroom training, followed by placement and employment at the company.",my:"စုပေါင်းသင်တန်းပြီးနောက် ကုမ္ပဏီသို့ တာဝန်ချထားကာ အလုပ်ခန့်အပ်ခြင်း"},
+  eflow3_note:{zh:"＊特定技能不需此講習，僅適用技能實習生",ja:"＊特定技能はこの講習不要、技能実習生のみ対象",en:"＊Not required for Specified Skilled Workers — applies to Technical Intern Trainees only",my:"＊အထူးကျွမ်းကျင်အတွက် ဤသင်တန်းမလိုအပ်ပါ၊ နည်းပညာအလုပ်သင်များသာ သက်ဆိုင်သည်"},
 
   e_h3_4:{zh:"基本受入人數配額（一般職種）",ja:"基本受入人数枠（一般職種）",en:"Basic Acceptance Quota (General Occupations)",my:"အခြေခံလက်ခံနိုင်သူဦးရေ (ယေဘုယျအလုပ်များ)"},
   quota_th1:{zh:"企業常勤員工人數",ja:"企業の常勤職員数",en:"Number of Full-time Employees",my:"ကုမ္ပဏီ၏အမြဲတမ်းဝန်ထမ်းအရေအတွက်"},
@@ -1595,13 +1891,107 @@ const I18N = {
   quota_r6_1:{zh:"201～300 人",ja:"201〜300人",en:"201–300",my:"၂၀၁-၃၀၀ ဦး"},
   quota_r6_2:{zh:"15 人",ja:"15人",en:"15",my:"၁၅ ဦး"},
   quota_r7_1:{zh:"301 人以上",ja:"301人以上",en:"301 or more",my:"၃၀၁ ဦးအထက်"},
-  quota_r7_2:{zh:"常勤人數 1/20",ja:"常勤職員数の1/20",en:"1/20 of full-time staff",my:"အမြဲတမ်းဝန်ထမ်း၏ ၁/၂၀"},
-  quota_note:{zh:"＊若取得優良實施者認定，配額可擴充至 2 倍，並可引進第 3 號 4–5 年實習生。",ja:"＊優良実施者認定を取得した場合、受入枠は2倍に拡大でき、3号（4〜5年目）実習生の受入も可能です。",en:"*With Excellent Implementer certification, quotas can double and No.3 (Year 4–5) trainees become available.",my:"* ကောင်းမွန်သောအကောင်အထည်ဖော်သူအဖြစ် အသိအမှတ်ပြုခံရပါက နှုန်းထားနှစ်ဆတိုးနိုင်ပြီး အမှတ် ၃ (၄-၅ နှစ်) အလုပ်သင်များ ခေါ်ယူနိုင်သည်။"},
+  quota_sub1:{zh:"＜一般職種＞",ja:"＜一般職種＞",en:"<General Occupations>",my:"<အထွေထွေအလုပ်များ>"},
+  quota_sub2:{zh:"＜介護職種＞",ja:"＜介護職種＞",en:"<Nursing Care>",my:"<သူနာပြု/စောင့်ရှောက်ရေး>"},
+  quota_th_g1:{zh:"第 1 號（1 年間）",ja:"第1号（1年間）",en:"Stage 1 (1 year)",my:"အမှတ် ၁ （၁ နှစ်）"},
+  quota_th_g2:{zh:"第 2 號（2 年間）",ja:"第2号（2年間）",en:"Stage 2 (2 years)",my:"အမှတ် ၂ （၂ နှစ်）"},
+  quota_th_g3:{zh:"優良基準適合者",ja:"優良基準適合者",en:"Excellent Operator Certified",my:"ကောင်းမွန်သောစံနှုန်းနှင့်ကိုက်ညီသူ"},
+  quota_th_basic:{zh:"基本人數枠",ja:"基本人数枠",en:"Base Quota",my:"အခြေခံဦးရေကန့်သတ်ချက်"},
+  quota_th_x2a:{zh:"基本人數枠的 2 倍",ja:"基本人数枠の2倍",en:"2× Base Quota",my:"အခြေခံဦးရေ၏ ၂ ဆ"},
+  quota_th_g3_1:{zh:"第 1 號（1 年間）",ja:"第1号（1年間）",en:"Stage 1 (1 year)",my:"အမှတ် ၁ （၁ နှစ်）"},
+  quota_th_g3_2:{zh:"第 2 號（2 年間）",ja:"第2号（2年間）",en:"Stage 2 (2 years)",my:"အမှတ် ၂ （၂ နှစ်）"},
+  quota_th_g3_3:{zh:"第 3 號（2 年間）",ja:"第3号（2年間）",en:"Stage 3 (2 years)",my:"အမှတ် ၃ （၂ နှစ်）"},
+  quota_x2:{zh:"基本人數枠的 2 倍",ja:"基本人数枠の2倍",en:"2× Base Quota",my:"အခြေခံဦးရေ၏ ၂ ဆ"},
+  quota_x2b:{zh:"基本人數枠的 2 倍",ja:"基本人数枠の2倍",en:"2× Base Quota",my:"အခြေခံဦးရေ၏ ၂ ဆ"},
+  quota_x4:{zh:"基本人數枠的 4 倍",ja:"基本人数枠の4倍",en:"4× Base Quota",my:"အခြေခံဦးရေ၏ ၄ ဆ"},
+  quota_x6:{zh:"基本人數枠的 6 倍",ja:"基本人数枠の6倍",en:"6× Base Quota",my:"အခြေခံဦးရေ၏ ၆ ဆ"},
+  quota_r7_2:{zh:"常勤職員總數的 20 分之 1",ja:"常勤職員数の20分の1",en:"1/20 of full-time staff",my:"အမြဲတမ်းဝန်ထမ်း၏ ၁/၂၀"},
+  quota_note_h:{zh:"配額計算相關規定：",ja:"受入人数枠の計算に関する規定：",en:"Rules for Calculating Quotas:",my:"ဦးရေကန့်သတ်ချက်တွက်ချက်မှုဆိုင်ရာစည်းမျဉ်းများ："},
+  quota_note1:{zh:"上述可受入人數，指「1 年內」可新受入之技能實習第 1 號人數。當該名實習生於第 2 年順利移行至第 2 號後，隔年即可再次新增第 1 號名額，配額可逐年持續疊加，並非一次性總量上限。",ja:"上記の受入可能人数は「1年間」に新たに受入れられる技能実習1号の人数です。実習生が2年目に技能実習2号へ移行すれば、翌年また新たに1号の枠を追加できます。年々積み上げが可能で、一度きりの上限ではありません。",en:"The figures above represent the number of new Stage 1 trainees that may be accepted per year. Once a trainee advances to Stage 2 in year two, a new Stage 1 slot opens the following year — quotas accumulate year over year rather than being a one-time cap.",my:"အထက်ပါလက်ခံနိုင်သည့်ဦးရေသည် 「၁ နှစ်အတွင်း」 အသစ်လက်ခံနိုင်သည့် နည်းပညာအလုပ်သင် အမှတ် ၁ ဦးရေဖြစ်သည်။ အလုပ်သင်သည် ဒုတိယနှစ်တွင် အမှတ် ၂ သို့ အောင်မြင်စွာကူးပြောင်းပါက နောက်နှစ်တွင် အမှတ် ၁ နေရာအသစ်ကို ထပ်မံထည့်သွင်းနိုင်သည်။ ဦးရေကန့်သတ်ချက်သည် နှစ်စဉ်တိုးမြှင့်နိုင်ပြီး တစ်ကြိမ်တည်းအများဆုံးကန့်သတ်ချက် မဟုတ်ပါ။"},
+  quota_note2:{zh:"技能實習第 1 號的在職人數，於任何時間點均不可超過該企業之「常勤職員總數」，此為法定上限，非僅限申請當年度。",ja:"技能実習1号の在籍人数は、いかなる時点においても企業の「常勤職員総数」を超えることはできません。これは申請年度に限らない法定上限です。",en:"At no point may the number of active Stage 1 trainees exceed the company's total number of full-time employees. This is a statutory cap that applies at all times, not just in the application year.",my:"နည်းပညာအလုပ်သင် အမှတ် ၁ ၏ လက်ရှိရှိနေသည့်ဦးရေသည် မည်သည့်အချိန်တွင်မဆို ကုမ္ပဏီ၏ 「အမြဲတမ်းဝန်ထမ်းစုစုပေါင်း」ကို မကျော်လွန်ရပါ။ ၎င်းသည် လျှောက်ထားသောနှစ်တွင်သာမက အမြဲတမ်းသက်ဆိုင်သော ဥပဒေအရကန့်သတ်ချက်ဖြစ်သည်။"},
+  quota_note3:{zh:"「常勤職員總數」以前一年度決算申報時的正式雇用人數為計算基準，不包含技能實習生本人、兼職人員與派遣人員。",ja:"「常勤職員総数」は前年度決算申告時点の正社員雇用数を基準とし、技能実習生本人、パート・アルバイト、派遣社員は含まれません。",en:"\"Total full-time employees\" is based on the number of regular employees reported in the previous fiscal year's settlement filing, excluding the trainees themselves, part-time staff, and dispatched workers.",my:"「အမြဲတမ်းဝန်ထမ်းစုစုပေါင်း」ကို ယခင်နှစ်၏ ဘဏ္ဍာရေးနှစ်ပြီးဆုံးမှုအစီရင်ခံစာတင်သွင်းချိန်ရှိ တရားဝင်ခန့်အပ်ထားသောဝန်ထမ်းဦးရေကို အခြေခံတွက်ချက်ပြီး နည်းပညာအလုပ်သင်ကိုယ်တိုင်၊ အချိန်ပိုင်းဝန်ထမ်းနှင့် စေလွှတ်ဝန်ထမ်းများ မပါဝင်ပါ။"},
+  quota_note4:{zh:"企業若同時受入一般職種與介護職種之技能實習生，兩者配額須分開計算，不得合併使用或互相流用。",ja:"企業が一般職種と介護職種の技能実習生を同時に受入れる場合、両者の受入枠は別々に計算し、合算や流用はできません。",en:"If a company accepts trainees in both general occupations and nursing care simultaneously, the two quotas must be calculated separately and may not be combined or transferred between categories.",my:"ကုမ္ပဏီသည် ယေဘုယျအလုပ်နှင့် သူနာပြု/စောင့်ရှောက်ရေးအလုပ်သင်များကို တစ်ပြိုင်နက်တည်း လက်ခံပါက ဦးရေနှစ်မျိုးလုံးကို သီးခြားစီတွက်ချက်ရမည်ဖြစ်ပြီး ပေါင်းစပ်အသုံးပြုခြင်း သို့မဟုတ် လွှဲပြောင်းအသုံးပြုခြင်း မပြုလုပ်ရပါ။"},
+  cquota_th0:{zh:"事業所的常勤照護職員總數",ja:"事業所の常勤介護職員の総数",en:"Total Full-Time Care Staff at Facility",my:"လုပ်ငန်းခွင်၏ အမြဲတမ်းစောင့်ရှောက်ရေးဝန်ထမ်း စုစုပေါင်း"},
+  cquota_th_g1:{zh:"一般的實習實施者",ja:"一般の実習実施者",en:"General Host Organization",my:"ယေဘုယျအလုပ်သင်လက်ခံသူ"},
+  cquota_th_g2:{zh:"優良的實習實施者",ja:"優良な実習実施者",en:"Excellent Host Organization",my:"ကောင်းမွန်သောအလုပ်သင်လက်ခံသူ"},
+  cquota_th_1:{zh:"第 1 號",ja:"1号",en:"Stage 1",my:"အမှတ် ၁"},
+  cquota_th_all:{zh:"全體（第 1・2 號）",ja:"全体（1・2号）",en:"Total (Stages 1–2)",my:"စုစုပေါင်း （အမှတ် ၁・၂）"},
+  cquota_th_1b:{zh:"第 1 號",ja:"1号",en:"Stage 1",my:"အမှတ် ၁"},
+  cquota_th_allb:{zh:"全體（第 1・2・3 號）",ja:"全体（1・2・3号）",en:"Total (Stages 1–3)",my:"စုစုပေါင်း （အမှတ် ၁・၂・၃）"},
+  cquota_r1_0:{zh:"1",ja:"1",en:"1",my:"1"},
+  cquota_r1_1:{zh:"1",ja:"1",en:"1",my:"1"},
+  cquota_r1_2:{zh:"1",ja:"1",en:"1",my:"1"},
+  cquota_r1_3:{zh:"1",ja:"1",en:"1",my:"1"},
+  cquota_r1_4:{zh:"1",ja:"1",en:"1",my:"1"},
+  cquota_r2_0:{zh:"2",ja:"2",en:"2",my:"2"},
+  cquota_r2_1:{zh:"1",ja:"1",en:"1",my:"1"},
+  cquota_r2_2:{zh:"2",ja:"2",en:"2",my:"2"},
+  cquota_r2_3:{zh:"2",ja:"2",en:"2",my:"2"},
+  cquota_r2_4:{zh:"2",ja:"2",en:"2",my:"2"},
+  cquota_r3_0:{zh:"3～10",ja:"3～10",en:"3～10",my:"3～10"},
+  cquota_r3_1:{zh:"1",ja:"1",en:"1",my:"1"},
+  cquota_r3_2:{zh:"3",ja:"3",en:"3",my:"3"},
+  cquota_r3_3:{zh:"2",ja:"2",en:"2",my:"2"},
+  cquota_r3_4:{zh:"6",ja:"6",en:"6",my:"6"},
+  cquota_r4_0:{zh:"11～20",ja:"11～20",en:"11～20",my:"11～20"},
+  cquota_r4_1:{zh:"2",ja:"2",en:"2",my:"2"},
+  cquota_r4_2:{zh:"6",ja:"6",en:"6",my:"6"},
+  cquota_r4_3:{zh:"4",ja:"4",en:"4",my:"4"},
+  cquota_r4_4:{zh:"12",ja:"12",en:"12",my:"12"},
+  cquota_r5_0:{zh:"21～30",ja:"21～30",en:"21～30",my:"21～30"},
+  cquota_r5_1:{zh:"3",ja:"3",en:"3",my:"3"},
+  cquota_r5_2:{zh:"9",ja:"9",en:"9",my:"9"},
+  cquota_r5_3:{zh:"6",ja:"6",en:"6",my:"6"},
+  cquota_r5_4:{zh:"18",ja:"18",en:"18",my:"18"},
+  cquota_r6_0:{zh:"31～40",ja:"31～40",en:"31～40",my:"31～40"},
+  cquota_r6_1:{zh:"4",ja:"4",en:"4",my:"4"},
+  cquota_r6_2:{zh:"12",ja:"12",en:"12",my:"12"},
+  cquota_r6_3:{zh:"8",ja:"8",en:"8",my:"8"},
+  cquota_r6_4:{zh:"24",ja:"24",en:"24",my:"24"},
+  cquota_r7_0:{zh:"41～50",ja:"41～50",en:"41～50",my:"41～50"},
+  cquota_r7_1:{zh:"5",ja:"5",en:"5",my:"5"},
+  cquota_r7_2:{zh:"15",ja:"15",en:"15",my:"15"},
+  cquota_r7_3:{zh:"10",ja:"10",en:"10",my:"10"},
+  cquota_r7_4:{zh:"30",ja:"30",en:"30",my:"30"},
+  cquota_r8_0:{zh:"51～71",ja:"51～71",en:"51～71",my:"51～71"},
+  cquota_r8_1:{zh:"6",ja:"6",en:"6",my:"6"},
+  cquota_r8_2:{zh:"18",ja:"18",en:"18",my:"18"},
+  cquota_r8_3:{zh:"12",ja:"12",en:"12",my:"12"},
+  cquota_r8_4:{zh:"36",ja:"36",en:"36",my:"36"},
+  cquota_r9_0:{zh:"72～100",ja:"72～100",en:"72～100",my:"72～100"},
+  cquota_r9_1:{zh:"6",ja:"6",en:"6",my:"6"},
+  cquota_r9_2:{zh:"18",ja:"18",en:"18",my:"18"},
+  cquota_r9_3:{zh:"12",ja:"12",en:"12",my:"12"},
+  cquota_r9_4:{zh:"36",ja:"36",en:"36",my:"36"},
+  cquota_r10_0:{zh:"101～119",ja:"101～119",en:"101～119",my:"101～119"},
+  cquota_r10_1:{zh:"10",ja:"10",en:"10",my:"10"},
+  cquota_r10_2:{zh:"30",ja:"30",en:"30",my:"30"},
+  cquota_r10_3:{zh:"20",ja:"20",en:"20",my:"20"},
+  cquota_r10_4:{zh:"60",ja:"60",en:"60",my:"60"},
+  cquota_r11_0:{zh:"120～200",ja:"120～200",en:"120～200",my:"120～200"},
+  cquota_r11_1:{zh:"10",ja:"10",en:"10",my:"10"},
+  cquota_r11_2:{zh:"30",ja:"30",en:"30",my:"30"},
+  cquota_r11_3:{zh:"20",ja:"20",en:"20",my:"20"},
+  cquota_r11_4:{zh:"60",ja:"60",en:"60",my:"60"},
+  cquota_r12_0:{zh:"201～300",ja:"201～300",en:"201～300",my:"201～300"},
+  cquota_r12_1:{zh:"15",ja:"15",en:"15",my:"15"},
+  cquota_r12_2:{zh:"45",ja:"45",en:"45",my:"45"},
+  cquota_r12_3:{zh:"30",ja:"30",en:"30",my:"30"},
+  cquota_r12_4:{zh:"90",ja:"90",en:"90",my:"90"},
+  cquota_r13_0:{zh:"301～",ja:"301～",en:"301 or more",my:"၃၀၁ အထက်"},
+  cquota_r13_1:{zh:"常勤照護職員的 20 分之 1",ja:"常勤介護職員の20分の1",en:"1/20 of full-time care staff",my:"အမြဲတမ်းစောင့်ရှောက်ရေးဝန်ထမ်း၏ ၁/၂၀"},
+  cquota_r13_2:{zh:"常勤照護職員的 20 分之 3",ja:"常勤介護職員の20分の3",en:"3/20 of full-time care staff",my:"အမြဲတမ်းစောင့်ရှောက်ရေးဝန်ထမ်း၏ ၃/၂၀"},
+  cquota_r13_3:{zh:"常勤照護職員的 10 分之 1",ja:"常勤介護職員の10分の1",en:"1/10 of full-time care staff",my:"အမြဲတမ်းစောင့်ရှောက်ရေးဝန်ထမ်း၏ ၁/၁၀"},
+  cquota_r13_4:{zh:"常勤照護職員的 5 分之 3",ja:"常勤介護職員の5分の3",en:"3/5 of full-time care staff",my:"အမြဲတမ်းစောင့်ရှောက်ရေးဝန်ထမ်း၏ ၃/၅"},
+  quota_note5_h:{zh:"優良基準適合者相關規定：",ja:"優良基準適合者に関する規定：",en:"Rules for Excellent Operator Certification:",my:"ကောင်းမွန်သောစံနှုန်းနှင့်ကိုက်ညီသူဆိုင်ရာစည်းမျဉ်းများ："},
+  quota_note5:{zh:"若企業取得「優良實施者」認定（須通過技能評價合格率、法令遵守狀況、支援體制等綜合審查），受入配額最高可擴充至一般標準的 2 倍，介護職種第 1 號配額則可提升至一般標準的 2 倍、全體（第 1～3 號）配額可提升至 6 倍。",ja:"企業が「優良実施者」の認定を取得した場合（技能評価の合格率、法令遵守状況、支援体制等の総合審査に合格する必要があります）、受入枠は一般基準の最大2倍まで拡大でき、介護職種の1号枠は一般基準の2倍、全体（1〜3号）枠は6倍まで拡大できます。",en:"Companies certified as \"Excellent Operators\" (which requires passing a comprehensive review of skills assessment pass rates, legal compliance, and support systems) can expand their quota up to 2× the standard rate. For nursing care, the Stage 1 quota can rise to 2× standard, and the total (Stages 1–3) quota can rise to 6×.",my:"ကုမ္ပဏီသည် 「ကောင်းမွန်သောလုပ်ဆောင်သူ」 အသိအမှတ်ပြုခံရပါက（ကျွမ်းကျင်မှုအကဲဖြတ်အောင်မြင်နှုန်း၊ ဥပဒေလိုက်နာမှုအခြေအနေ၊ ပံ့ပိုးမှုစနစ်စသည့် ပေါင်းစပ်စစ်ဆေးမှုကို အောင်မြင်ရမည်）ဦးရေကန့်သတ်ချက်ကို ယေဘုယျစံနှုန်း၏ ၂ ဆအထိ တိုးမြှင့်နိုင်ပြီး သူနာပြု/စောင့်ရှောက်ရေးအလုပ်၏ အမှတ် ၁ ကန့်သတ်ချက်ကို ယေဘုယျစံနှုန်း၏ ၂ ဆ၊ စုစုပေါင်း（အမှတ် ၁-၃）ကန့်သတ်ချက်ကို ၆ ဆအထိ တိုးမြှင့်နိုင်သည်။"},
+  quota_note6:{zh:"唯有取得優良實施者認定之企業，方可進一步引進技能實習第 3 號（第 4–5 年）實習生；未取得認定者，實習期最長僅至第 2 號（第 2–3 年）為止。",ja:"優良実施者の認定を取得した企業のみが、技能実習3号（4〜5年目）の実習生をさらに受入れることができます。認定を取得していない場合、実習期間は最長で2号（2〜3年目）までとなります。",en:"Only companies with Excellent Operator certification may go on to accept Stage 3 trainees (years 4–5). Without certification, training is limited to Stage 2 (years 2–3) at most.",my:"ကောင်းမွန်သောလုပ်ဆောင်သူအသိအမှတ်ပြုခံရသော ကုမ္ပဏီများသာလျှင် နည်းပညာအလုပ်သင် အမှတ် ၃ （၄-၅ နှစ်မြောက်）အလုပ်သင်များကို ထပ်မံလက်ခံနိုင်မည်ဖြစ်သည်။ အသိအမှတ်ပြုခံရခြင်းမရှိပါက အလုပ်သင်ကာလသည် အများဆုံး အမှတ် ၂ （၂-၃ နှစ်မြောက်）အထိသာ ဖြစ်သည်။"},
 
   e_cta_h:{zh:"諮詢表單",ja:"お問合せフォーム",en:"Consultation Form",my:"တိုင်ပင်ရန်ပုံစံ"},
   e_cta_p:{zh:"由專人試算企業人數配額、評估對應職種，並提供監理費折抵方案。",ja:"専任スタッフが受入枠の試算、対応職種の評価、監理費割引プランをご提案します。",en:"Our staff will calculate your quota, assess suitable occupations, and offer fee discount plans.",my:"ကျွန်ုပ်တို့ဝန်ထမ်းများမှ လက်ခံနိုင်သူဦးရေတွက်ချက်ပေးခြင်း၊ သင့်လျော်သောအလုပ်အမျိုးအစားအကဲဖြတ်ခြင်းနှင့် ကြီးကြပ်ခလျှော့စျေးအစီအစဉ်ကို ပေးအပ်ပါမည်။"},
   table_scroll_hint:{zh:"← 左右滑動查看完整表格 →",ja:"← 左右にスワイプして表全体を見る →",en:"← Swipe to see full table →",my:"← ဇယားအပြည့်အစုံကြည့်ရန် ဘေးသို့ပွတ်ဆွဲပါ →"},
   e_cta_btn:{zh:"立即洽詢",ja:"お問合せはこちら",en:"Contact Us Now",my:"ယခုပင်ဆက်သွယ်ရန်"},
+  email_copied_toast:{zh:"已複製信箱地址：",ja:"メールアドレスをコピーしました：",en:"Email address copied: ",my:"အီးမေးလ်လိပ်စာကို ကူးယူပြီးပါပြီ："},
   readmore_employer:{zh:"先看「特定技能」制度完整說明",ja:"「特定技能」制度の詳細を見る",en:"See the Full Program Overview",my:"「အထူးကျွမ်းကျင်」စနစ်အသေးစိတ်ကြည့်ရန်"},
   e_inquiry_h:{zh:"企業諮詢表單",ja:"企業様お問合せフォーム",en:"Employer Inquiry Form",my:"အလုပ်ရှင် စုံစမ်းမေးမြန်းရေးပုံစံ"},
   e_inquiry_p:{zh:"填寫以下資訊，顧問將於 1 個工作天內與您聯繫。",ja:"以下の情報をご入力いただければ、1営業日以内にご連絡いたします。",en:"Fill in the details below and our team will contact you within 1 business day.",my:"အောက်ပါအချက်အလက်များဖြည့်စွက်ပါက ၁ ရုံးဖွင့်ရက်အတွင်း ဆက်သွယ်ပေးပါမည်။"},
@@ -1633,13 +2023,15 @@ const I18N = {
   ab_v8:{zh:"〒260-0007 千葉縣千葉市中央區祐光2丁目15−7 6樓",ja:"〒260-0007 千葉県千葉市中央区祐光2丁目15−7 6階",en:"6F, 2-15-7 Yuko, Chuo-ku, Chiba City, Chiba 260-0007",my:"〒260-0007 Chiba City, Chuo-ku, Yuko 2-15-7, 6F"},
   ab_v7:{zh:"共同銷售事業、共同購買事業、共同事務代行事業、外國人技能實習生共同受入事業、特定技能外國人支援事業",ja:"共同販売事業、共同購買事業、共同事務代行事業、外国人技能実習生共同受入事業、特定技能外国人支援事業",en:"Joint sales, joint purchasing, joint administrative services, foreign technical intern trainee acceptance, and specified skilled worker support",my:"ပူးတွဲရောင်းချမှု၊ ပူးတွဲဝယ်ယူမှု၊ ပူးတွဲအုပ်ချုပ်ရေးဝန်ဆောင်မှု၊ နိုင်ငံခြားနည်းပညာအလုပ်သင်လက်ခံမှုနှင့် အထူးကျွမ်းကျင်လုပ်သားထောက်ခံမှု"},
 
-  core_h:{zh:"核心競爭力",ja:"当組合の強み",en:"Core Strengths",my:"အဓိကအားသာချက်များ"},
-  core1_b:{zh:"緬甸人才特化：",ja:"ミャンマー人材特化：",en:"Myanmar Specialization: ",my:"မြန်မာလုပ်သားအထူးပြု："},
-  core1_p:{zh:"緬甸人多信仰佛教、性格溫和易融入日本社會、高學歷者多且希望長期留日。配置 2 名精通日語的緬甸籍專任員工及 1 名歸化幹部，溝通零障礙。",ja:"ミャンマー人は仏教徒が多く、穏やかな性格で日本社会に馴染みやすく、高学歴で長期就労を希望する方が多い。日本語堪能なミャンマー人専任スタッフ2名と帰化幹部1名を配置し、意思疎通に支障がありません。",en:"Many Myanmar nationals are Buddhist, adapt well to Japanese society, and are highly educated with a desire for long-term work in Japan. We have 2 fluent Myanmar staff and 1 naturalized executive for seamless communication.",my:"မြန်မာလူမျိုးအများစုသည် ဗုဒ္ဓဘာသာဝင်များဖြစ်ပြီး ဂျပန်လူ့အဖွဲ့အစည်းနှင့် လွယ်ကူစွာအံဝင်ခွင်ကျဖြစ်ကာ ပညာရေးအဆင့်မြင့်သူများ၊ ဂျပန်တွင် ကြာရှည်အလုပ်လုပ်လိုသူများ များပါသည်။ ဂျပန်စကားကျွမ်းကျင်သော မြန်မာဝန်ထမ်း ၂ ဦးနှင့် နိုင်ငံသားပြောင်းလဲသူအရာရှိ ၁ ဦးကို ခန့်အပ်ထားသဖြင့် ဆက်သွယ်ရေးအခက်အခဲမရှိပါ။"},
-  core2_b:{zh:"一貫化管理：",ja:"一貫管理体制：",en:"Integrated Management: ",my:"တစ်စိုက်တစ်ခဲတည်း စီမံခန့်ခွဲမှု："},
-  core2_p:{zh:"從當地培訓到日本監理全程 Tokyo One 集團管理，建立極高信任度。",ja:"現地研修から日本での監理まで、Tokyo Oneグループが一貫して管理し、高い信頼性を実現。",en:"From local training to supervision in Japan, everything is managed by Tokyo One Group, building strong trust.",my:"ဒေသန္တရသင်တန်းမှ ဂျပန်ကြီးကြပ်မှုအထိ Tokyo One အုပ်စုမှ တစ်စိုက်တစ်ခဲတည်း စီမံခန့်ခွဲကာ မြင့်မားသောယုံကြည်မှုတည်ဆောက်ထားသည်။"},
-  core3_b:{zh:"深厚外交信任：",ja:"厚い外交的信頼：",en:"Deep Diplomatic Trust: ",my:"ခိုင်မာသောသံတမန်ဆက်ဆံရေးယုံကြည်မှု："},
-  core3_p:{zh:"長期協助緬甸大使館市場調查與活動企劃，諮詢事項均能獲良好協助。",ja:"長年ミャンマー大使館の市場調査やイベント企画に協力しており、相談事項にも良好なサポートが得られます。",en:"Years of assisting the Myanmar Embassy with market research and event planning ensure excellent support for any inquiries.",my:"မြန်မာသံရုံး၏ စျေးကွက်လေ့လာမှုနှင့် ပွဲစီစဉ်မှုများကို ကြာရှည်စွာ ကူညီခဲ့သဖြင့် တိုင်ပင်ဆွေးနွေးမှုတိုင်းအတွက် ကောင်းမွန်သောအကူအညီရရှိပါသည်။"},
+  core_h:{zh:"當監理團體的特徵",ja:"当監理団体の特徴",en:"Characteristics of Our Supervising Organization",my:"ကျွန်ုပ်တို့၏ ကြီးကြပ်ရေးအဖွဲ့၏ ထူးခြားချက်များ"},
+  core1_b:{zh:"① 緬甸人才專精：",ja:"①ミャンマーに特化している：",en:"① Myanmar Specialization: ",my:"① မြန်မာလုပ်သားအထူးပြု："},
+  core1_p:{zh:"技能實習生的引進專注於緬甸人才，深耕單一國家建立高度信賴管道。緬甸人多信仰佛教、性格溫和易融入日本社會，且高學歷者不少，多希望能長期留日。另配置 2 名日語流利的緬甸籍專職員工及 1 名歸化幹部，通譯調度完全無虞。",ja:"技能実習生の受入れはミャンマー人材に特化しており、単一国に深く根差した信頼できるルートを構築しています。ミャンマー人は仏教徒が多く、穏やかな性格で日本社会に馴染みやすく、高学歴の方も多い上、日本で長く働きたいと考える方が多数です。日本語堪能なミャンマー人専任スタッフ2名と帰化幹部1名も配置し、通訳の心配はありません。",en:"Technical intern trainee recruitment focuses exclusively on Myanmar talent, building deep, trusted channels in a single country. Myanmar nationals are largely Buddhist, adapt well to Japanese society, are often highly educated, and many hope to stay in Japan long-term. Two fluent Japanese-speaking Myanmar staff plus one naturalized executive ensure interpretation is never an issue.",my:"နည်းပညာအလုပ်သင်များ ခေါ်ယူခြင်းသည် မြန်မာလုပ်သားများကိုသာ အထူးပြုထားပြီး တစ်နိုင်ငံတည်းတွင် နက်နဲစွာအခြေတည်၍ ယုံကြည်စိတ်ချရသောလမ်းကြောင်းကို တည်ဆောက်ထားသည်။ မြန်မာလူမျိုးအများစုသည် ဗုဒ္ဓဘာသာဝင်ဖြစ်ပြီး ဂျပန်လူ့အဖွဲ့အစည်းနှင့် အံဝင်ခွင်ကျဖြစ်လွယ်ကာ ပညာရေးအဆင့်မြင့်သူများလည်း ရှိသည်၊ ဂျပန်တွင် ကြာရှည်နေထိုင်လိုသူများ စသည်။ ဂျပန်စကားကျွမ်းကျင်သော မြန်မာဝန်ထမ်း ၂ ဦးနှင့် နိုင်ငံသားပြောင်းလဲသူအရာရှိ ၁ ဦးကိုလည်း ခန့်အပ်ထားသဖြင့် စကားပြန်ပြဿနာမရှိပါ။"},
+  core2_b:{zh:"② 一貫化管理體制：",ja:"②一貫管理体制：",en:"② Integrated Management System: ",my:"② တစ်စိုက်တစ်ခဲတည်းစီမံခန့်ခွဲမှုစနစ်："},
+  core2_p:{zh:"從緬甸當地日語學校、送出機關，到日本入國後法定講習、技能實習監理，四大環節全程由 Tokyo One 集團一手管理，能與實習生建立高度信賴關係並加深相互理解。",ja:"ミャンマー現地の日本語学校・送出機関から、日本での入国後法定講習・技能実習の監理まで、四つの工程全てをTokyo Oneグループが一貫して管理。実習生との信頼関係を強く持て、相互理解も深められます。",en:"From the local Japanese language school and sending organization in Myanmar to statutory orientation and supervision in Japan, all four stages are managed end-to-end by the Tokyo One Group — building strong trust and deeper mutual understanding with trainees.",my:"မြန်မာနိုင်ငံရှိ ဂျပန်ဘာသာကျောင်းနှင့် စေလွှတ်ရေးအဖွဲ့မှ ဂျပန်နိုင်ငံ ဝင်ရောက်ပြီးနောက် ဥပဒေအရသင်တန်းနှင့် နည်းပညာအလုပ်သင်ကြီးကြပ်မှုအထိ အဆင့် ၄ ဆင့်စလုံးကို Tokyo One အုပ်စုမှ အစအဆုံးစီမံခန့်ခွဲထားပြီး အလုပ်သင်များနှင့် ခိုင်မာသောယုံကြည်မှုတည်ဆောက်နိုင်ကာ အပြန်အလှန်နားလည်မှုကိုလည်း နက်ရှိုင်းစေသည်။"},
+  core3_b:{zh:"③ 多樣化人才確保手段：",ja:"③多様な人材確保手段を提案：",en:"③ Diverse Talent Sourcing Options: ",my:"③ လုပ်သားအမျိုးမျိုးရရှိရေးနည်းလမ်းများ："},
+  core3_p:{zh:"透過 Tokyo One Care 協同組合提供技能實習生（緬甸人）與特定技能外國人（印尼、菲律賓、越南、緬甸、中國等），依企業需求彈性提案最適合的人才組合方案。",ja:"Tokyo One Care協同組合を通じて、技能実習生（ミャンマー人）と特定技能外国人（インドネシア、フィリピン、ベトナム、ミャンマー、中国など）をご用意し、企業のニーズに合わせて最適な人材組合せをご提案します。",en:"Through the Tokyo One Care Cooperative, we offer technical intern trainees (Myanmar) and Specified Skilled Workers (Indonesia, Philippines, Vietnam, Myanmar, China, etc.), proposing the ideal talent combination for each company's needs.",my:"Tokyo One Care ပူးပေါင်းအသင်းမှတဆင့် နည်းပညာအလုပ်သင်များ（မြန်မာ）နှင့် အထူးကျွမ်းကျင်နိုင်ငံခြားသားများ（အင်ဒိုနီးရှား၊ ဖိလစ်ပိုင်၊ ဗီယက်နမ်၊ မြန်မာ၊ တရုတ်စသည်）ကို ပံ့ပိုးပေးပြီး ကုမ္ပဏီလိုအပ်ချက်နှင့်အညီ အသင့်တော်ဆုံး လုပ်သားပေါင်းစပ်မှုအစီအစဉ်ကို အကြံပြုပေးသည်။"},
+  core4_b:{zh:"④ 與緬甸大使館的緊密關係：",ja:"④ミャンマー大使館との密接な関係：",en:"④ Close Ties with the Myanmar Embassy: ",my:"④ မြန်မာသံရုံးနှင့် နီးကပ်သောဆက်ဆံရေး："},
+  core4_p:{zh:"長期協助緬甸大使館市場調查與活動企劃，建立深厚信賴關係，凡外國人才相關諮詢皆能獲得良好協助。",ja:"長年ミャンマー大使館の市場調査やイベント企画に協力し、深い信頼関係を築いています。外国人材に関するご相談にも、必ず良い協力が得られます。",en:"Years of assisting the Myanmar Embassy with market research and event planning have built a deep relationship of trust — any inquiries about foreign talent consistently receive excellent cooperation.",my:"မြန်မာသံရုံး၏ စျေးကွက်လေ့လာမှုနှင့် ပွဲစီစဉ်မှုများကို ကြာရှည်စွာကူညီပြီး နက်နဲသောယုံကြည်မှုဆက်ဆံရေးကို တည်ဆောက်ထားသည်။ နိုင်ငံခြားလုပ်သားနှင့်ပတ်သက်သည့် တိုင်ပင်ဆွေးနွေးမှုတိုင်းအတွက်လည်း ကောင်းမွန်သောပူးပေါင်းဆောင်ရွက်မှုကို အမြဲရရှိပါသည်။"},
 
   foot_addr:{zh:"〒260-0007 千葉縣千葉市中央區祐光2丁目15−7 6樓",ja:"〒260-0007 千葉県千葉市中央区祐光2丁目15−7 6階",en:"6F, 2-15-7 Yuko, Chuo-ku, Chiba City, Chiba 260-0007",my:"〒260-0007 Chiba City, Chuo-ku, Yuko 2-15-7, 6F"},
   foot_h5_1:{zh:"求職者",ja:"求職者の方へ",en:"Job Seekers",my:"အလုပ်ရှာသူများ"},
