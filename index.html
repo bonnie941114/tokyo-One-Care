@@ -312,6 +312,32 @@
   .news-modal-link{display:none;}
   .news-modal-link.show{display:inline-block;}
 
+  /* ---- inquiry form modal ---- */
+  .iq-box{background:#f7f7f7;border:1px solid #e3e3e3;border-radius:6px;padding:32px 28px;}
+  .iq-field{margin-bottom:26px;}
+  .iq-field label{display:block;font-size:15px;font-weight:700;color:#333;margin-bottom:10px;}
+  .iq-field .req{font-weight:400;color:#333;margin-left:2px;}
+  .iq-note,.iq-sublabel{font-size:13px;color:#555;margin-top:6px;margin-bottom:6px;}
+  .iq-field input,.iq-field select,.iq-field textarea{
+    width:100%;border:1.5px solid #ccc;border-radius:2px;padding:11px 14px;
+    font-size:14.5px;font-family:inherit;color:var(--ink);background:#fff;
+    transition:border-color .2s var(--ease);
+  }
+  .iq-field input:focus,.iq-field select:focus,.iq-field textarea:focus{outline:none;border-color:var(--provence);}
+  .iq-field textarea{resize:vertical;min-height:160px;}
+  .iq-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  @media(max-width:560px){.iq-row{grid-template-columns:1fr;}}
+  .iq-submit{display:block;width:100%;max-width:320px;margin:8px auto 0;border:none;cursor:pointer;padding:14px 24px;font-size:15.5px;font-weight:700;border-radius:2px;background:#333;color:#fff;transition:all .25s var(--ease);}
+  .iq-submit:hover{background:var(--navy);}
+  .iq-submit:disabled{opacity:.6;cursor:not-allowed;}
+  .iq-status{margin-top:12px;font-size:13.5px;text-align:center;display:none;}
+  .iq-status.show{display:block;}
+  .iq-status.ok{color:var(--leaf);}
+  .iq-status.err{color:#C0392B;}
+  .iq-success{display:none;text-align:center;padding:20px 0;}
+  .iq-success.show{display:block;}
+  .iq-success .iq-success-icon{width:56px;height:56px;border-radius:50%;background:var(--leaf);color:#fff;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:28px;}
+
   .pill-row{display:flex;gap:20px;flex-wrap:wrap;margin-bottom:40px;}
   .pill-box{flex:1;min-width:220px;border:1px solid var(--line);border-radius:var(--radius);background:var(--bg-2);padding:22px;transition:all .25s var(--ease);position:relative;overflow:hidden;}
   .pill-box::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--peach);}
@@ -704,7 +730,7 @@
         </div>
       </div>
       <a href="tel:0432165242" class="btn btn-ghost">043-216-5242</a>
-      <a href="#contact" class="btn btn-primary" data-i18n="nav_contact_btn">聯絡我們</a>
+      <a href="javascript:void(0)" class="btn btn-primary" data-i18n="nav_contact_btn" onclick="openInquiryModal()">聯絡我們</a>
     </div>
   </nav>
 </header>
@@ -806,6 +832,78 @@
     <h3 class="news-modal-title" id="newsModalTitle"></h3>
     <div class="news-modal-body" id="newsModalBody"></div>
     <a href="#" class="btn btn-primary news-modal-link" id="newsModalLink" data-i18n="news_modal_link_text">查看詳情</a>
+  </div>
+</div>
+
+<!-- ============ INQUIRY FORM MODAL ============ -->
+<div class="news-modal-backdrop" id="inquiryModalBackdrop" onclick="if(event.target===this){closeInquiryModal();}">
+  <div class="news-modal" role="dialog" aria-modal="true" aria-labelledby="inquiryModalTitle">
+    <button type="button" class="news-modal-close" onclick="closeInquiryModal()" aria-label="Close">&times;</button>
+    <h3 class="news-modal-title" id="inquiryModalTitle" data-i18n="e_inquiry_h">企業諮詢表單</h3>
+    <p style="font-size:13.5px;color:var(--ink-soft);margin-bottom:20px;" data-i18n="iq_intro">お問合せは以下のフォームよりお願い致します。</p>
+
+    <div class="iq-box">
+      <form id="inquiryForm" onsubmit="submitInquiryForm(event)">
+        <!-- 請將下方 access_key 換成你自己在 https://web3forms.com 申請的免費金鑰 -->
+        <input type="hidden" name="access_key" value="1aeef2dc-1e24-4efe-bda6-34c7d2145321">
+        <input type="hidden" name="subject" value="【網站表單】企業諮詢">
+        <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
+
+        <div class="iq-field">
+          <label for="iq-name" data-i18n="iq_l_name">■氏名<span class="req">（必須）</span></label>
+          <input type="text" id="iq-name" name="name" required>
+        </div>
+
+        <div class="iq-field">
+          <label for="iq-company" data-i18n="iq_l_company">■会社、団体、組織名<span class="req">（必須）</span></label>
+          <input type="text" id="iq-company" name="company" required>
+          <div class="iq-note" data-i18n="iq_note_company">※個人の方は「個人」とご入力してください</div>
+        </div>
+
+        <div class="iq-field">
+          <label for="iq-address" data-i18n="iq_l_address">■ご住所<span class="req">（必須）</span></label>
+          <input type="text" id="iq-address" name="address" required>
+          <div class="iq-note" data-i18n="iq_note_address">※市町村までのご入力で結構です</div>
+        </div>
+
+        <div class="iq-field">
+          <label for="iq-tel" data-i18n="iq_l_tel">■電話番号<span class="req">（必須）</span></label>
+          <input type="tel" id="iq-tel" name="tel" required>
+        </div>
+
+        <div class="iq-field">
+          <label for="iq-email" data-i18n="iq_l_email">■メールアドレス<span class="req">（必須）</span></label>
+          <input type="email" id="iq-email" name="email" required>
+        </div>
+
+        <div class="iq-field">
+          <label for="iq-purpose" data-i18n="iq_l_purpose">■ご用件<span class="req">（必須）</span></label>
+          <div class="iq-sublabel" data-i18n="iq_purpose_sub">ご用件をお選びください。</div>
+          <select id="iq-purpose" name="purpose" required>
+            <option value="" data-i18n="iq_opt_placeholder">―以下から選択してください―</option>
+            <option value="技能実習生の受け入れについて" data-i18n="iq_opt1">技能実習生の受け入れについて</option>
+            <option value="特定技能外国人の受け入れについて" data-i18n="iq_opt2">特定技能外国人の受け入れについて</option>
+            <option value="監理団体・登録支援機関へのご相談" data-i18n="iq_opt3">監理団体・登録支援機関へのご相談</option>
+            <option value="求人・人材確保に関するご相談" data-i18n="iq_opt4">求人・人材確保に関するご相談</option>
+            <option value="その他" data-i18n="iq_opt5">その他</option>
+          </select>
+        </div>
+
+        <div class="iq-field">
+          <label for="iq-message" data-i18n="iq_l_message">■メッセージ本文<span class="req">（必須）</span></label>
+          <textarea id="iq-message" name="message" required></textarea>
+        </div>
+
+        <button type="submit" class="iq-submit" id="iqSubmitBtn" data-i18n="iq_submit">送信</button>
+        <div class="iq-status" id="iqStatus"></div>
+      </form>
+
+      <div class="iq-success" id="iqSuccess">
+        <div class="iq-success-icon">&#10003;</div>
+        <h3 class="news-modal-title" style="margin-bottom:8px;" data-i18n="iq_success_h">已收到您的諮詢！</h3>
+        <p style="font-size:14px;color:var(--ink-soft);" data-i18n="iq_success_p">專人將於 1–2 個工作天內與您聯繫，感謝您的耐心等候。</p>
+      </div>
+    </div>
   </div>
 </div>
 <svg class="wave-divider to-bg2" viewBox="0 0 1440 60" preserveAspectRatio="none" style="background:var(--bg);"><path d="M0,28 C240,4 480,50 720,28 C960,6 1200,48 1440,24 L1440,60 L0,60 Z"/></svg>
@@ -1086,6 +1184,12 @@
           <p><strong data-i18n="job2_kw">工作內容：</strong><span data-i18n="job2_note">從事建築工地基礎作業，內容依現場需求安排。</span></p>
         </div>
         <div class="job-card">
+          <div class="icon-badge job-icon ic-visa-dual"><svg class="icon"><use href="#ic-leaf"/></svg></div>
+          <h4 data-i18n="job6_h">農業從業者</h4>
+          <div class="job-tags-sm"><span class="tag-core" data-i18n="job6_s1">技能實習・特定技能</span></div>
+          <p><strong data-i18n="job6_kw">工作內容：</strong><span data-i18n="job6_note">於農場從事栽培、採收與包裝，適合喜歡戶外工作者。</span></p>
+        </div>
+        <div class="job-card">
           <div class="icon-badge job-icon ic-visa-dual"><svg class="icon"><use href="#ic-factory"/></svg></div>
           <h4 data-i18n="job3_h">食品工廠作業員</h4>
           <div class="job-tags-sm"><span class="tag-core" data-i18n="job3_s1">技能實習・特定技能</span></div>
@@ -1096,12 +1200,6 @@
           <h4 data-i18n="job4_h">機械加工工廠作業員</h4>
           <div class="job-tags-sm"><span class="tag-core" data-i18n="job4_s1">技能實習・特定技能</span></div>
           <p><strong data-i18n="job4_kw">工作內容：</strong><span data-i18n="job4_note">於工廠從事零件加工、組裝與品質檢查等技術作業。</span></p>
-        </div>
-        <div class="job-card">
-          <div class="icon-badge job-icon ic-visa-dual"><svg class="icon"><use href="#ic-leaf"/></svg></div>
-          <h4 data-i18n="job6_h">農業從業者</h4>
-          <div class="job-tags-sm"><span class="tag-core" data-i18n="job6_s1">技能實習・特定技能</span></div>
-          <p><strong data-i18n="job6_kw">工作內容：</strong><span data-i18n="job6_note">於農場從事栽培、採收與包裝，適合喜歡戶外工作者。</span></p>
         </div>
         <div class="job-card">
           <div class="icon-badge job-icon ic-visa-single"><svg class="icon"><use href="#ic-fork"/></svg></div>
@@ -1292,7 +1390,7 @@
           <h3 data-i18n="e_cta_h">諮詢表單</h3>
           <p data-i18n="e_cta_p">由專人試算企業人數配額、評估對應職種，並提供監理費折抵方案。</p>
         </div>
-        <a href="mailto:info@tokyo-one-care.jp" class="btn" style="background:var(--peach);border-color:var(--peach);color:#402713;" data-i18n="e_cta_btn" onclick="copyEmailFallback(event,'info@tokyo-one-care.jp')">立即洽詢</a>
+        <a href="javascript:void(0)" class="btn" style="background:var(--peach);border-color:var(--peach);color:#402713;border-radius:999px;" data-i18n="e_cta_btn" onclick="openInquiryModal()">立即洽詢</a>
       </div>
     </div>
   </div>
@@ -1474,6 +1572,60 @@ function closeNewsModal(){
   document.body.style.overflow = '';
 }
 
+/* ---- inquiry form modal ---- */
+function openInquiryModal(){
+  document.getElementById('inquiryModalBackdrop').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  document.getElementById('inquiryForm').style.display = '';
+  document.getElementById('iqSuccess').classList.remove('show');
+  document.getElementById('iqStatus').classList.remove('show','ok','err');
+}
+function closeInquiryModal(){
+  document.getElementById('inquiryModalBackdrop').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function submitInquiryForm(e){
+  e.preventDefault();
+  var form = document.getElementById('inquiryForm');
+  var btn = document.getElementById('iqSubmitBtn');
+  var status = document.getElementById('iqStatus');
+  var accessKey = form.access_key.value;
+
+  if(!accessKey || accessKey === 'YOUR_WEB3FORMS_ACCESS_KEY'){
+    status.textContent = '尚未設定表單金鑰，請聯絡網站管理員完成設定。';
+    status.className = 'iq-status show err';
+    return;
+  }
+
+  btn.disabled = true;
+  status.className = 'iq-status show';
+  status.textContent = '送出中…';
+
+  var formData = new FormData(form);
+  fetch('https://api.web3forms.com/submit', {
+    method: 'POST',
+    headers: { 'Accept': 'application/json' },
+    body: formData
+  })
+  .then(function(res){ return res.json(); })
+  .then(function(data){
+    btn.disabled = false;
+    if(data.success){
+      form.style.display = 'none';
+      status.classList.remove('show');
+      document.getElementById('iqSuccess').classList.add('show');
+    } else {
+      status.textContent = '送出失敗，請稍後再試或直接來信 info@tokyo-one-care.jp';
+      status.className = 'iq-status show err';
+    }
+  })
+  .catch(function(){
+    btn.disabled = false;
+    status.textContent = '送出失敗，請確認網路連線後再試一次。';
+    status.className = 'iq-status show err';
+  });
+}
+
 function initNewsCarousel(){
   var track = document.getElementById('newsCarouselTrack');
   var dotsWrap = document.getElementById('newsCarouselDots');
@@ -1614,7 +1766,7 @@ const I18N = {
   adv4_h:{zh:"緬甸大使館深厚信任",ja:"ミャンマー大使館との厚い信頼",en:"Strong Ties with Myanmar Embassy",my:"မြန်မာသံရုံးနှင့် ခိုင်မာသောယုံကြည်မှု"},
   adv4_p:{zh:"長期協助大使館業務，建立緊密合作關係與良好諮詢管道。",ja:"大使館業務への長年の協力により、緊密な連携と円滑な相談ルートを構築。",en:"Years of collaboration with the Embassy have built close ties and a reliable consultation channel.",my:"သံရုံးလုပ်ငန်းများကို ကြာမြင့်စွာ ကူညီခဲ့ခြင်းကြောင့် နီးကပ်သောပူးပေါင်းဆောင်ရွက်မှုနှင့် တိုင်ပင်ရေးလမ်းကြောင်း ကောင်းမွန်စွာတည်ဆောက်နိုင်ခဲ့သည်။"},
 
-  tag1:{zh:"介護職業",ja:"介護",en:"Nursing Care",my:"သူနာပြု/စောင့်ရှောက်ရေး"},
+  tag1:{zh:"介護職業",ja:"介護業",en:"Nursing Care",my:"သူနာပြု/စောင့်ရှောက်ရေး"},
   tag2:{zh:"建設業",ja:"建設業",en:"Construction",my:"ဆောက်လုပ်ရေးလုပ်ငန်း"},
   tag3:{zh:"食品製造業",ja:"食品製造業",en:"Food Manufacturing",my:"အစားအစာထုတ်လုပ်ရေးလုပ်ငန်း"},
   tag4:{zh:"機械加工業",ja:"機械加工業",en:"Machinery Processing",my:"စက်ပစ္စည်းထုတ်လုပ်ရေးလုပ်ငန်း"},
@@ -1626,7 +1778,7 @@ const I18N = {
   jc_kicker:{zh:"MAIN OCCUPATIONS",ja:"MAIN OCCUPATIONS",en:"MAIN OCCUPATIONS",my:"MAIN OCCUPATIONS"},
   jc_h2:{zh:"主要對應職種",ja:"主な対応職種",en:"Main Occupations",my:"အဓိကလုပ်ကိုင်နိုင်သောအလုပ်များ"},
   jc_p:{zh:"依產業別提供人才引進與監理支援，以下為目前主要對應的六大職種。",ja:"業種別に人材紹介・監理支援を行っております。以下は現在対応している主な6職種です。",en:"We provide talent placement and supervision support by industry. Below are the six main occupations we currently handle.",my:"လုပ်ငန်းအမျိုးအစားအလိုက် လုပ်သားရွေးချယ်မှုနှင့် ကြီးကြပ်ရေးထောက်ခံမှု ပေးအပ်ပါသည်။ အောက်ပါတို့သည် လက်ရှိအဓိကလုပ်ကိုင်နိုင်သော အလုပ်ခြောက်မျိုးဖြစ်သည်။"},
-  jc1_h:{zh:"介護（護理）",ja:"介護",en:"Nursing Care",my:"သူနာပြု/စောင့်ရှောက်ရေး"},
+  jc1_h:{zh:"介護業",ja:"介護業",en:"Nursing Care",my:"သူနာပြု/စောင့်ရှောက်ရေး"},
   jc1_p:{zh:"於日本照護機構從事日常照護、生活協助等工作，不包含居家訪問看護。",ja:"日本の介護施設にて日常介護・生活支援業務に従事します。訪問介護は対象外です。",en:"Work at Japanese care facilities providing daily care and life support. Home visit care is not included.",my:"ဂျပန်၏စောင့်ရှောက်ရေးဌာနတွင် နေ့စဉ်စောင့်ရှောက်မှုနှင့် နေထိုင်မှုကူညီရေးလုပ်ငန်းများ လုပ်ကိုင်ရသည်။ အိမ်တိုင်ရာရောက်စောင့်ရှောက်မှု မပါဝင်ပါ။"},
   jc2_h:{zh:"營建作業員",ja:"建設作業員",en:"Construction Worker",my:"ဆောက်လုပ်ရေးလုပ်သား"},
   jc2_p:{zh:"從事建築工地基礎作業，接收企業需具備建設業許可資格。",ja:"建設現場での基礎作業に従事します。受入企業は建設業許可の取得が必要です。",en:"Basic construction site work. Employers must hold a construction business license.",my:"ဆောက်လုပ်ရေးလုပ်ငန်းခွင်တွင် အခြေခံလုပ်ငန်းများ လုပ်ကိုင်ရသည်။ လက်ခံကုမ္ပဏီသည် ဆောက်လုပ်ရေးလိုင်စင် ရရှိရမည်။"},
@@ -1677,7 +1829,7 @@ const I18N = {
   svc2_p:{zh:"嚴格監督接收企業遵守《技能實習法》與《勞動基準法》，確保工作環境安全。",ja:"技能実習法・労働基準法の遵守を厳格に監督し、安全な職場環境を確保。",en:"Strictly supervising employer compliance with the Technical Intern Training Act and Labor Standards Act to ensure a safe workplace.",my:"နည်းပညာအလုပ်သင်ဥပဒေနှင့် အလုပ်သမားအခြေခံဥပဒေများကို လိုက်နာစေရန် တင်းကျပ်စွာ ကြီးကြပ်ကာ ဘေးကင်းသောအလုပ်ခွင်ပတ်ဝန်းကျင်ကို သေချာစေသည်။"},
 
   w_h3_4:{zh:"職缺一覽",ja:"職種一覧",en:"Job Categories",my:"အလုပ်အမျိုးအစားများ"},
-  job1_h:{zh:"介護職業",ja:"介護",en:"Nursing Care",my:"သူနာပြု/စောင့်ရှောက်ရေး"},
+  job1_h:{zh:"介護職業",ja:"介護業",en:"Nursing Care",my:"သူနာပြု/စောင့်ရှောက်ရေး"},
   job1_s1:{zh:"技能實習・特定技能",ja:"技能実習・特定技能",en:"Technical Intern / Specified Skilled",my:"နည်းပညာအလုပ်သင်/အထူးကျွမ်းကျင်"},
   job1_s2:{zh:"不包含居家訪問看護",ja:"訪問介護は対象外",en:"Excludes home visit care",my:"အိမ်တိုင်ရာရောက်စောင့်ရှောက်မှု မပါဝင်ပါ"},
   job2_h:{zh:"建設業",ja:"建設業",en:"Construction",my:"ဆောက်လုပ်ရေးလုပ်ငန်း"},
@@ -1994,6 +2146,26 @@ const I18N = {
   email_copied_toast:{zh:"已複製信箱地址：",ja:"メールアドレスをコピーしました：",en:"Email address copied: ",my:"အီးမေးလ်လိပ်စာကို ကူးယူပြီးပါပြီ："},
   readmore_employer:{zh:"先看「特定技能」制度完整說明",ja:"「特定技能」制度の詳細を見る",en:"See the Full Program Overview",my:"「အထူးကျွမ်းကျင်」စနစ်အသေးစိတ်ကြည့်ရန်"},
   e_inquiry_h:{zh:"企業諮詢表單",ja:"企業様お問合せフォーム",en:"Employer Inquiry Form",my:"အလုပ်ရှင် စုံစမ်းမေးမြန်းရေးပုံစံ"},
+  iq_intro:{zh:"請填寫以下表單提出諮詢。",ja:"お問合せは以下のフォームよりお願い致します。",en:"Please use the form below to send us your inquiry.",my:"အောက်ပါပုံစံဖြင့် စုံစမ်းမေးမြန်းနိုင်ပါသည်။"},
+  iq_l_name:{zh:"■姓名",ja:"■氏名",en:"■Name",my:"■အမည်"},
+  iq_l_company:{zh:"■公司、團體、組織名稱",ja:"■会社、団体、組織名",en:"■Company / Organization Name",my:"■ကုမ္ပဏီ၊ အဖွဲ့အစည်းအမည်"},
+  iq_note_company:{zh:"※個人申請請填寫「個人」",ja:"※個人の方は「個人」とご入力してください",en:"※Individuals may enter \"Individual\"",my:"※တစ်ဦးချင်းလျှင် 「Individual」ဟု ဖြည့်ပါ"},
+  iq_l_address:{zh:"■地址",ja:"■ご住所",en:"■Address",my:"■လိပ်စာ"},
+  iq_note_address:{zh:"※填寫至市町村（縣市區）即可",ja:"※市町村までのご入力で結構です",en:"※City/ward level is sufficient",my:"※မြို့/ရပ်ကွက်အဆင့်အထိ ဖြည့်ပေးရုံလုံလောက်ပါသည်"},
+  iq_l_tel:{zh:"■電話號碼",ja:"■電話番号",en:"■Phone Number",my:"■ဖုန်းနံပါတ်"},
+  iq_l_email:{zh:"■Email",ja:"■メールアドレス",en:"■Email",my:"■အီးမေးလ်"},
+  iq_l_purpose:{zh:"■諮詢事項",ja:"■ご用件",en:"■Subject",my:"■ကိစ္စရပ်"},
+  iq_purpose_sub:{zh:"請選擇您的諮詢事項。",ja:"ご用件をお選びください。",en:"Please select a subject.",my:"ကိစ္စရပ်ကိုရွေးချယ်ပါ။"},
+  iq_opt_placeholder:{zh:"―請從以下選擇―",ja:"―以下から選択してください―",en:"―Please select―",my:"―အောက်မှရွေးချယ်ပါ―"},
+  iq_opt1:{zh:"關於技能實習生的引進",ja:"技能実習生の受け入れについて",en:"About Accepting Technical Intern Trainees",my:"နည်းပညာအလုပ်သင်လက်ခံခြင်းအကြောင်း"},
+  iq_opt2:{zh:"關於特定技能外國人的引進",ja:"特定技能外国人の受け入れについて",en:"About Accepting Specified Skilled Workers",my:"အထူးကျွမ်းကျင်နိုင်ငံခြားသားလက်ခံခြင်းအကြောင်း"},
+  iq_opt3:{zh:"監理團體／登錄支援機關相關諮詢",ja:"監理団体・登録支援機関へのご相談",en:"Supervising Organization / Registered Support Organization Consultation",my:"ကြီးကြပ်အဖွဲ့/မှတ်ပုံတင်ထောက်ခံရေးအဖွဲ့ တိုင်ပင်ခြင်း"},
+  iq_opt4:{zh:"求才與人力確保相關諮詢",ja:"求人・人材確保に関するご相談",en:"Recruitment / Workforce Consultation",my:"အလုပ်ရှာဖွေရေးနှင့် လူ့စွမ်းအားရှာဖွေရေးဆိုင်ရာ တိုင်ပင်ခြင်း"},
+  iq_opt5:{zh:"其他",ja:"その他",en:"Other",my:"အခြား"},
+  iq_l_message:{zh:"■訊息內容",ja:"■メッセージ本文",en:"■Message",my:"■မက်ဆေ့ချ်အကြောင်းအရာ"},
+  iq_submit:{zh:"送出",ja:"送信",en:"Submit",my:"ပေးပို့ရန်"},
+  iq_success_h:{zh:"已收到您的諮詢！",ja:"お問合せを受け付けました！",en:"Inquiry Received!",my:"သင့်စုံစမ်းချက်ကို လက်ခံရရှိပါပြီ！"},
+  iq_success_p:{zh:"專人將於 1–2 個工作天內與您聯繫，感謝您的耐心等候。",ja:"担当者より1〜2営業日以内にご連絡いたします。今しばらくお待ちください。",en:"Our team will contact you within 1–2 business days. Thank you for your patience.",my:"တာဝန်ခံမှ အလုပ်လုပ်ရက် ၁-၂ ရက်အတွင်း ဆက်သွယ်ပါမည်။ စိတ်ရှည်စွာစောင့်ဆိုင်းပေးသည့်အတွက် ကျေးဇူးတင်ပါသည်။"},
   e_inquiry_p:{zh:"填寫以下資訊，顧問將於 1 個工作天內與您聯繫。",ja:"以下の情報をご入力いただければ、1営業日以内にご連絡いたします。",en:"Fill in the details below and our team will contact you within 1 business day.",my:"အောက်ပါအချက်အလက်များဖြည့်စွက်ပါက ၁ ရုံးဖွင့်ရက်အတွင်း ဆက်သွယ်ပေးပါမည်။"},
   w_apply_h:{zh:"線上應徵",ja:"オンライン応募",en:"Apply Online",my:"အွန်လိုင်းလျှောက်ထားရန်"},
   w_apply_p:{zh:"留下您的基本資料，顧問將於 1 個工作天內與您聯繫，說明後續流程。",ja:"基本情報をご入力いただければ、1営業日以内にご連絡し今後の流れをご説明いたします。",en:"Leave your details and our team will reach out within 1 business day to explain next steps.",my:"သင့်အခြေခံအချက်အလက်များထားခဲ့ပါက ၁ ရုံးဖွင့်ရက်အတွင်း ဆက်သွယ်ကာ နောက်ဆက်တွဲအဆင့်များကို ရှင်းပြပါမည်။"},
